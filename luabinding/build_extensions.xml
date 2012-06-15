@@ -1,0 +1,130 @@
+
+<project name="create_cocos2d_x_extensions_lua_bindings" default="create_cocos2d_x_extensions_lua_bindings" basedir=".">
+    <description>
+        Utilises tolua++ to create the lua bindings to expose cocos2d_x_extensions interfaces to lua
+    </description>
+    <property name="tolua++" location="tolua++.exe" />
+
+    <target name="cocos2d_x_extensions">
+        <echo message="Calling tolua++" />
+        <exec executable="${tolua++}">
+            <arg value="-L" />
+            <arg value="basic_extensions.lua" />
+            <arg value="-o"/>
+            <arg value="cocos2d_x_extensions_lua.cpp"/>
+            <arg value="cocos2d_x_extensions_lua.tolua"/>
+        </exec>
+        <echo message="Patching resultant lua bindings" />
+
+        <!-- fix push ccobject -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[toluafix_pushusertype_ccobject(tolua_S,(void*)tolua_ret]]></replacetoken>
+            <replacevalue><![CDATA[int nID = (tolua_ret) ? tolua_ret->m_uID : -1;
+   int* pLuaID = (tolua_ret) ? &tolua_ret->m_nLuaID : NULL;
+   toluafix_pushusertype_ccobject(tolua_S, nID, pLuaID, (void*)tolua_ret]]></replacevalue>
+        </replace>
+
+        <!-- fix LUA_FUNCTION -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[*((LUA_FUNCTION*)]]></replacetoken>
+            <replacevalue><![CDATA[(]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[tolua_usertype(tolua_S,"LUA_FUNCTION");]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+
+        <!-- fix LUA_TABLE -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[*((LUA_TABLE*)]]></replacetoken>
+            <replacevalue><![CDATA[(]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[tolua_usertype(tolua_S,"LUA_TABLE");]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[{
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((LUA_TABLE)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"LUA_TABLE");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(LUA_TABLE));
+     tolua_pushusertype(tolua_S,tolua_obj,"LUA_TABLE");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[LUA_TABLE tolua_ret = (LUA_TABLE)]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[static int tolua_collect_LUA_TABLE (lua_State* tolua_S)
+{
+ LUA_TABLE* self = (LUA_TABLE*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+
+        <!-- fix LUA_STRING -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[*((LUA_STRING*)]]></replacetoken>
+            <replacevalue><![CDATA[(]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[tolua_usertype(tolua_S,"LUA_STRING");]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[{
+#ifdef __cplusplus
+    void* tolua_obj = Mtolua_new((LUA_STRING)(tolua_ret));
+     tolua_pushusertype(tolua_S,tolua_obj,"LUA_STRING");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#else
+    void* tolua_obj = tolua_copy(tolua_S,(void*)&tolua_ret,sizeof(LUA_STRING));
+     tolua_pushusertype(tolua_S,tolua_obj,"LUA_STRING");
+    tolua_register_gc(tolua_S,lua_gettop(tolua_S));
+#endif
+   }]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[LUA_STRING tolua_ret = (LUA_STRING)]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[static int tolua_collect_LUA_STRING (lua_State* tolua_S)
+{
+ LUA_STRING* self = (LUA_STRING*) tolua_tousertype(tolua_S,1,0);
+	Mtolua_delete(self);
+	return 0;
+}]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+
+        <!-- remove unused header -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[#ifndef __cplusplus
+#include "stdlib.h"
+#endif
+#include "string.h"
+
+#include "tolua++.h"]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+
+        <!-- remove unused functions -->
+        <replace file="cocos2d_x_extensions_lua.cpp">
+            <replacetoken><![CDATA[/* Exported function */
+TOLUA_API int  tolua_cocos2d_x_extensions_lua_open (lua_State* tolua_S);]]></replacetoken>
+            <replacevalue><![CDATA[]]></replacevalue>
+        </replace>
+    </target>
+    <target name="create_cocos2d_x_extensions_lua_bindings" depends="cocos2d_x_extensions" />
+</project>

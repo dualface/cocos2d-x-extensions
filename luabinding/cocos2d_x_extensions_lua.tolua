@@ -1,0 +1,133 @@
+
+$#include "cocos2d_x_extensions_lua.h"
+$#include "CCCrypto.h"
+$#include "CCOpenFeint.h"
+$#include "CCNative.h"
+$#include "CCNetwork.h"
+$#include "CCStore.h"
+
+$using namespace extensions;
+
+
+class CCCrypto
+{
+public:
+    static int getAES256KeyLength(void);
+
+    static LUA_STRING encryptAES256Lua(const char* plaintext,
+                                       int plaintextLength,
+                                       const char* key,
+                                       int keyLength);
+    static LUA_STRING decryptAES256Lua(const char* ciphertext,
+                                       int ciphertextLength,
+                                       const char* key,
+                                       int keyLength);
+
+    static LUA_STRING encodeBase64Lua(const char* input, int inputLength);
+    static LUA_STRING decodeBase64Lua(const char* input);
+
+    static LUA_STRING MD5Lua(char* input, int inputLength, bool isRawOutput);
+};
+
+// ----------------------------------------
+
+class CCOpenFeint
+{
+public:
+    static void postInitWithProductKey(const char* productKey, const char* secret, const char* displayName);
+
+    static void showDashboard(void);
+    static void showLeaderboards(void);
+    static void showLeaderboards(const char* leaderboardId);
+    static void showAchievements(void);
+    static void showChallenges(void);
+    static void showFriends(void);
+    static void showPlaying(void);
+
+    static LUA_TABLE getAchievementsLua(void);
+    static void unlockAchievement(const char* achievementId);
+
+    static LUA_TABLE getLeaderboardsLua(void);
+    static void setHighScore(const char* leaderboardId, int score, const char* displayText = NULL);
+};
+
+// ----------------------------------------
+
+typedef enum {
+    CCActivityIndicatorViewStyleWhiteLarge,
+    CCActivityIndicatorViewStyleWhite,
+    CCActivityIndicatorViewStyleGray,
+} CCActivityIndicatorViewStyle;
+
+class CCNative
+{
+public:
+    static void showActivityIndicator(CCActivityIndicatorViewStyle style = CCActivityIndicatorViewStyleWhiteLarge);
+    static void hideActivityIndicator(void);
+
+    static void createAlert(const char* title,
+                            const char* message,
+                            const char* cancelButtonTitle);
+    static int addAlertButton(const char* buttonTitle);
+    static void showAlertLua(LUA_FUNCTION listener);
+    static void cancelAlert(void);
+
+    static const char* getOpenUDID(void);
+};
+
+// ----------------------------------------
+
+typedef enum {
+    CCNetworkStatusNotReachable = 0,
+    CCNetworkStatusReachableViaWiFi,
+    CCNetworkStatusReachableViaWWAN
+} CCNetworkStatus;
+
+class CCNetwork
+{
+public:
+    static bool isLocalWiFiAvailable(void);
+    static bool isInternetConnectionAvailable(void);
+    static bool isHostNameReachable(const char* hostName);
+    static CCNetworkStatus getInternetConnectionStatus(void);
+};
+
+// ----------------------------------------
+
+typedef bool CCStoreIsSandbox;
+
+typedef enum {
+    CCStoreReceiptVerifyModeNone = 0,
+    CCStoreReceiptVerifyModeDevice = 1,
+    CCStoreReceiptVerifyModeServer
+} CCStoreReceiptVerifyMode;
+
+#define CCStoreReceiptVerifyStatusUnknownError      -5
+#define CCStoreReceiptVerifyStatusInvalidReceipt    -4
+#define CCStoreReceiptVerifyStatusRequestFailed     -3
+#define CCStoreReceiptVerifyStatusInvalidResult     -2
+#define CCStoreReceiptVerifyStatusNone              -1
+#define CCStoreReceiptVerifyStatusOK                0
+
+class CCStore
+{
+public:
+    static CCStore* sharedStore(void);
+    static void purgeSharedStore(void);
+
+    void postInitWithTransactionListenerLua(LUA_FUNCTION listener);
+
+    bool canMakePurchases(void);
+
+    void loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback);
+    void cancelLoadProducts(void);
+    bool isProductLoaded(const char* productId);
+
+    bool purchase(const char* productId);
+    void finishTransactionLua(const char* transactionIdentifier);
+
+    CCStoreReceiptVerifyMode getReceiptVerifyMode(void);
+    void setReceiptVerifyMode(CCStoreReceiptVerifyMode mode, CCStoreIsSandbox isSandbox = true);
+    const char* getReceiptVerifyServerUrl(void);
+    void setReceiptVerifyServerUrl(const char* url);
+};

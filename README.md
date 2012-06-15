@@ -19,6 +19,9 @@
 
 ## Lua-binding
 
-Check out https://github.com/dualface/cocos2d-x-lua-framework, it's a Game Framework based cocos2d-x + lua-binding.
+1.  Copy cocos2d_x_extensions_lua.h/.cpp to your project
+2.  Add code to AppDelegate.cpp, before pEngine->executeScriptFile()
 
+        tolua_cocos2d_x_extensions_lua_open(pEngine->getLuaState());
 
+3.  See https://github.com/dualface/cocos2d-x-lua-framework (Game Framework based cocos2d-x + lua-binding) for how to use.
