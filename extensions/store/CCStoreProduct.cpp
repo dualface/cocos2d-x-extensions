@@ -21,11 +21,11 @@ namespace extensions {
                                     float price,
                                     const char* priceLocale)
     {
-        m_productIdentifier = productIdentifier;
-        m_localizedTitle = localizedTitle;
-        m_localizedDescription = localizedDescription;
+        m_productIdentifier = productIdentifier ? productIdentifier : "";
+        m_localizedTitle = localizedTitle ? localizedTitle : "";
+        m_localizedDescription = localizedDescription ? localizedDescription : "";
         m_price = price;
-        m_priceLocale = priceLocale;
+        m_priceLocale = priceLocale ? priceLocale : "";
         return true;
     }
     

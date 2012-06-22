@@ -8,7 +8,7 @@
 #include "CCCrypto.h"
 
 #ifndef utf8cstr
-#define utf8cstr(nsstr) [nsstr cStringUsingEncoding:NSUTF8StringEncoding]
+#define utf8cstr(nsstr) (nsstr ? [nsstr cStringUsingEncoding:NSUTF8StringEncoding] : "")
 #endif
 
 using namespace cocos2d;
