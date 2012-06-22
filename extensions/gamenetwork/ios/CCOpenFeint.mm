@@ -71,6 +71,7 @@ namespace extensions {
                                                                         title,
                                                                         description,
                                                                         iconUrl,
+                                                                        ach.gamerscore,
                                                                         ach.isUnlocked,
                                                                         ach.isSecret);
             arr->addObject(ccach);
@@ -89,12 +90,13 @@ namespace extensions {
             CCOFAchievement* ach = static_cast<CCOFAchievement*>(achievements->objectAtIndex(i));
             CCLuaTableDict ach_;
             
-            ach_["id"] = CCLuaValue::valueWithString(ach->id);
-            ach_["title"] = CCLuaValue::valueWithString(ach->title);
-            ach_["description"] = CCLuaValue::valueWithString(ach->description);
-            ach_["iconUrl"] = CCLuaValue::valueWithString(ach->iconUrl);
-            ach_["isUnlocked"] = CCLuaValue::valueWithBoolean(ach->isUnlocked);
-            ach_["isSecret"] = CCLuaValue::valueWithBoolean(ach->isSecret);
+            ach_["id"] = CCLuaValue::valueWithString(ach->getId());
+            ach_["title"] = CCLuaValue::valueWithString(ach->getTitle());
+            ach_["description"] = CCLuaValue::valueWithString(ach->getDescription());
+            ach_["iconUrl"] = CCLuaValue::valueWithString(ach->getIconUrl());
+            ach_["gameScore"] = CCLuaValue::valueWithInt(ach->getGameScore());
+            ach_["isUnlocked"] = CCLuaValue::valueWithBoolean(ach->getIsUnlocked());
+            ach_["isSecret"] = CCLuaValue::valueWithBoolean(ach->getIsSecret());
             
             achievements_.push_back(CCLuaValue::valueWithCCLuaTableDict(ach_));
         }
@@ -144,11 +146,11 @@ namespace extensions {
             CCOFLeaderboard* board = static_cast<CCOFLeaderboard*>(leaderboards->objectAtIndex(i));
             CCLuaTableDict board_;
             
-            board_["id"] = CCLuaValue::valueWithString(board->id);
-            board_["name"] = CCLuaValue::valueWithString(board->name);
-            board_["descendingScoreOrder"] = CCLuaValue::valueWithBoolean(board->descendingScoreOrder);
-            board_["currentUserScore"] = CCLuaValue::valueWithInt(board->currentUserScore);
-            board_["currentUserScoreDisplayText"] = CCLuaValue::valueWithString(board->currentUserScoreDisplayText);
+            board_["id"] = CCLuaValue::valueWithString(board->getId());
+            board_["name"] = CCLuaValue::valueWithString(board->getName());
+            board_["descendingScoreOrder"] = CCLuaValue::valueWithBoolean(board->getDescendingScoreOrder());
+            board_["currentUserScore"] = CCLuaValue::valueWithInt(board->getCurrentUserScore());
+            board_["currentUserScoreDisplayText"] = CCLuaValue::valueWithString(board->getCurrentUserScoreDisplayText());
             
             leaderboards_.push_back(CCLuaValue::valueWithCCLuaTableDict(board_));
         }

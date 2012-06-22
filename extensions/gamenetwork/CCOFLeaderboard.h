@@ -19,14 +19,34 @@ namespace extensions {
                                                   int currentUserScore,
                                                   const char* currentUserScoreDisplayText);
         
-        string id;
-        string name;
-        int currentUserScore;
-        string currentUserScoreDisplayText;
-        bool descendingScoreOrder;
+        const string& getId(void) {
+            return m_id;
+        }
+        
+        const string& getName(void) {
+            return m_name;
+        }
+        
+        int getCurrentUserScore(void) {
+            return m_currentUserScore;
+        }
+        
+        const string& getCurrentUserScoreDisplayText(void) {
+            return m_currentUserScoreDisplayText;
+        }
+        
+        bool getDescendingScoreOrder(void) {
+            return m_descendingScoreOrder;
+        }
         
     private:
         CCOFLeaderboard(void) {}
+        
+        string  m_id;
+        string  m_name;
+        int     m_currentUserScore;
+        string  m_currentUserScoreDisplayText;
+        bool    m_descendingScoreOrder;
     };
     
 }

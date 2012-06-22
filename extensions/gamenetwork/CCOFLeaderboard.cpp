@@ -10,11 +10,11 @@ namespace extensions {
                                                         const char* currentUserScoreDisplayText)
     {
         CCOFLeaderboard* board = new CCOFLeaderboard();
-        board->id = id;
-        board->name = name;
-        board->descendingScoreOrder = descendingScoreOrder;
-        board->currentUserScore = currentUserScore;
-        board->currentUserScoreDisplayText = currentUserScoreDisplayText;
+        board->m_id = id ? id : "";
+        board->m_name = name ? name : "";
+        board->m_descendingScoreOrder = descendingScoreOrder;
+        board->m_currentUserScore = currentUserScore;
+        board->m_currentUserScoreDisplayText = currentUserScoreDisplayText ? currentUserScoreDisplayText : "";
         board->autorelease();
         return board;
     }

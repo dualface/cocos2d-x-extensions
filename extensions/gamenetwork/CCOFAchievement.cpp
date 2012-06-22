@@ -7,16 +7,18 @@ namespace extensions {
                                                         const char* title,
                                                         const char* description,
                                                         const char* iconUrl,
+                                                        int gameScore,
                                                         bool isUnlocked,
                                                         bool isSecret)
     {
         CCOFAchievement* ach = new CCOFAchievement();
-        ach->id = id;
-        ach->title = title;
-        ach->description = description;
-        ach->iconUrl = iconUrl;
-        ach->isUnlocked = isUnlocked;
-        ach->isSecret = isSecret;
+        ach->m_id = id ? id : "";
+        ach->m_title = title ? title : "";
+        ach->m_description = description ? description : "";
+        ach->m_iconUrl = iconUrl ? iconUrl : "";
+        ach->m_gameScore = gameScore;
+        ach->m_isUnlocked = isUnlocked;
+        ach->m_isSecret = isSecret;
         ach->autorelease();
         return ach;
     }
