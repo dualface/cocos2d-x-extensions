@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2d_x_extensions_lua
-** Generated automatically by tolua++-1.0.92 on Fri Jun 15 14:46:04 2012.
+** Generated automatically by tolua++-1.0.92 on Wed Jul  4 12:18:27 2012.
 */
 
 
@@ -773,6 +773,35 @@ static int tolua_cocos2d_x_extensions_lua_CCNative_getOpenUDID00(lua_State* tolu
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: openURL of class  CCNative */
+#ifndef TOLUA_DISABLE_tolua_cocos2d_x_extensions_lua_CCNative_openURL00
+static int tolua_cocos2d_x_extensions_lua_CCNative_openURL00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCNative",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const char* url = ((const char*)  tolua_tostring(tolua_S,2,0));
+  {
+   CCNative::openURL(url);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'openURL'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: isLocalWiFiAvailable of class  CCNetwork */
 #ifndef TOLUA_DISABLE_tolua_cocos2d_x_extensions_lua_CCNetwork_isLocalWiFiAvailable00
 static int tolua_cocos2d_x_extensions_lua_CCNetwork_isLocalWiFiAvailable00(lua_State* tolua_S)
@@ -1349,6 +1378,7 @@ TOLUA_API int tolua_cocos2d_x_extensions_lua_open (lua_State* tolua_S)
    tolua_function(tolua_S,"showAlertLua",tolua_cocos2d_x_extensions_lua_CCNative_showAlertLua00);
    tolua_function(tolua_S,"cancelAlert",tolua_cocos2d_x_extensions_lua_CCNative_cancelAlert00);
    tolua_function(tolua_S,"getOpenUDID",tolua_cocos2d_x_extensions_lua_CCNative_getOpenUDID00);
+   tolua_function(tolua_S,"openURL",tolua_cocos2d_x_extensions_lua_CCNative_openURL00);
   tolua_endmodule(tolua_S);
   tolua_constant(tolua_S,"CCNetworkStatusNotReachable",CCNetworkStatusNotReachable);
   tolua_constant(tolua_S,"CCNetworkStatusReachableViaWiFi",CCNetworkStatusReachableViaWiFi);

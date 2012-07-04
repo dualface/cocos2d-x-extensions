@@ -55,6 +55,12 @@ namespace extensions {
         static const char* getOpenUDID(void);
         
 #pragma mark -
+#pragma mark misc
+        
+        /** @brief Open a web page in the browser; create an email; or call a phone number. */
+        static void openURL(const char* url);
+        
+#pragma mark -
 #pragma mark helper
         
     private:

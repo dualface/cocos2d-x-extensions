@@ -58,6 +58,13 @@ namespace extensions {
     {
         [[CCNative_objc sharedInstance] cancelAlertView];
     }
+    
+    void CCNative::openURL(const char* url)
+    {
+        if (!url) return;
+        NSURL *nsurl = [NSURL URLWithString:[NSString stringWithCString:url encoding:NSUTF8StringEncoding]];
+        [[UIApplication sharedApplication] openURL:nsurl];
+    }
 
 #pragma mark -
 #pragma mark OpenUDID
