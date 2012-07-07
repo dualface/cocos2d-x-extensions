@@ -174,7 +174,7 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
             CCString* ccid = new CCString(utf8cstr(productId));
             ccid->autorelease();
             ccinvalidProductsId->addObject(ccid);
-            CCLOG("[CCStore_obj] productsRequestDidReceiveResponse() invalid pid: %s", ccid);
+            CCLOG("[CCStore_obj] productsRequestDidReceiveResponse() invalid pid: %s", utf8cstr(productId));
         }
     }
     

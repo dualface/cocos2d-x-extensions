@@ -268,7 +268,7 @@ namespace extensions {
             for (int i = 0; i < invalidProductsId->count(); ++i)
             {
                 CCString* ccid = static_cast<CCString*>(invalidProductsId->objectAtIndex(i));
-                invalidProductsId_.push_back(CCLuaValue::valueWithString(ccid->m_sString));
+                invalidProductsId_.push_back(CCLuaValue::valueWithString(ccid->toStdString()));
             }            
             event["invalidProductsId"] = CCLuaValue::valueWithCCLuaTableArray(invalidProductsId_);
         }
