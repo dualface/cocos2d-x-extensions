@@ -1,0 +1,43 @@
+
+gamenetwork.OpenFeint:
+[ ] OpenFeint for Android.
+[ ] Game Center Compatibility. (ios)
+[ ] Custom initial configurations.
+
+gamenetwork.GameCenter:
+[ ] Support Game Center. (ios)
+
+
+native:
+[ ] Activity indicator for Android.
+[ ] Alert view for Android.
+[ ] OpenUDID for Android.
+[ ] openURL() for Android.
+[ ] showWebPopup/cancelWebPopup, Creates a web popup that loads a local or remote web page.
+
+    void CCNative::showWebPopup(const char* url);
+    void CCNative::showWebPopup(const char* url, const CCRect& rect);
+    void CCNative::cancelWebPopup(void);
+
+[ ] newVideo, Returns a video object.
+
+    CCNativeVideo* CCNative::newVideo(const char* filename, const CCRect& rect);
+    void CCNativeVideo::seek(float time);
+    void CCNativeVideo::play(void);
+    void CCNativeVideo::pause(void);
+    float CCNativeVideo::getTotalTime(void);
+    float CCNativeVideo::getCurrentTime(void);
+    bool CCNativeVideo::getIsMuted(void);
+    void CCNativeVideo::setIsMuted(bool isMuted);
+    void CCNativeVideo::addEventListenerLua(LUA_FUNCTION listener); // ready, ended
+
+
+network:
+[ ] CCNetworkDelegate, notify the delegate when the network state has changed.
+[ ] Makes an asynchronous HTTP request.
+
+
+store:
+[ ] Verify receipt by the server. (ios)
+[ ] Google Play IAP. (android)
+
