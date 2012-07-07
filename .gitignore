@@ -10,3 +10,8 @@
 *.lai
 *.la
 *.a
+
+examples/cocos2dx-extensions-demo/libs/cocos2dx
+examples/cocos2dx-extensions-demo.xcodeproj/xcuserdata
+examples/cocos2dx-extensions-demo.xcodeproj/project.xcworkspace/xcuserdata
+
