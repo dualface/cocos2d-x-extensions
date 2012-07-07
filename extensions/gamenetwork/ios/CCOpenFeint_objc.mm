@@ -156,43 +156,43 @@ static CCOpenFeint_objc* s_sharedInstance;
 
 - (void)dashboardWillAppear
 {
-    cocos2d::CCLog("[OpenFeint] dashboardWillAppear");
+    CCLOG("[OpenFeint] dashboardWillAppear");
     cocos2d::CCDirector::sharedDirector()->stopAnimation();
     cocos2d::CCDirector::sharedDirector()->pause();
 }
 
 - (void)dashboardDidAppear
 {
-    cocos2d::CCLog("[OpenFeint] dashboardDidAppear");
+    CCLOG("[OpenFeint] dashboardDidAppear");
 }
 
 - (void)dashboardWillDisappear
 {
-    cocos2d::CCLog("[OpenFeint] dashboardWillDisappear");
+    CCLOG("[OpenFeint] dashboardWillDisappear");
 }
 
 - (void)dashboardDidDisappear
 {
-    cocos2d::CCLog("[OpenFeint] dashboardDidDisappear");
+    CCLOG("[OpenFeint] dashboardDidDisappear");
     cocos2d::CCDirector::sharedDirector()->startAnimation();
     cocos2d::CCDirector::sharedDirector()->resume();
 }
 
 - (void)offlineUserLoggedIn:(NSString*)userId
 {
-	cocos2d::CCLog("[OpenFeint] User logged in, but OFFLINE. UserId: %s",
+	CCLOG("[OpenFeint] User logged in, but OFFLINE. UserId: %s",
                    [userId cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (void)userLoggedIn:(NSString*)userId
 {
-	cocos2d::CCLog("[OpenFeint] User logged in. UserId: %s",
+	CCLOG("[OpenFeint] User logged in. UserId: %s",
                    [userId cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (BOOL)showCustomOpenFeintApprovalScreen
 {
-    cocos2d::CCLog("[OpenFeint] showCustomOpenFeintApprovalScreen");
+    CCLOG("[OpenFeint] showCustomOpenFeintApprovalScreen");
 	return NO;
 }
 
@@ -201,13 +201,13 @@ static CCOpenFeint_objc* s_sharedInstance;
 
 - (void)userLaunchedChallenge:(OFChallengeToUser*)challengeToLaunch withChallengeData:(NSData*)challengeData
 {
-	cocos2d::CCLog("[OpenFeint] userLaunchedChallenge: %s",
+	CCLOG("[OpenFeint] userLaunchedChallenge: %s",
                    [challengeToLaunch.challenge.challengeDefinition.title cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 - (void)userRestartedChallenge
 {
-	cocos2d::CCLog("[OpenFeint] userRestartedChallenge");
+	CCLOG("[OpenFeint] userRestartedChallenge");
 }
 
 #pragma mark -
@@ -215,19 +215,19 @@ static CCOpenFeint_objc* s_sharedInstance;
 
 - (BOOL)isOpenFeintNotificationAllowed:(OFNotificationData*)notificationData
 {
-    cocos2d::CCLog("[OpenFeint] isOpenFeintNotificationAllowed: %s",
+    CCLOG("[OpenFeint] isOpenFeintNotificationAllowed: %s",
                    [notificationData.notificationText cStringUsingEncoding:NSUTF8StringEncoding]);
 	return YES;
 }
 
 - (void)handleDisallowedNotification:(OFNotificationData*)notificationData
 {
-    cocos2d::CCLog("[OpenFeint] handleDisallowedNotification");
+    CCLOG("[OpenFeint] handleDisallowedNotification");
 }
 
 - (void)notificationWillShow:(OFNotificationData*)notificationData
 {
-    cocos2d::CCLog("[OpenFeint] notificationWillShow: %s",
+    CCLOG("[OpenFeint] notificationWillShow: %s",
                    [notificationData.notificationText cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
