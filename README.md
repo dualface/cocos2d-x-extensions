@@ -15,7 +15,8 @@
 2.  Copy cocos2dx to examples/cocos2dx-extensions-demo/libs
 3.  Open examples/cocos2dx-extensions-demo.xcodeproj
 4.  Change examples/cocos2dx-extensions-demo/Classes/CCStoreScene.cpp, SET YOUR IAP PRODUCTS ID
-5.  Run!
+5.  **!!! CHANGE Bundle identifier FOR IAP !!!**
+6.  Run!
 
 ## Example - iOS (Lua)
 
