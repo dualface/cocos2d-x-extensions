@@ -22,7 +22,9 @@ static CCNative_objc *s_sharedInstance;
 {
     [self hideActivityIndicator];
     [self removeAlertView];
+#if CC_LUA_ENGINE_ENABLED > 0
     [self removeAlertViewLuaListener];
+#endif
     [super dealloc];
     s_sharedInstance = nil;
 }
@@ -46,9 +48,9 @@ static CCNative_objc *s_sharedInstance;
     [activityIndicatorView_ retain];
     
     NSInteger count = [UIApplication sharedApplication].windows.count;
-    UIWindow* rootWindow = [[UIApplication sharedApplication].windows objectAtIndex:count - 1];
-    [rootWindow addSubview: activityIndicatorView_];
-    activityIndicatorView_.center = rootWindow.center;
+    UIWindow* topWindow = [[UIApplication sharedApplication].windows objectAtIndex:count - 1];
+    [topWindow addSubview: activityIndicatorView_];
+    activityIndicatorView_.center = topWindow.center;
     [activityIndicatorView_ startAnimating];
 }
 
@@ -111,21 +113,9 @@ static CCNative_objc *s_sharedInstance;
 
     CCLOG("[CCNative_objc] showAlertViewWithDelegate()");
     alertViewDelegates_ = delegate;
+#if CC_LUA_ENGINE_ENABLED > 0
     [self removeAlertViewLuaListener];
-    [alertView_ show];
-}
-
-- (void)showAlertViewWithLuaListener:(LUA_FUNCTION)listener
-{
-    if (!alertView_)
-    {
-        CCLOG("[CCNative_objc] ERR, showAlertViewWithLuaListener() alert view not exists");
-        return;
-    }
-
-    CCLOG("[CCNative_objc] showAlertViewWithLuaListener()");
-    alertViewLuaListener_ = listener;
-    alertViewDelegates_ = nil;
+#endif
     [alertView_ show];
 }
 
@@ -140,16 +130,10 @@ static CCNative_objc *s_sharedInstance;
     CCLOG("[CCNative_objc] removeAlertView()");
     [alertView_ release];
     alertView_ = nil;
+#if CC_LUA_ENGINE_ENABLED > 0
     [self removeAlertViewLuaListener];
+#endif
     alertViewDelegates_ = nil;
-}
-
-- (void)removeAlertViewLuaListener
-{
-    if (alertViewLuaListener_)
-    {
-        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(alertViewLuaListener_);
-    }
 }
 
 - (void)cancelAlertView
@@ -165,6 +149,30 @@ static CCNative_objc *s_sharedInstance;
     [self removeAlertView];
 }
 
+#if CC_LUA_ENGINE_ENABLED > 0
+- (void)showAlertViewWithLuaListener:(LUA_FUNCTION)listener
+{
+    if (!alertView_)
+    {
+        CCLOG("[CCNative_objc] ERR, showAlertViewWithLuaListener() alert view not exists");
+        return;
+    }
+    
+    CCLOG("[CCNative_objc] showAlertViewWithLuaListener()");
+    alertViewLuaListener_ = listener;
+    alertViewDelegates_ = nil;
+    [alertView_ show];
+}
+
+- (void)removeAlertViewLuaListener
+{
+    if (alertViewLuaListener_)
+    {
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(alertViewLuaListener_);
+    }
+}
+#endif
+
 
 #pragma mark -
 #pragma mark UIAlertView delegates
@@ -175,6 +183,7 @@ static CCNative_objc *s_sharedInstance;
     {
         alertViewDelegates_->alertViewClickedButtonAtIndex(buttonIndex);
     }
+#if CC_LUA_ENGINE_ENABLED > 0
     if (alertViewLuaListener_)
     {
         CCScriptEngineProtocol *engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
@@ -186,27 +195,7 @@ static CCNative_objc *s_sharedInstance;
         engine->pushCCLuaTableDictToLuaStack(&event);
         engine->executeFunctionByHandler(alertViewLuaListener_, 1);
     }
-    
-    [self cancelAlertView];
-}
-
-- (void)alertViewCancel:(UIAlertView *)alertView
-{
-    if (alertViewDelegates_)
-    {
-        alertViewDelegates_->alertViewCancel();
-    }
-    if (alertViewLuaListener_)
-    {
-        CCScriptEngineProtocol *engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-        
-        CCLuaTableDict event;
-        event["action"] = CCLuaValue::valueWithString("cancelled");
-        
-        engine->pushCCLuaTableDictToLuaStack(&event);
-        engine->executeFunctionByHandler(alertViewLuaListener_, 1);
-    }
-    
+#endif    
     [self removeAlertView];
 }
 

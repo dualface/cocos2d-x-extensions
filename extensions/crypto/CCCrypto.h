@@ -56,6 +56,8 @@ namespace extensions {
 #pragma mark -
 #pragma mark for Lua
         
+#if CC_LUA_ENGINE_ENABLED > 0
+
         /** @brief Encrypt data with AES256 algorithm, return ciphertext string, return nil if failed */
         static LUA_STRING encryptAES256Lua(const char* plaintext,
                                            int plaintextLength,
@@ -88,6 +90,8 @@ namespace extensions {
         
         /** @brief Calculate MD5, return MD5 string */
         static LUA_STRING MD5Lua(char* input, int inputLength, bool isRawOutput);
+        
+#endif
         
 #pragma mark -
 #pragma mark private methods

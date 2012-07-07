@@ -39,12 +39,14 @@ namespace extensions {
         
         /** @brief Add button to alert view, return button index */
         static int addAlertButton(const char* buttonTitle);
+#if CC_LUA_ENGINE_ENABLED > 0
         static int addAlertButtonLua(const char* buttonTitle);
-        
+#endif        
         /** @brief Show alert view */
         static void showAlert(CCAlertViewDelegate* delegate = NULL);
+#if CC_LUA_ENGINE_ENABLED > 0
         static void showAlertLua(LUA_FUNCTION listener);
-        
+#endif        
         /** @brief Hide and remove alert view */
         static void cancelAlert(void);
         

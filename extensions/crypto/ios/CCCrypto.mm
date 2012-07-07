@@ -2,12 +2,17 @@
 #include "CCCrypto.h"
 
 extern "C" {
-#include "lua.h"
-#include "lapi.h"
-#include "tolua_fix.h"
 #include "libb64.h"
 #include "md5.h"
 }
+
+#if CC_LUA_ENGINE_ENABLED > 0
+extern "C" {
+#include "lua.h"
+#include "lapi.h"
+#include "tolua_fix.h"
+}
+#endif
 
 #import <CommonCrypto/CommonCryptor.h>
 
@@ -64,38 +69,6 @@ namespace extensions {
         MD5_Init(&ctx);
         MD5_Update(&ctx, input, inputLength);
         MD5_Final(output, &ctx);
-    }
-    
-    LUA_STRING CCCrypto::MD5Lua(char* input, int inputLength, bool isRawOutput)
-    {
-        static const char* hextable = "0123456789abcdef";
-        
-        unsigned char buffer[16];
-        MD5(static_cast<void*>(input), inputLength, buffer);
-        
-        CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-        engine->cleanLuaStack();
-        lua_State* L = engine->getLuaState();
-        
-        if (isRawOutput)
-        {
-            lua_pushlstring(L, (char*)buffer, 16);
-        }
-        else
-        {
-            char md5str[33];
-            md5str[32] = 0;
-            int ci = 0;
-            for (int i = 0; i < 16; ++i)
-            {
-                unsigned char c = buffer[i];
-                md5str[ci++] = hextable[(c >> 4) & 0x0f];
-                md5str[ci++] = hextable[c & 0x0f];
-            }
-            lua_pushstring(L, md5str);
-        }
-        
-        return 1;
     }
     
 #pragma mark -
@@ -166,6 +139,8 @@ namespace extensions {
         return 0;
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
+    
     LUA_STRING CCCrypto::cryptAES256Lua(bool isDecrypt,
                                         const void* input,
                                         int inputLength,
@@ -220,5 +195,39 @@ namespace extensions {
         return 1;
         
     }
+    
+    LUA_STRING CCCrypto::MD5Lua(char* input, int inputLength, bool isRawOutput)
+    {
+        static const char* hextable = "0123456789abcdef";
+        
+        unsigned char buffer[16];
+        MD5(static_cast<void*>(input), inputLength, buffer);
+        
+        CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        engine->cleanLuaStack();
+        lua_State* L = engine->getLuaState();
+        
+        if (isRawOutput)
+        {
+            lua_pushlstring(L, (char*)buffer, 16);
+        }
+        else
+        {
+            char md5str[33];
+            md5str[32] = 0;
+            int ci = 0;
+            for (int i = 0; i < 16; ++i)
+            {
+                unsigned char c = buffer[i];
+                md5str[ci++] = hextable[(c >> 4) & 0x0f];
+                md5str[ci++] = hextable[c & 0x0f];
+            }
+            lua_pushstring(L, md5str);
+        }
+        
+        return 1;
+    }
+    
+#endif
     
 }

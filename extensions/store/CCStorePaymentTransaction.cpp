@@ -95,6 +95,7 @@ namespace extensions {
         return true;
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     const CCLuaTableDict CCStorePaymentTransaction::convertToLuaTable(void)
     {
         CCLuaTableDict transaction_;
@@ -122,5 +123,6 @@ namespace extensions {
         
         return transaction_;
     }
+#endif
     
 } // namespace store

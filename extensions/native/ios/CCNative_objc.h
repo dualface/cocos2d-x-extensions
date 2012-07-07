@@ -12,7 +12,9 @@ using namespace extensions;
     
     UIAlertView *alertView_;
     CCAlertViewDelegate *alertViewDelegates_;
+#if CC_LUA_ENGINE_ENABLED > 0
     LUA_FUNCTION alertViewLuaListener_;
+#endif
 }
 
 + (CCNative_objc *)sharedInstance;
@@ -33,15 +35,17 @@ using namespace extensions;
    andCancelButtonTitle:(NSString *)cancelButtonTitle;
 - (NSInteger)addAlertButton:(NSString *)buttonTitle;
 - (void)showAlertViewWithDelegate:(CCAlertViewDelegate *)delegate;
-- (void)showAlertViewWithLuaListener:(LUA_FUNCTION)listener;
 - (void)removeAlertView;
-- (void)removeAlertViewLuaListener;
 - (void)cancelAlertView;
+
+#if CC_LUA_ENGINE_ENABLED > 0
+- (void)showAlertViewWithLuaListener:(LUA_FUNCTION)listener;
+- (void)removeAlertViewLuaListener;
+#endif
 
 #pragma mark -
 #pragma mark UIAlertView delegates
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-- (void)alertViewCancel:(UIAlertView *)alertView;
 
 @end

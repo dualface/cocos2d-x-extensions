@@ -80,33 +80,6 @@ namespace extensions {
         return arr;
     }
     
-    LUA_TABLE CCOpenFeint::getAchievementsLua(void)
-    {
-        CCArray* achievements = getAchievements();
-        CCLuaTableArray achievements_;
-        
-        for (int i = 0; i < achievements->count(); ++i)
-        {
-            CCOFAchievement* ach = static_cast<CCOFAchievement*>(achievements->objectAtIndex(i));
-            CCLuaTableDict ach_;
-            
-            ach_["id"] = CCLuaValue::valueWithString(ach->getId());
-            ach_["title"] = CCLuaValue::valueWithString(ach->getTitle());
-            ach_["description"] = CCLuaValue::valueWithString(ach->getDescription());
-            ach_["iconUrl"] = CCLuaValue::valueWithString(ach->getIconUrl());
-            ach_["gameScore"] = CCLuaValue::valueWithInt(ach->getGameScore());
-            ach_["isUnlocked"] = CCLuaValue::valueWithBoolean(ach->getIsUnlocked());
-            ach_["isSecret"] = CCLuaValue::valueWithBoolean(ach->getIsSecret());
-            
-            achievements_.push_back(CCLuaValue::valueWithCCLuaTableDict(ach_));
-        }
-        
-        CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-        engine->cleanLuaStack();
-        engine->pushCCLuaTableArrayToLuaStack(&achievements_);
-        return 1;
-    }
-    
     void CCOpenFeint::unlockAchievement(const char* achievementId)
     {
         if (!achievementId) achievementId = "";
@@ -136,6 +109,43 @@ namespace extensions {
         return arr;
     }
     
+    void CCOpenFeint::setHighScore(const char* leaderboardId, int score, const char* displayText)
+    {
+        if (!leaderboardId) leaderboardId = "";
+        if (!displayText) displayText = "";
+        [[CCOpenFeint_objc sharedInstance] setHighScore:[NSString stringWithUTF8String:leaderboardId]
+                                               andScore:[NSNumber numberWithInt:score]
+                                         andDisplayText:[NSString stringWithUTF8String:displayText]];
+    }
+
+#if CC_LUA_ENGINE_ENABLED > 0
+    LUA_TABLE CCOpenFeint::getAchievementsLua(void)
+    {
+        CCArray* achievements = getAchievements();
+        CCLuaTableArray achievements_;
+        
+        for (int i = 0; i < achievements->count(); ++i)
+        {
+            CCOFAchievement* ach = static_cast<CCOFAchievement*>(achievements->objectAtIndex(i));
+            CCLuaTableDict ach_;
+            
+            ach_["id"] = CCLuaValue::valueWithString(ach->getId());
+            ach_["title"] = CCLuaValue::valueWithString(ach->getTitle());
+            ach_["description"] = CCLuaValue::valueWithString(ach->getDescription());
+            ach_["iconUrl"] = CCLuaValue::valueWithString(ach->getIconUrl());
+            ach_["gameScore"] = CCLuaValue::valueWithInt(ach->getGameScore());
+            ach_["isUnlocked"] = CCLuaValue::valueWithBoolean(ach->getIsUnlocked());
+            ach_["isSecret"] = CCLuaValue::valueWithBoolean(ach->getIsSecret());
+            
+            achievements_.push_back(CCLuaValue::valueWithCCLuaTableDict(ach_));
+        }
+        
+        CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        engine->cleanLuaStack();
+        engine->pushCCLuaTableArrayToLuaStack(&achievements_);
+        return 1;
+    }
+    
     LUA_TABLE CCOpenFeint::getLeaderboardsLua(void)
     {
         CCArray* leaderboards = getLeaderboards();
@@ -160,14 +170,6 @@ namespace extensions {
         engine->pushCCLuaTableArrayToLuaStack(&leaderboards_);
         return 1;
     }
-    
-    void CCOpenFeint::setHighScore(const char* leaderboardId, int score, const char* displayText)
-    {
-        if (!leaderboardId) leaderboardId = "";
-        if (!displayText) displayText = "";
-        [[CCOpenFeint_objc sharedInstance] setHighScore:[NSString stringWithUTF8String:leaderboardId]
-                                                   andScore:[NSNumber numberWithInt:score]
-                                             andDisplayText:[NSString stringWithUTF8String:displayText]];
-    }
+#endif
     
 }

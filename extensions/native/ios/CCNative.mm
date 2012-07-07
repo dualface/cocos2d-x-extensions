@@ -27,7 +27,7 @@ namespace extensions {
     {
         NSString *title_ = [NSString stringWithUTF8String:title ? title : ""];
         NSString *message_ = [NSString stringWithUTF8String:message ? message : ""];
-        NSString *cancelButtonTitle_ = [NSString stringWithUTF8String:cancelButtonTitle ? cancelButtonTitle : "Cancel"];
+        NSString *cancelButtonTitle_ = cancelButtonTitle ? [NSString stringWithUTF8String:cancelButtonTitle] : nil;
         [[CCNative_objc sharedInstance] createAlertView:title_
                                              andMessage:message_
                                    andCancelButtonTitle:cancelButtonTitle_];
@@ -39,20 +39,24 @@ namespace extensions {
         return [[CCNative_objc sharedInstance] addAlertButton:buttonTitle_];
     }
 
+#if CC_LUA_ENGINE_ENABLED > 0
     int CCNative::addAlertButtonLua(const char* buttonTitle)
     {
         return addAlertButton(buttonTitle) + 1;
     }
-
+#endif
+    
     void CCNative::showAlert(CCAlertViewDelegate* delegate)
     {
         [[CCNative_objc sharedInstance] showAlertViewWithDelegate:delegate];
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCNative::showAlertLua(LUA_FUNCTION listener)
     {
         [[CCNative_objc sharedInstance] showAlertViewWithLuaListener:listener];
     }
+#endif
     
     void CCNative::cancelAlert(void)
     {

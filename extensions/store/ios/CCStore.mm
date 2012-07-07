@@ -6,10 +6,12 @@
 #import "CCStore_objc.h"
 #import "libb64.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
 extern "C" {
 #include "lua.h"
 #include "tolua_fix.h"
 }
+#endif
 
 namespace extensions {
     
@@ -27,10 +29,12 @@ namespace extensions {
     
     CCStore::~CCStore(void)
     {
+#if CC_LUA_ENGINE_ENABLED > 0
         if (m_listener)
         {
             CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(m_listener);
         }
+#endif
         for (CCStorePaymentTransactionsIterator it = m_transactions.begin(); it != m_transactions.end(); ++it)
         {
             it->second->release();
@@ -58,6 +62,7 @@ namespace extensions {
         [[CCStore_objc sharedStore] postInitWithTransactionObserver:this];
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCStore::postInitWithTransactionListenerLua(LUA_FUNCTION listener)
     {
         if (m_listener)
@@ -67,6 +72,7 @@ namespace extensions {
         m_listener = listener;
         [[CCStore_objc sharedStore] postInitWithTransactionObserver:this];
     }
+#endif
     
     bool CCStore::canMakePurchases(void)
     {
@@ -84,6 +90,7 @@ namespace extensions {
         [[CCStore_objc sharedStore] requestProductData:set andDelegate:delegate];
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCStore::loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback)
     {
         CC_UNUSED_PARAM(__LUA_TABLE__);
@@ -119,6 +126,7 @@ namespace extensions {
         m_loadProductsCallback = callback;
         [[CCStore_objc sharedStore] requestProductData:set andDelegate:this];
     }
+#endif
     
     void CCStore::cancelLoadProducts(void)
     {
@@ -155,6 +163,7 @@ namespace extensions {
         }
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCStore::finishTransactionLua(const char* transactionIdentifier)
     {
         for (CCStorePaymentTransactionsIterator it = m_transactions.begin(); it != m_transactions.end(); ++it)
@@ -172,6 +181,7 @@ namespace extensions {
             CCLOG("[CCStore] ERR, finishTransactionLua() invalid tid: %s", transactionIdentifier);
         }
     }
+#endif
     
     CCStoreReceiptVerifyMode CCStore::getReceiptVerifyMode(void)
     {
@@ -206,10 +216,12 @@ namespace extensions {
         {
             m_observer->transactionCompleted(transaction);
         }
+#if CC_LUA_ENGINE_ENABLED > 0
         if (m_listener)
         {
             passCCStorePaymentTransactionToLuaListener(transaction);
         }
+#endif
     }
     
     void CCStore::transactionFailed(CCStorePaymentTransaction* transaction)
@@ -221,10 +233,12 @@ namespace extensions {
         {
             m_observer->transactionFailed(transaction);
         }
+#if CC_LUA_ENGINE_ENABLED > 0
         if (m_listener)
         {
             passCCStorePaymentTransactionToLuaListener(transaction);
         }
+#endif
     }
     
     void CCStore::transactionRestored(CCStorePaymentTransaction* transaction)
@@ -236,12 +250,15 @@ namespace extensions {
         {
             m_observer->transactionRestored(transaction);
         }
+#if CC_LUA_ENGINE_ENABLED > 0
         if (m_listener)
         {
             passCCStorePaymentTransactionToLuaListener(transaction);
         }
+#endif
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProductsId)
     {
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
@@ -294,10 +311,12 @@ namespace extensions {
         m_loadProductsCallback = 0;
         m_isLoadProductsLuaNotCompleted = false;
     }
+#endif
     
 #pragma mark -
 #pragma mark helper
-    
+
+#if CC_LUA_ENGINE_ENABLED > 0
     void CCStore::passCCStorePaymentTransactionToLuaListener(CCStorePaymentTransaction* transaction)
     {
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
@@ -308,5 +327,6 @@ namespace extensions {
         engine->pushCCLuaTableDictToLuaStack(&event);
         engine->executeFunctionByHandler(m_listener, 1);
     }
+#endif
     
 } // namespace store

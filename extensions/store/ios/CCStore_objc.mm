@@ -110,12 +110,12 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
     }
 #endif
     
+    productRequestDelegate_ = delegate;
     SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productsId];
     request.delegate = self;
     [request autorelease];
     [request start];
     productRequest_ = request;
-    productRequestDelegate_ = delegate;
 }
 
 - (void)cancelRequestProductData

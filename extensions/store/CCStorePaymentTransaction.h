@@ -127,7 +127,9 @@ namespace extensions {
             return m_receiptVerifyStatus;
         }
         
+#if CC_LUA_ENGINE_ENABLED > 0
         const CCLuaTableDict convertToLuaTable(void);
+#endif
         
     private:
         CCStorePaymentTransaction(void) {}

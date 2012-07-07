@@ -58,7 +58,7 @@ namespace extensions {
         string m_productIdentifier;
         string m_localizedTitle;
         string m_localizedDescription;
-        float       m_price;
+        float  m_price;
         string m_priceLocale;
     };
     

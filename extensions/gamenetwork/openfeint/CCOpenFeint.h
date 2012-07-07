@@ -2,7 +2,9 @@
 #ifndef  __EXTENSIONS_CCOPENFEINT_H_
 #define  __EXTENSIONS_CCOPENFEINT_H_
 
+#if CC_LUA_ENGINE_ENABLED > 0
 #include "CCScriptSupport.h"
+#endif
 #include "CCArray.h"
 
 using namespace cocos2d;
@@ -32,17 +34,20 @@ namespace extensions {
         
         // 取得所有成就的信息，返回 array of CCOFAchievement
         static CCArray* getAchievements(void);
-        // 以 lua table 的形式返回所有成就的信息
-        static LUA_TABLE getAchievementsLua(void);
         // 解锁指定的成就
         static void unlockAchievement(const char* achievementId);
         
         // 取得所有排行榜的信息，返回 array of CCOFLeaderboard
         static CCArray* getLeaderboards(void);
-        // 以 lua table 的形式返回所有排行榜的信息
-        static LUA_TABLE getLeaderboardsLua(void);
         // 设置指定排行榜上，当前玩家的高分
         static void setHighScore(const char* leaderboardId, int score, const char* displayText = NULL);
+        
+#if CC_LUA_ENGINE_ENABLED > 0
+        // 以 lua table 的形式返回所有成就的信息
+        static LUA_TABLE getAchievementsLua(void);
+        // 以 lua table 的形式返回所有排行榜的信息
+        static LUA_TABLE getLeaderboardsLua(void);
+#endif
         
     private:
         CCOpenFeint(void) {}
