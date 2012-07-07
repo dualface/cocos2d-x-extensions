@@ -9,11 +9,22 @@
 -   CCStore: iOS IAP support, with receipt verify
 -   **100% Lua-binding compatibility**
 
+## Example - iOS (without Lua)
+
+1.  Download cocos2d-x 1.x sources from https://github.com/cocos2d/cocos2d-x/tree/master
+2.  Copy cocos2dx to examples/cocos2dx-extensions-demo/libs
+3.  Open examples/cocos2dx-extensions-demo.xcodeproj
+4.  Change examples/cocos2dx-extensions-demo/Classes/CCStoreScene.cpp, SET YOUR IAP PRODUCTS ID
+5.  Run!
+
+## Example - iOS (Lua)
+
+Coming soon.
+
 
 ## iOS Setup
 
 1.  Add frameworks:
-
     -   MobileCoreService.framework
     -   Security.framework
     -   StoreKit.framework
@@ -22,7 +33,8 @@
 
 2.  Copy files (required modules) to your project folder, add files to Xcode project
 
-Luabinding:
+
+**Luabinding**:
 
 1.  Copy luabinding files (required modules), add to Xcode
 2.  Add code to AppDelegate.cpp:
@@ -43,3 +55,11 @@ Luabinding:
         tolua_cocos2dx_extension_gamecenter_open(L);    // CCGameCenter
 
 3.  See https://github.com/dualface/cocos2d-x-lua-framework (Game Framework based cocos2d-x + lua-binding) for how to use.
+
+
+## CCOpenFeint Setup
+
+1.  Add OpenFeint to your project
+2.  Copy gamenetwork/openfeint to your project folder, add files to Xcode project
+3.  Check CCOpenFeint.h interface
+
