@@ -1,0 +1,24 @@
+
+$#include "CCOpenFeint.h"
+
+$using namespace extensions;
+
+class CCOpenFeint
+{
+public:
+    static void postInitWithProductKey(const char* productKey, const char* secret, const char* displayName);
+
+    static void showDashboard(void);
+    static void showLeaderboards(void);
+    static void showLeaderboards(const char* leaderboardId);
+    static void showAchievements(void);
+    static void showChallenges(void);
+    static void showFriends(void);
+    static void showPlaying(void);
+
+    static LUA_TABLE getAchievementsLua(void);
+    static void unlockAchievement(const char* achievementId);
+
+    static LUA_TABLE getLeaderboardsLua(void);
+    static void setHighScore(const char* leaderboardId, int score, const char* displayText = NULL);
+};

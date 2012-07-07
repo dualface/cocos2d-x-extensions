@@ -1,0 +1,19 @@
+
+$#include "CCNetwork.h"
+
+$using namespace extensions;
+
+typedef enum {
+    CCNetworkStatusNotReachable = 0,
+    CCNetworkStatusReachableViaWiFi,
+    CCNetworkStatusReachableViaWWAN
+} CCNetworkStatus;
+
+class CCNetwork
+{
+public:
+    static bool isLocalWiFiAvailable(void);
+    static bool isInternetConnectionAvailable(void);
+    static bool isHostNameReachable(const char* hostName);
+    static CCNetworkStatus getInternetConnectionStatus(void);
+};
