@@ -8,7 +8,6 @@ namespace extensions {
     {
     public:
         virtual void alertViewClickedButtonAtIndex(int buttonIndex) = 0;
-        virtual void alertViewCancel(void) = 0;
     };
     
 }
