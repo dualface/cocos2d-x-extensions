@@ -43,6 +43,7 @@ namespace extensions {
         memset(output, 0, outputBufferLength);
         int cp = dataUsed < outputBufferLength ? dataUsed : outputBufferLength - 1;
         memcpy(output, buffer, cp);
+        free(buffer);
         return cp;
     }
     
@@ -60,6 +61,7 @@ namespace extensions {
         memset(output, 0, outputBufferLength);
         int cp = r1 < outputBufferLength ? r1 : outputBufferLength - 1;
         memcpy(output, buffer, cp);
+        free(buffer);
         return cp;
     }
     
@@ -161,6 +163,7 @@ namespace extensions {
         {
             lua_pushnil(L);
         }
+        free(buffer);
         return 1;
     }
     
@@ -192,8 +195,8 @@ namespace extensions {
         {
             lua_pushnil(L);
         }
+        free(output);
         return 1;
-        
     }
     
     LUA_STRING CCCrypto::MD5Lua(char* input, int inputLength, bool isRawOutput)
