@@ -36,4 +36,13 @@ namespace extensions {
         return CCNetworkStatusNotReachable;
     }
     
+    CCHttpRequest* CCNetwork::httpRequest(CCHttpRequestDelegate* delegate,
+                                          const char* url,
+                                          CCHttpRequestMethod method)
+    {
+        CCHttpRequest* request = CCHttpRequest::createWithUrl(delegate, url, method);
+        request->start();
+        return request;
+    }
+    
 }

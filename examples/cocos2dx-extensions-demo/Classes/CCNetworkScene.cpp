@@ -1,6 +1,8 @@
 
 #include "CCNetworkScene.h"
 #include "CCNetwork.h"
+#include "CCNative.h"
+#include "CCHttpRequest.h"
 #include "HelloWorldScene.h"
 
 using namespace extensions;
@@ -22,12 +24,17 @@ bool CCNetworkScene::init(void)
                                                             this,
                                                             menu_selector(CCNetworkScene::testCheckNetworkStatus));
     
+    label = CCLabelTTF::labelWithString("send synchronous HTTP request", "Arial", 22);
+    CCMenuItemLabel* item2 = CCMenuItemLabel::itemWithLabel(label,
+                                                            this,
+                                                            menu_selector(CCNetworkScene::testHttpRequest));
+    
     label = CCLabelTTF::labelWithString("- BACK -", "Arial", 22);
     CCMenuItemLabel* itemBack = CCMenuItemLabel::itemWithLabel(label,
                                                                this,
                                                                menu_selector(CCNetworkScene::backToMainScene));
     
-	CCMenu* pMenu = CCMenu::menuWithItems(item1, itemBack, NULL);
+	CCMenu* pMenu = CCMenu::menuWithItems(item1, item2, itemBack, NULL);
     pMenu->alignItemsVertically();
 	addChild(pMenu);
     
@@ -54,10 +61,36 @@ void CCNetworkScene::testCheckNetworkStatus(CCObject* pSender)
     printf("getInternetConnectionStatus(): %s\n", nsString[ns]);
     
     printf("\n");
-    
+}
+
+void CCNetworkScene::testHttpRequest(CCObject* pSender)
+{
+    CCNetwork::httpRequest(this, "http://www.cocos2d-x.org/projects.json", CCHttpRequestMethodGET);
+    CCNative::createAlert("CCNetwork::httpRequest",
+                          "Get http://www.cocos2d-x.org/projects.json contents, check console output.",
+                          NULL);
+    CCNative::showAlert();
 }
 
 void CCNetworkScene::backToMainScene(CCObject* pSender)
 {
     CCDirector::sharedDirector()->replaceScene(HelloWorldScene::scene());
+}
+
+void CCNetworkScene::requestFinished(CCHttpRequest* request)
+{
+    CCLOG("http request response string length: %d", strlen(request->getResponseString()));
+    printf("----------------------------------------\n");
+    puts(request->getResponseString());
+    printf("----------------------------------------\n");
+    CCNative::cancelAlert();
+    CCNative::createAlert("Http Request Completed", "Request completed, check console output.", "OK");
+    CCNative::showAlert();
+}
+
+void CCNetworkScene::requestFailed(CCHttpRequest* request)
+{
+    CCNative::cancelAlert();
+    CCNative::createAlert("Http Request Failed", "Request failed, check console output.", "OK");
+    CCNative::showAlert();
 }

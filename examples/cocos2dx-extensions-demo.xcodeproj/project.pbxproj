@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F465FCEB15AAE8EE0027D248 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F465FCEA15AAE8EE0027D248 /* ASIFormDataRequest.m */; };
 		F473231015A7EF4A007430BB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F473230F15A7EF4A007430BB /* QuartzCore.framework */; };
 		F473231215A7EF4A007430BB /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F473231115A7EF4A007430BB /* OpenGLES.framework */; };
 		F473231415A7EF4A007430BB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F473231315A7EF4A007430BB /* OpenAL.framework */; };
@@ -160,9 +161,12 @@
 		F47325D715A8249E007430BB /* CCStoreReceiptVerifyRequest_objc.m in Sources */ = {isa = PBXBuildFile; fileRef = F47325D115A8249E007430BB /* CCStoreReceiptVerifyRequest_objc.m */; };
 		F47325E115A835F7007430BB /* CCStoreScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F47325DE15A835F7007430BB /* CCStoreScene.cpp */; };
 		F47331F015A84321007430BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F47331EF15A84321007430BB /* UIKit.framework */; };
+		F4B7474B15A951E70005E0C5 /* CCHttpRequest.mm in Sources */ = {isa = PBXBuildFile; fileRef = F4B7474A15A951E70005E0C5 /* CCHttpRequest.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F465FCE915AAE8EE0027D248 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		F465FCEA15AAE8EE0027D248 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
 		F473230B15A7EF4A007430BB /* cocos2dx-extensions-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cocos2dx-extensions-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F473230F15A7EF4A007430BB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F473231115A7EF4A007430BB /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -489,6 +493,9 @@
 		F47325DE15A835F7007430BB /* CCStoreScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCStoreScene.cpp; path = Classes/CCStoreScene.cpp; sourceTree = "<group>"; };
 		F47325DF15A835F7007430BB /* CCStoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCStoreScene.h; path = Classes/CCStoreScene.h; sourceTree = "<group>"; };
 		F47331EF15A84321007430BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F4B7474515A94AAA0005E0C5 /* CCHttpRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCHttpRequest.h; sourceTree = "<group>"; };
+		F4B7474915A94C6D0005E0C5 /* CCHttpRequestDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CCHttpRequestDelegate.h; sourceTree = "<group>"; };
+		F4B7474A15A951E70005E0C5 /* CCHttpRequest.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CCHttpRequest.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1146,6 +1153,8 @@
 		F473257415A7F18E007430BB /* network */ = {
 			isa = PBXGroup;
 			children = (
+				F4B7474515A94AAA0005E0C5 /* CCHttpRequest.h */,
+				F4B7474915A94C6D0005E0C5 /* CCHttpRequestDelegate.h */,
 				F473257515A7F18E007430BB /* CCNetwork.h */,
 				F473257615A7F18E007430BB /* ios */,
 			);
@@ -1155,6 +1164,7 @@
 		F473257615A7F18E007430BB /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				F4B7474A15A951E70005E0C5 /* CCHttpRequest.mm */,
 				F473257715A7F18E007430BB /* CCNetwork.mm */,
 				F473257815A7F18E007430BB /* reachability */,
 			);
@@ -1197,6 +1207,8 @@
 				F473258415A7F198007430BB /* ASIDataCompressor.m */,
 				F473258515A7F198007430BB /* ASIDataDecompressor.h */,
 				F473258615A7F198007430BB /* ASIDataDecompressor.m */,
+				F465FCE915AAE8EE0027D248 /* ASIFormDataRequest.h */,
+				F465FCEA15AAE8EE0027D248 /* ASIFormDataRequest.m */,
 				F473258715A7F198007430BB /* ASIHTTPRequest.h */,
 				F473258815A7F198007430BB /* ASIHTTPRequest.m */,
 				F473258915A7F198007430BB /* ASIHTTPRequestConfig.h */,
@@ -1456,6 +1468,8 @@
 				F47325D615A8249E007430BB /* CCStorePaymentTransactionWrapper.mm in Sources */,
 				F47325D715A8249E007430BB /* CCStoreReceiptVerifyRequest_objc.m in Sources */,
 				F47325E115A835F7007430BB /* CCStoreScene.cpp in Sources */,
+				F4B7474B15A951E70005E0C5 /* CCHttpRequest.mm in Sources */,
+				F465FCEB15AAE8EE0027D248 /* ASIFormDataRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,9 @@
 #ifndef __EXTENSIONS_CCNETWORK_H_
 #define __EXTENSIONS_CCNETWORK_H_
 
+#include "CCHttpRequest.h"
+#include "CCHttpRequestDelegate.h"
+
 namespace extensions {
     
     typedef enum {
@@ -10,6 +13,7 @@ namespace extensions {
         CCNetworkStatusReachableViaWWAN
     } CCNetworkStatus;
     
+        
     class CCNetwork
     {
     public:
@@ -27,7 +31,14 @@ namespace extensions {
         
         /** @brief Checks Internet connection reachability status */
         static CCNetworkStatus getInternetConnectionStatus(void);
-                
+        
+#pragma mark -
+#pragma mark HTTP
+        
+        static CCHttpRequest* httpRequest(CCHttpRequestDelegate* delegate,
+                                          const char* url,
+                                          CCHttpRequestMethod method);
+        
     private:
         CCNetwork(void) {}
     };

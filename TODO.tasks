@@ -7,9 +7,14 @@ gamenetwork.OpenFeint:
 gamenetwork.GameCenter:
 [ ] Support Game Center. (ios)
 
+gamenetwork.gree:
+[ ] GREE Platform. (ios)
+[ ] GREE Platform. (android)
+
 
 native:
 [ ] Activity indicator for Android.
+[ ] In the specified location display activity indicator.
 [ ] Alert view for Android.
 [ ] OpenUDID for Android.
 [ ] openURL() for Android.
@@ -34,7 +39,7 @@ native:
 
 network:
 [ ] CCNetworkDelegate, notify the delegate when the network state has changed.
-[ ] Makes an asynchronous HTTP request.
+[X] Makes an asynchronous HTTP request.
 
 
 store:
