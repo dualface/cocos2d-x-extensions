@@ -9,6 +9,27 @@ typedef enum {
     CCNetworkStatusReachableViaWWAN
 } CCNetworkStatus;
 
+typedef enum {
+    CCHttpRequestMethodGET = 0,
+    CCHttpRequestMethodPOST,
+} CCHttpRequestMethod;
+
+class CCHttpRequest : public CCObject
+{
+    static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
+                                           const char* url,
+                                           CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    void addRequestHeader(const char* key, const char* value);
+    void addPostValue(const char* key, const char* value);
+    void setTimeout(float timeout);
+    float getTimeout(void);
+    bool getIsInProgress(void);
+    void start(bool isCached = false);
+    void cancel(void);
+    void clearDelegatesAndCancel(void);
+    const const char* getResponseString(void);
+};
+
 class CCNetwork
 {
 public:
@@ -16,4 +37,8 @@ public:
     static bool isInternetConnectionAvailable(void);
     static bool isHostNameReachable(const char* hostName);
     static CCNetworkStatus getInternetConnectionStatus(void);
+
+    static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
+                                         const char* url,
+                                         CCHttpRequestMethod method = CCHttpRequestMethodGET);
 };

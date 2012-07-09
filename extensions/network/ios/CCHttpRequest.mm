@@ -21,6 +21,20 @@ namespace extensions {
         return request;
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
+    CCHttpRequest* CCHttpRequest::createWithUrlLua(LUA_FUNCTION listener,
+                                                   const char* url,
+                                                   CCHttpRequestMethod method)
+    {
+        CCHttpRequest* request = new CCHttpRequest(NULL, method, true);
+        request->initWithUrl(url);
+        request->m_luaListener = listener;
+        request->autorelease();
+        request->retain();
+        return request;
+    }
+#endif
+    
     bool CCHttpRequest::initWithUrl(const char *url)
     {
         NSURL *nsurl = [NSURL URLWithString:[NSString stringWithCString:url encoding:NSUTF8StringEncoding]];
@@ -43,7 +57,7 @@ namespace extensions {
         
         return true;
     }
-
+    
     CCHttpRequest::~CCHttpRequest(void)
     {
         [(ASIHTTPRequest *)m_request release];
@@ -85,11 +99,33 @@ namespace extensions {
         
         [(ASIHTTPRequest *)m_request setCompletionBlock:^{
             if (m_delegate) m_delegate->requestFinished(this);
+#if CC_LUA_ENGINE_ENABLED > 0
+            if (m_luaListener)
+            {
+                CCScriptValueDict dict;
+                dict["name"] = CCScriptValue::stringValue("completed");
+                dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+                CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+                engine->pushCCScriptValueDictToLuaStack(dict);
+                engine->executeFunctionByHandler(m_luaListener, 1);
+            }
+#endif
             if (m_isAutoReleaseOnFinish) release();
         }];
         
         [(ASIHTTPRequest *)m_request setFailedBlock:^{
             if (m_delegate) m_delegate->requestFailed(this);
+#if CC_LUA_ENGINE_ENABLED > 0
+            if (m_luaListener)
+            {
+                CCScriptValueDict dict;
+                dict["name"] = CCScriptValue::stringValue("failed");
+                dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+                CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+                engine->pushCCScriptValueDictToLuaStack(dict);
+                engine->executeFunctionByHandler(m_luaListener, 1);
+            }
+#endif
             if (m_isAutoReleaseOnFinish) release();
         }];
         

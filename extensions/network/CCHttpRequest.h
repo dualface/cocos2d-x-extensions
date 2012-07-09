@@ -7,6 +7,10 @@
 #include "CCObject.h"
 #include "CCHttpRequestDelegate.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCScriptSupport.h"
+#endif
+
 using namespace std;
 using namespace cocos2d;
 
@@ -27,6 +31,13 @@ namespace extensions {
                                             const char* url,
                                             CCHttpRequestMethod method = CCHttpRequestMethodGET,
                                             bool isAutoReleaseOnFinish = true);
+        
+#if CC_LUA_ENGINE_ENABLED > 0
+        static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
+                                               const char* url,
+                                               CCHttpRequestMethod method = CCHttpRequestMethodGET);
+#endif
+        
         ~CCHttpRequest(void);
         
         /** @brief Add a custom header to the request. */
@@ -67,6 +78,9 @@ namespace extensions {
         , m_method(method)
         , m_request(NULL)
         , m_isAutoReleaseOnFinish(isAutoReleaseOnFinish)
+#if CC_LUA_ENGINE_ENABLED > 0
+        , m_luaListener(0)
+#endif
         {
         }
         bool initWithUrl(const char* url);
@@ -74,7 +88,10 @@ namespace extensions {
         CCHttpRequestDelegate*  m_delegate;
         CCHttpRequestMethod     m_method;
         void*                   m_request;
-        bool                    m_isAutoReleaseOnFinish;
+        bool                    m_isAutoReleaseOnFinish;        
+#if CC_LUA_ENGINE_ENABLED > 0
+        LUA_FUNCTION            m_luaListener;
+#endif
     };
     
 }

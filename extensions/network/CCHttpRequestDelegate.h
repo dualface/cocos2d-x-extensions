@@ -10,7 +10,8 @@ namespace extensions {
     {
     public:
         virtual void requestFinished(CCHttpRequest* request) = 0;
-        virtual void requestFailed(CCHttpRequest* request) = 0;
+        virtual void requestFailed(CCHttpRequest* request) {
+        }
     };
     
 }

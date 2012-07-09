@@ -122,52 +122,52 @@ namespace extensions {
     LUA_TABLE CCOpenFeint::getAchievementsLua(void)
     {
         CCArray* achievements = getAchievements();
-        CCLuaTableArray achievements_;
+        CCScriptValueArray achievements_;
         
         for (int i = 0; i < achievements->count(); ++i)
         {
             CCOFAchievement* ach = static_cast<CCOFAchievement*>(achievements->objectAtIndex(i));
-            CCLuaTableDict ach_;
+            CCScriptValueDict ach_;
             
-            ach_["id"] = CCLuaValue::valueWithString(ach->getId());
-            ach_["title"] = CCLuaValue::valueWithString(ach->getTitle());
-            ach_["description"] = CCLuaValue::valueWithString(ach->getDescription());
-            ach_["iconUrl"] = CCLuaValue::valueWithString(ach->getIconUrl());
-            ach_["gameScore"] = CCLuaValue::valueWithInt(ach->getGameScore());
-            ach_["isUnlocked"] = CCLuaValue::valueWithBoolean(ach->getIsUnlocked());
-            ach_["isSecret"] = CCLuaValue::valueWithBoolean(ach->getIsSecret());
+            ach_["id"] = CCScriptValue::stringValue(ach->getId());
+            ach_["title"] = CCScriptValue::stringValue(ach->getTitle());
+            ach_["description"] = CCScriptValue::stringValue(ach->getDescription());
+            ach_["iconUrl"] = CCScriptValue::stringValue(ach->getIconUrl());
+            ach_["gameScore"] = CCScriptValue::intValue(ach->getGameScore());
+            ach_["isUnlocked"] = CCScriptValue::booleanValue(ach->getIsUnlocked());
+            ach_["isSecret"] = CCScriptValue::booleanValue(ach->getIsSecret());
             
-            achievements_.push_back(CCLuaValue::valueWithCCLuaTableDict(ach_));
+            achievements_.push_back(CCScriptValue::dictValue(ach_));
         }
         
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
         engine->cleanLuaStack();
-        engine->pushCCLuaTableArrayToLuaStack(&achievements_);
+        engine->pushCCScriptValueArrayToLuaStack(achievements_);
         return 1;
     }
     
     LUA_TABLE CCOpenFeint::getLeaderboardsLua(void)
     {
         CCArray* leaderboards = getLeaderboards();
-        CCLuaTableArray leaderboards_;
+        CCScriptValueArray leaderboards_;
         
         for (int i = 0; i < leaderboards->count(); ++i)
         {
             CCOFLeaderboard* board = static_cast<CCOFLeaderboard*>(leaderboards->objectAtIndex(i));
-            CCLuaTableDict board_;
+            CCScriptValueDict board_;
             
-            board_["id"] = CCLuaValue::valueWithString(board->getId());
-            board_["name"] = CCLuaValue::valueWithString(board->getName());
-            board_["descendingScoreOrder"] = CCLuaValue::valueWithBoolean(board->getDescendingScoreOrder());
-            board_["currentUserScore"] = CCLuaValue::valueWithInt(board->getCurrentUserScore());
-            board_["currentUserScoreDisplayText"] = CCLuaValue::valueWithString(board->getCurrentUserScoreDisplayText());
+            board_["id"] = CCScriptValue::stringValue(board->getId());
+            board_["name"] = CCScriptValue::stringValue(board->getName());
+            board_["descendingScoreOrder"] = CCScriptValue::booleanValue(board->getDescendingScoreOrder());
+            board_["currentUserScore"] = CCScriptValue::intValue(board->getCurrentUserScore());
+            board_["currentUserScoreDisplayText"] = CCScriptValue::stringValue(board->getCurrentUserScoreDisplayText());
             
-            leaderboards_.push_back(CCLuaValue::valueWithCCLuaTableDict(board_));
+            leaderboards_.push_back(CCScriptValue::dictValue(board_));
         }
         
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
         engine->cleanLuaStack();
-        engine->pushCCLuaTableArrayToLuaStack(&leaderboards_);
+        engine->pushCCScriptValueArrayToLuaStack(leaderboards_);
         return 1;
     }
 #endif

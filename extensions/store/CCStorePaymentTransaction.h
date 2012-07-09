@@ -128,7 +128,7 @@ namespace extensions {
         }
         
 #if CC_LUA_ENGINE_ENABLED > 0
-        const CCLuaTableDict convertToLuaTable(void);
+        const CCScriptValueDict convertToLuaTable(void);
 #endif
         
     private:

@@ -188,11 +188,10 @@ static CCNative_objc *s_sharedInstance;
     {
         CCScriptEngineProtocol *engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
         
-        CCLuaTableDict event;
-        event["action"] = CCLuaValue::valueWithString("clicked");
-        event["buttonIndex"] = CCLuaValue::valueWithInt(buttonIndex + 1);
-        
-        engine->pushCCLuaTableDictToLuaStack(&event);
+        CCScriptValueDict event;
+        event["action"] = CCScriptValue::stringValue("clicked");
+        event["buttonIndex"] = CCScriptValue::intValue(buttonIndex + 1);
+        engine->pushCCScriptValueDictToLuaStack(event);
         engine->executeFunctionByHandler(alertViewLuaListener_, 1);
     }
 #endif    

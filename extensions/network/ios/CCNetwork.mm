@@ -45,4 +45,15 @@ namespace extensions {
         return request;
     }
     
+#if CC_LUA_ENGINE_ENABLED > 0
+    CCHttpRequest* CCNetwork::httpRequestLua(LUA_FUNCTION listener,
+                                             const char* url,
+                                             CCHttpRequestMethod method)
+    {
+        CCHttpRequest* request = CCHttpRequest::createWithUrlLua(listener, url, method);
+        request->start();
+        return request;
+    }
+#endif
+    
 }

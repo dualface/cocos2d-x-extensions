@@ -5,6 +5,10 @@
 #include "CCHttpRequest.h"
 #include "CCHttpRequestDelegate.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCScriptSupport.h"
+#endif
+
 namespace extensions {
     
     typedef enum {
@@ -13,7 +17,6 @@ namespace extensions {
         CCNetworkStatusReachableViaWWAN
     } CCNetworkStatus;
     
-        
     class CCNetwork
     {
     public:
@@ -37,7 +40,13 @@ namespace extensions {
         
         static CCHttpRequest* httpRequest(CCHttpRequestDelegate* delegate,
                                           const char* url,
-                                          CCHttpRequestMethod method);
+                                          CCHttpRequestMethod method = CCHttpRequestMethodGET);
+        
+#if CC_LUA_ENGINE_ENABLED > 0
+        static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
+                                             const char* url,
+                                             CCHttpRequestMethod method = CCHttpRequestMethodGET);
+#endif
         
     private:
         CCNetwork(void) {}

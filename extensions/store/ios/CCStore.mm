@@ -263,34 +263,34 @@ namespace extensions {
     {
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
         
-        CCLuaTableDict event;
-        CCLuaTableArray products_;
+        CCScriptValueDict event;
+        CCScriptValueArray products_;
         
         for (int i = 0; i < products->count(); ++i)
         {
             CCStoreProduct* product = static_cast<CCStoreProduct*>(products->objectAtIndex(i));
-            CCLuaTableDict product_;
-            product_["productIdentifier"]    = CCLuaValue::valueWithString(product->getProductIdentifier());
-            product_["localizedTitle"]       = CCLuaValue::valueWithString(product->getLocalizedTitle());
-            product_["localizedDescription"] = CCLuaValue::valueWithString(product->getLocalizedDescription());
-            product_["priceLocale"]          = CCLuaValue::valueWithString(product->getPriceLocale());
-            product_["price"]                = CCLuaValue::valueWithFloat(product->getPrice());
-            products_.push_back(CCLuaValue::valueWithCCLuaTableDict(product_));
+            CCScriptValueDict product_;
+            product_["productIdentifier"]    = CCScriptValue::stringValue(product->getProductIdentifier());
+            product_["localizedTitle"]       = CCScriptValue::stringValue(product->getLocalizedTitle());
+            product_["localizedDescription"] = CCScriptValue::stringValue(product->getLocalizedDescription());
+            product_["priceLocale"]          = CCScriptValue::stringValue(product->getPriceLocale());
+            product_["price"]                = CCScriptValue::floatValue(product->getPrice());
+            products_.push_back(CCScriptValue::dictValue(product_));
         }
-        event["products"] = CCLuaValue::valueWithCCLuaTableArray(products_);
+        event["products"] = CCScriptValue::arrayValue(products_);
         
         if (invalidProductsId)
         {
-            CCLuaTableArray invalidProductsId_;
+            CCScriptValueArray invalidProductsId_;
             for (int i = 0; i < invalidProductsId->count(); ++i)
             {
                 CCString* ccid = static_cast<CCString*>(invalidProductsId->objectAtIndex(i));
-                invalidProductsId_.push_back(CCLuaValue::valueWithString(ccid->toStdString()));
+                invalidProductsId_.push_back(CCScriptValue::stringValue(ccid->toStdString()));
             }            
-            event["invalidProductsId"] = CCLuaValue::valueWithCCLuaTableArray(invalidProductsId_);
+            event["invalidProductsId"] = CCScriptValue::arrayValue(invalidProductsId_);
         }
         
-        engine->pushCCLuaTableDictToLuaStack(&event);
+        engine->pushCCScriptValueDictToLuaStack(event);
         engine->executeFunctionByHandler(m_loadProductsCallback, 1);
         
         m_loadProductsCallback = 0;
@@ -301,11 +301,11 @@ namespace extensions {
     {
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
         
-        CCLuaTableDict event;
-        event["errorCode"] = CCLuaValue::valueWithInt(errorCode);
-        event["errorString"] = CCLuaValue::valueWithString(errorString);
+        CCScriptValueDict event;
+        event["errorCode"] = CCScriptValue::intValue(errorCode);
+        event["errorString"] = CCScriptValue::stringValue(errorString);
         
-        engine->pushCCLuaTableDictToLuaStack(&event);
+        engine->pushCCScriptValueDictToLuaStack(event);
         engine->executeFunctionByHandler(m_loadProductsCallback, 1);
         
         m_loadProductsCallback = 0;
@@ -321,10 +321,10 @@ namespace extensions {
     {
         CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
 
-        CCLuaTableDict event;
-        event["transaction"] = CCLuaValue::valueWithCCLuaTableDict(transaction->convertToLuaTable());
+        CCScriptValueDict event;
+        event["transaction"] = CCScriptValue::dictValue(transaction->convertToLuaTable());
         
-        engine->pushCCLuaTableDictToLuaStack(&event);
+        engine->pushCCScriptValueDictToLuaStack(event);
         engine->executeFunctionByHandler(m_listener, 1);
     }
 #endif
