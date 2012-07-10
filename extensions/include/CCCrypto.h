@@ -12,6 +12,8 @@ namespace extensions {
     {
     public:
         
+#ifndef CC_UNDER_WIN32
+
         /** @brief Return AES256 key length */
         static int getAES256KeyLength(void);
         
@@ -36,7 +38,9 @@ namespace extensions {
         {
             return cryptAES256(true, ciphertext, ciphertextLength, plaintext, plaintextBufferLength, key, keyLength);
         }
-        
+
+#endif
+
         /** @brief Encoding data with Base64 algorithm, return encoded string length */
         static int encodeBase64(const void* input,
                                 int inputLength,
@@ -58,6 +62,7 @@ namespace extensions {
         
 #if CC_LUA_ENGINE_ENABLED > 0
 
+#ifndef CC_UNDER_WIN32
         /** @brief Encrypt data with AES256 algorithm, return ciphertext string, return nil if failed */
         static LUA_STRING encryptAES256Lua(const char* plaintext,
                                            int plaintextLength,
@@ -75,7 +80,8 @@ namespace extensions {
         {
             return cryptAES256Lua(true, ciphertext, ciphertextLength, key, keyLength);
         }
-        
+#endif
+
         /** @brief Encoding data with Base64 algorithm, return encoded string */
         static LUA_STRING encodeBase64Lua(const char* input, int inputLength)
         {
