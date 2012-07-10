@@ -4,15 +4,15 @@
 #import "CCOpenFeint_objc.h"
 
 // OpenFeint
-#import "OpenFeint.h"
-#import "OpenFeint+Dashboard.h"
-#import "OFAchievement.h"
-#import "OFAchievementService.h"
-#import "OFChallenge.h"
-#import "OFChallengeDefinition.h"
-#import "OFChallengeToUser.h"
-#import "OFInvocation.h"
-#import "OFLeaderboard.h"
+#import "OpenFeint/OpenFeint.h"
+#import "OpenFeint/OpenFeint+Dashboard.h"
+#import "OpenFeint/OFAchievement.h"
+#import "OpenFeint/OFAchievementService.h"
+#import "OpenFeint/OFChallenge.h"
+#import "OpenFeint/OFChallengeDefinition.h"
+#import "OpenFeint/OFChallengeToUser.h"
+#import "OpenFeint/OFInvocation.h"
+#import "OpenFeint/OFLeaderboard.h"
 
 @implementation CCOpenFeint_objc
 
