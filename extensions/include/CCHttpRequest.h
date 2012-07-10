@@ -2,8 +2,6 @@
 #ifndef __EXTENSIONS_CCHTTP_REQUEST_H_
 #define __EXTENSIONS_CCHTTP_REQUEST_H_
 
-#include <string>
-#include <map>
 #include "CCObject.h"
 #include "CCHttpRequestDelegate.h"
 
@@ -11,7 +9,6 @@
 #include "CCScriptSupport.h"
 #endif
 
-using namespace std;
 using namespace cocos2d;
 
 namespace extensions {
@@ -20,9 +17,6 @@ namespace extensions {
         CCHttpRequestMethodGET = 0,
         CCHttpRequestMethodPOST,
     } CCHttpRequestMethod;
-    
-    typedef map<string, string>             CCHttpRequestHeaders;
-    typedef CCHttpRequestHeaders::iterator  CCHttpRequestHeadersIterator;
     
     class CCHttpRequest : public CCObject
     {
@@ -67,7 +61,7 @@ namespace extensions {
         void clearDelegatesAndCancel(void);
         
         /** @brief Returns the contents of the result. */
-        const const char* getResponseString(void);
+        const char* getResponseString(void);
         
         /** @brief Response data. */
         const void* getResponseData(int* dataLength);

@@ -22,7 +22,8 @@ namespace extensions {
     public:
 #pragma mark -
 #pragma mark reachability
-        
+
+#ifndef CC_UNDER_WIN32
         /** @brief Checks whether a local wifi connection is available */
         static bool isLocalWiFiAvailable(void);
         
@@ -34,7 +35,8 @@ namespace extensions {
         
         /** @brief Checks Internet connection reachability status */
         static CCNetworkStatus getInternetConnectionStatus(void);
-        
+#endif
+
 #pragma mark -
 #pragma mark HTTP
         
