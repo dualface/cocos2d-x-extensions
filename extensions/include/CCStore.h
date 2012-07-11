@@ -1,19 +1,12 @@
 
-#ifndef  __EXTENSIONS_CCSTORE_H_
-#define  __EXTENSIONS_CCSTORE_H_
+#ifndef  __CC_EXTENSION_CCSTORE_H_
+#define  __CC_EXTENSION_CCSTORE_H_
 
 #include "cocos2dx_extensions.h"
-#include <map>
-#include "CCObject.h"
-#include "CCSet.h"
 #include "CCStoreProduct.h"
 #include "CCStorePaymentTransaction.h"
 #include "CCStoreTransactionObserver.h"
 #include "CCStoreProductsRequestDelegate.h"
-
-#if CC_LUA_ENGINE_ENABLED > 0
-#include "CCScriptSupport.h"
-#endif
 
 NS_CC_EXT_BEGIN
 
@@ -126,4 +119,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCSTORE_H_
+#endif // __CC_EXTENSION_CCSTORE_H_

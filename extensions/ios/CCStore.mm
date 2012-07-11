@@ -1,7 +1,5 @@
 
 #include "CCStore.h"
-#include "CCString.h"
-#include "CCSet.h"
 
 #import "CCStore_objc.h"
 #import "libb64.h"

@@ -1,12 +1,9 @@
 
-#ifndef __EXTENSIONS_CCSTORE_PAYMENT_TRANSACTION_H_
-#define __EXTENSIONS_CCSTORE_PAYMENT_TRANSACTION_H_
+#ifndef __CC_EXTENSION_CCSTORE_PAYMENT_TRANSACTION_H_
+#define __CC_EXTENSION_CCSTORE_PAYMENT_TRANSACTION_H_
 
 #include "cocos2dx_extensions.h"
-#include <string>
-#include "CCObject.h"
 #include "CCStorePaymentTransactionWrapper.h"
-#include "CCScriptSupport.h"
 
 NS_CC_EXT_BEGIN
 
@@ -163,4 +160,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCSTORE_PAYMENT_TRANSACTION_H_
+#endif // __CC_EXTENSION_CCSTORE_PAYMENT_TRANSACTION_H_

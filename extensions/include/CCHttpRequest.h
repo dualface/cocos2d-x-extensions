@@ -1,14 +1,9 @@
 
-#ifndef __EXTENSIONS_CCHTTP_REQUEST_H_
-#define __EXTENSIONS_CCHTTP_REQUEST_H_
+#ifndef __CC_EXTENSION_CCHTTP_REQUEST_H_
+#define __CC_EXTENSION_CCHTTP_REQUEST_H_
 
 #include "cocos2dx_extensions.h"
-#include "CCObject.h"
 #include "CCHttpRequestDelegate.h"
-
-#if CC_LUA_ENGINE_ENABLED > 0
-#include "CCScriptSupport.h"
-#endif
 
 NS_CC_EXT_BEGIN
 
@@ -89,4 +84,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCHTTP_REQUEST_H_
+#endif // __CC_EXTENSION_CCHTTP_REQUEST_H_

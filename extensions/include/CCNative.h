@@ -1,10 +1,9 @@
 
-#ifndef __EXTENSIONS_CCNATIVE_H_
-#define __EXTENSIONS_CCNATIVE_H_
+#ifndef __CC_EXTENSION_CCNATIVE_H_
+#define __CC_EXTENSION_CCNATIVE_H_
 
 #include "cocos2dx_extensions.h"
 #include "CCAlertViewDelegate.h"
-#include "CCScriptSupport.h"
 
 NS_CC_EXT_BEGIN
 
@@ -70,4 +69,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCNATIVE_H_
+#endif // __CC_EXTENSION_CCNATIVE_H_

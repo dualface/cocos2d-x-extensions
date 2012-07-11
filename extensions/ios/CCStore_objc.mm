@@ -2,9 +2,7 @@
 #import "CCStore_objc.h"
 #import "SBJSON.h"
 
-#include "cocos2d.h"
 #include "CCStoreProduct.h"
-#include "CCString.h"
 #include "CCCrypto.h"
 
 #ifndef utf8cstr

@@ -4,6 +4,13 @@
 
 #include "cocos2d.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCScriptSupport.h"
+#endif
+
+#include <map>
+#include <string>
+
 #ifndef NS_CC_EXT_BEGIN
 #define NS_CC_EXT_BEGIN                 namespace cocos2d { namespace extension { 
 #define NS_CC_EXT_END                   }} 

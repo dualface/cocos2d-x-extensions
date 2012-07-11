@@ -1,12 +1,8 @@
 
-#ifndef __EXTENSIONS_CCCRYPTO_H_
-#define __EXTENSIONS_CCCRYPTO_H_
+#ifndef __CC_EXTENSION_CCCRYPTO_H_
+#define __CC_EXTENSION_CCCRYPTO_H_
 
 #include "cocos2dx_extensions.h"
-
-#if CC_LUA_ENGINE_ENABLED > 0
-#include "CCScriptSupport.h"
-#endif
 
 NS_CC_EXT_BEGIN
 
@@ -131,4 +127,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCCRYPTO_H_
+#endif // __CC_EXTENSION_CCCRYPTO_H_

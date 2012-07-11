@@ -1,10 +1,8 @@
 
-#ifndef __EXTENSIONS_CCSTORE_PRODUCT_H_
-#define __EXTENSIONS_CCSTORE_PRODUCT_H_
+#ifndef __CC_EXTENSION_CCSTORE_PRODUCT_H_
+#define __CC_EXTENSION_CCSTORE_PRODUCT_H_
 
 #include "cocos2dx_extensions.h"
-#include <string>
-#include "CCObject.h"
 
 NS_CC_EXT_BEGIN
 
@@ -62,4 +60,4 @@ private:
 
 NS_CC_EXT_END
 
-#endif // __EXTENSIONS_CCSTORE_PRODUCT_H_
+#endif // __CC_EXTENSION_CCSTORE_PRODUCT_H_

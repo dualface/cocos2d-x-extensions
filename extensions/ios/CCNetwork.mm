@@ -1,5 +1,4 @@
 
-#include "CCScriptSupport.h"
 #include "CCNetwork.h"
 
 #import "ASIHTTPRequest.h"
