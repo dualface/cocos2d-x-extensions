@@ -500,6 +500,7 @@
 		F47325DE15A835F7007430BB /* CCStoreScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCStoreScene.cpp; path = Classes/CCStoreScene.cpp; sourceTree = "<group>"; };
 		F47325DF15A835F7007430BB /* CCStoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCStoreScene.h; path = Classes/CCStoreScene.h; sourceTree = "<group>"; };
 		F47331EF15A84321007430BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F47E999515AD28F9009D0255 /* cocos2dx_extensions.h */ = {isa = PBXFileReference; path = cocos2dx_extensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -527,6 +528,7 @@
 		F413E4B615AD2698005EE806 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				F47E999515AD28F9009D0255 /* cocos2dx_extensions.h */,
 				F413E4B715AD2698005EE806 /* CCAlertViewDelegate.h */,
 				F413E4B815AD2698005EE806 /* CCCrypto.h */,
 				F413E4B915AD2698005EE806 /* CCHttpRequest.h */,

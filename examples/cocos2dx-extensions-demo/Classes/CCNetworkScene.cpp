@@ -5,7 +5,8 @@
 #include "CCHttpRequest.h"
 #include "HelloWorldScene.h"
 
-using namespace extensions;
+USING_NS_CC;
+USING_NS_CC_EXT;
 
 CCNetworkScene* CCNetworkScene::scene(void)
 {

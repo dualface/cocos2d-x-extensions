@@ -2,66 +2,64 @@
 #ifndef __EXTENSIONS_CCSTORE_PRODUCT_H_
 #define __EXTENSIONS_CCSTORE_PRODUCT_H_
 
+#include "cocos2dx_extensions.h"
 #include <string>
 #include "CCObject.h"
 
-using namespace std;
-using namespace cocos2d;
+NS_CC_EXT_BEGIN
 
-namespace extensions {
-    
 #pragma mark -
 #pragma mark CCStoreProduct
+
+class CCStoreProduct : public cocos2d::CCObject
+{
+public:
+    static CCStoreProduct* productWithId(const char* productIdentifier,
+                                         const char* localizedTitle,
+                                         const char* localizedDescription,
+                                         float price,
+                                         const char* priceLocale);
     
-    class CCStoreProduct : public CCObject
+    const std::string& getProductIdentifier(void)
     {
-    public:
-        static CCStoreProduct* productWithId(const char* productIdentifier,
-                                             const char* localizedTitle,
-                                             const char* localizedDescription,
-                                             float price,
-                                             const char* priceLocale);
-        
-        const string& getProductIdentifier(void)
-        {
-            return m_productIdentifier;
-        }
-        
-        const string& getLocalizedTitle(void)
-        {
-            return m_localizedTitle;
-        }
-        
-        const string& getLocalizedDescription(void)
-        {
-            return m_localizedDescription;
-        }
-        
-        float getPrice(void)
-        {
-            return m_price;
-        }
-        
-        const string& getPriceLocale(void)
-        {
-            return m_priceLocale;
-        }
-        
-    private:
-        CCStoreProduct(void) {}
-        bool initWithId(const char* productIdentifier,
-                        const char* localizedTitle,
-                        const char* localizedDescription,
-                        float price,
-                        const char* priceLocale);
-        
-        string m_productIdentifier;
-        string m_localizedTitle;
-        string m_localizedDescription;
-        float  m_price;
-        string m_priceLocale;
-    };
+        return m_productIdentifier;
+    }
     
-} // namespace store
+    const std::string& getLocalizedTitle(void)
+    {
+        return m_localizedTitle;
+    }
+    
+    const std::string& getLocalizedDescription(void)
+    {
+        return m_localizedDescription;
+    }
+    
+    float getPrice(void)
+    {
+        return m_price;
+    }
+    
+    const std::string& getPriceLocale(void)
+    {
+        return m_priceLocale;
+    }
+    
+private:
+    CCStoreProduct(void) {}
+    bool initWithId(const char* productIdentifier,
+                    const char* localizedTitle,
+                    const char* localizedDescription,
+                    float price,
+                    const char* priceLocale);
+    
+    std::string m_productIdentifier;
+    std::string m_localizedTitle;
+    std::string m_localizedDescription;
+    float       m_price;
+    std::string m_priceLocale;
+};
+
+NS_CC_EXT_END
 
 #endif // __EXTENSIONS_CCSTORE_PRODUCT_H_

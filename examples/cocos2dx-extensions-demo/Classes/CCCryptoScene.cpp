@@ -1,10 +1,9 @@
 
 #include "CCCryptoScene.h"
-
 #include "CCCrypto.h"
-using namespace extensions;
-
 #include "HelloWorldScene.h"
+
+USING_NS_CC_EXT;
 
 CCCryptoScene* CCCryptoScene::scene(void)
 {

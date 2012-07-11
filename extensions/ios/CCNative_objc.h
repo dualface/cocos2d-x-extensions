@@ -3,8 +3,8 @@
 #include "CCAlertViewDelegate.h"
 #include "CCScriptSupport.h"
 
-using namespace cocos2d;
-using namespace extensions;
+USING_NS_CC;
+USING_NS_CC_EXT;
 
 @interface CCNative_objc : NSObject < UIAlertViewDelegate >
 {

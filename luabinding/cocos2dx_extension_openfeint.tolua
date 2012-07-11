@@ -1,7 +1,7 @@
 
 $#include "CCOpenFeint.h"
 
-$using namespace extensions;
+$using namespace cocos2d::extension;
 
 class CCOpenFeint
 {

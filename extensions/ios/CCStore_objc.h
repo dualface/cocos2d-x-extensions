@@ -6,7 +6,7 @@
 #include "CCStore.h"
 #include "CCStoreProductsRequestDelegate.h"
 
-using namespace extensions;
+USING_NS_CC_EXT;
 
 @interface CCStore_objc : NSObject < SKPaymentTransactionObserver, SKProductsRequestDelegate >
 {

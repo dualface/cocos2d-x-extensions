@@ -11,9 +11,6 @@
 #define utf8cstr(nsstr) (nsstr ? [nsstr cStringUsingEncoding:NSUTF8StringEncoding] : "")
 #endif
 
-using namespace cocos2d;
-using namespace extensions;
-
 @implementation CCStore_objc
 
 static CCStore_objc *s_sharedStore;
@@ -147,7 +144,7 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    CCArray* ccproducts = CCArray::arrayWithCapacity(response.products.count);
+    cocos2d::CCArray* ccproducts = cocos2d::CCArray::arrayWithCapacity(response.products.count);
     for (int i = 0; i < response.products.count; ++i)
     {
         // cache loaded product
@@ -164,14 +161,14 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
         CCLOG("[CCStore_obj] productsRequestDidReceiveResponse() get pid: %s", utf8cstr(product.productIdentifier));
     }
     
-    CCArray* ccinvalidProductsId = NULL;
+    cocos2d::CCArray* ccinvalidProductsId = NULL;
     if (response.invalidProductIdentifiers.count > 0)
     {
-        ccinvalidProductsId = CCArray::arrayWithCapacity(response.invalidProductIdentifiers.count);
+        ccinvalidProductsId = cocos2d::CCArray::arrayWithCapacity(response.invalidProductIdentifiers.count);
         for (int i = 0; i < response.invalidProductIdentifiers.count; ++i)
         {
             NSString* productId = [response.invalidProductIdentifiers objectAtIndex:i];
-            CCString* ccid = new CCString(utf8cstr(productId));
+            cocos2d::CCString* ccid = new cocos2d::CCString(utf8cstr(productId));
             ccid->autorelease();
             ccinvalidProductsId->addObject(ccid);
             CCLOG("[CCStore_obj] productsRequestDidReceiveResponse() invalid pid: %s", utf8cstr(productId));

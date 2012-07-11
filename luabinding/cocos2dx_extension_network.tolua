@@ -1,7 +1,7 @@
 
 $#include "CCNetwork.h"
 
-$using namespace extensions;
+$using namespace cocos2d::extension;
 
 typedef enum {
     CCNetworkStatusNotReachable = 0,

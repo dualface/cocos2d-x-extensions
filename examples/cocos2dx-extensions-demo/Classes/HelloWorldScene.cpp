@@ -7,9 +7,6 @@
 #include "CCStoreScene.h"
 #include "CCNative.h"
 
-using namespace cocos2d;
-using namespace extensions;
-
 HelloWorldScene* HelloWorldScene::scene(void)
 {
     HelloWorldScene* scene = new HelloWorldScene();

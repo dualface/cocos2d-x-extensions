@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_openfeint
-** Generated automatically by tolua++-1.0.92 on Tue Jul 10 00:48:01 2012.
+** Generated automatically by tolua++-1.0.92 on Wed Jul 11 11:55:16 2012.
 */
 
 #include "cocos2dx_extension_openfeint.h"
@@ -8,7 +8,7 @@
 
 
 #include "CCOpenFeint.h"
-using namespace extensions;
+using namespace cocos2d::extension;
 
 /* function to release collected object via destructor */
 #ifdef __cplusplus

@@ -5,8 +5,8 @@
 #include "cocos2d.h"
 #include "CCHttpRequestDelegate.h"
 
-using namespace cocos2d;
-using namespace extensions;
+USING_NS_CC;
+USING_NS_CC_EXT;
 
 class CCNetworkScene : public CCScene, public CCHttpRequestDelegate
 {

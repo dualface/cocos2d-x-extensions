@@ -6,8 +6,8 @@
 #include "CCStoreTransactionObserver.h"
 #include "CCStoreProductsRequestDelegate.h"
 
-using namespace cocos2d;
-using namespace extensions;
+USING_NS_CC;
+USING_NS_CC_EXT;
 
 class CCStoreScene : public CCScene, public CCStoreTransactionObserver, public CCStoreProductsRequestDelegate
 {

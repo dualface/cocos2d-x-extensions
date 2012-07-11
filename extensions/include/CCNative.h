@@ -2,73 +2,72 @@
 #ifndef __EXTENSIONS_CCNATIVE_H_
 #define __EXTENSIONS_CCNATIVE_H_
 
+#include "cocos2dx_extensions.h"
 #include "CCAlertViewDelegate.h"
 #include "CCScriptSupport.h"
 
-using namespace cocos2d;
+NS_CC_EXT_BEGIN
 
-namespace extensions {
+/** @brief Activity indicator style */
+typedef enum {
+    CCActivityIndicatorViewStyleWhiteLarge,
+    CCActivityIndicatorViewStyleWhite,
+    CCActivityIndicatorViewStyleGray,
+} CCActivityIndicatorViewStyle;
+
+class CCNative
+{
+public:
     
-    /** @brief Activity indicator style */
-    typedef enum {
-        CCActivityIndicatorViewStyleWhiteLarge,
-        CCActivityIndicatorViewStyleWhite,
-        CCActivityIndicatorViewStyleGray,
-    } CCActivityIndicatorViewStyle;
-    
-    class CCNative
-    {
-    public:
-        
 #pragma mark -
 #pragma mark activity indicator
-        
-        /** @brief Show activity indicator */
-        static void showActivityIndicator(CCActivityIndicatorViewStyle style = CCActivityIndicatorViewStyleWhiteLarge);
-        
-        /** @brief Hide activity indicator */
-        static void hideActivityIndicator(void);
-        
+    
+    /** @brief Show activity indicator */
+    static void showActivityIndicator(CCActivityIndicatorViewStyle style = CCActivityIndicatorViewStyleWhiteLarge);
+    
+    /** @brief Hide activity indicator */
+    static void hideActivityIndicator(void);
+    
 #pragma mark -
 #pragma mark alert view
-        
-        /** @brief Create alert view */
-        static void createAlert(const char* title,
-                                const char* message,
-                                const char* cancelButtonTitle);
-        
-        /** @brief Add button to alert view, return button index */
-        static int addAlertButton(const char* buttonTitle);
+    
+    /** @brief Create alert view */
+    static void createAlert(const char* title,
+                            const char* message,
+                            const char* cancelButtonTitle);
+    
+    /** @brief Add button to alert view, return button index */
+    static int addAlertButton(const char* buttonTitle);
 #if CC_LUA_ENGINE_ENABLED > 0
-        static int addAlertButtonLua(const char* buttonTitle);
+    static int addAlertButtonLua(const char* buttonTitle);
 #endif        
-        /** @brief Show alert view */
-        static void showAlert(CCAlertViewDelegate* delegate = NULL);
+    /** @brief Show alert view */
+    static void showAlert(CCAlertViewDelegate* delegate = NULL);
 #if CC_LUA_ENGINE_ENABLED > 0
-        static void showAlertLua(LUA_FUNCTION listener);
+    static void showAlertLua(cocos2d::LUA_FUNCTION listener);
 #endif        
-        /** @brief Hide and remove alert view */
-        static void cancelAlert(void);
-        
+    /** @brief Hide and remove alert view */
+    static void cancelAlert(void);
+    
 #pragma mark -
 #pragma mark OpenUDID
-        
-        /** @brief Get OpenUDID value */
-        static const char* getOpenUDID(void);
-        
+    
+    /** @brief Get OpenUDID value */
+    static const char* getOpenUDID(void);
+    
 #pragma mark -
 #pragma mark misc
-        
-        /** @brief Open a web page in the browser; create an email; or call a phone number. */
-        static void openURL(const char* url);
-        
+    
+    /** @brief Open a web page in the browser; create an email; or call a phone number. */
+    static void openURL(const char* url);
+    
 #pragma mark -
 #pragma mark helper
-        
-    private:
-        CCNative(void) {}
-    };
     
-}
+private:
+    CCNative(void) {}
+};
+
+NS_CC_EXT_END
 
 #endif // __EXTENSIONS_CCNATIVE_H_

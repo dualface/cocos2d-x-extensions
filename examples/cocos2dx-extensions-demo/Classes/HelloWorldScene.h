@@ -4,8 +4,8 @@
 #include "cocos2d.h"
 #include "CCAlertViewDelegate.h"
 
-using namespace cocos2d;
-using namespace extensions;
+USING_NS_CC;
+USING_NS_CC_EXT;
 
 class HelloWorldScene : public CCScene, public CCAlertViewDelegate
 {
