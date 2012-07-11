@@ -61,22 +61,29 @@ public:
     const void* getResponseData(int* dataLength);
     
 private:
-    CCHttpRequest(CCHttpRequestDelegate* delegate, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
+    CCHttpRequest(CCHttpRequestDelegate* delegate, const char* url, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
     : m_delegate(delegate)
+    , m_url(url ? url : "")
     , m_method(method)
     , m_request(NULL)
+    , m_responseData(NULL)
+    , m_responseDataLength(0)
     , m_isAutoReleaseOnFinish(isAutoReleaseOnFinish)
 #if CC_LUA_ENGINE_ENABLED > 0
     , m_luaListener(0)
 #endif
     {
     }
-    bool initWithUrl(const char* url);
+    bool initHttpRequest(void);
     
     CCHttpRequestDelegate*  m_delegate;
+    const std::string       m_url;
     CCHttpRequestMethod     m_method;
     void*                   m_request;
-    bool                    m_isAutoReleaseOnFinish;        
+    void*                   m_responseData;
+    int                     m_responseDataLength;
+    std::string             m_responseString;
+    bool                    m_isAutoReleaseOnFinish;
 #if CC_LUA_ENGINE_ENABLED > 0
     cocos2d::LUA_FUNCTION   m_luaListener;
 #endif

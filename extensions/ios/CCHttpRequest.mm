@@ -11,8 +11,8 @@ CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
                                             CCHttpRequestMethod method,
                                             bool isAutoReleaseOnFinish)
 {
-    CCHttpRequest* request = new CCHttpRequest(delegate, method, isAutoReleaseOnFinish);
-    request->initWithUrl(url);
+    CCHttpRequest* request = new CCHttpRequest(delegate, url, method, isAutoReleaseOnFinish);
+    request->initHttpRequest();
     request->autorelease();
     if (isAutoReleaseOnFinish)
     {
@@ -26,18 +26,18 @@ CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
                                                const char* url,
                                                CCHttpRequestMethod method)
 {
-    CCHttpRequest* request = new CCHttpRequest(NULL, method, true);
-    request->initWithUrl(url);
+    CCHttpRequest* request = new CCHttpRequest(NULL, url, method, true);
     request->m_luaListener = listener;
+    request->initHttpRequest();
     request->autorelease();
     request->retain();
     return request;
 }
 #endif
 
-bool CCHttpRequest::initWithUrl(const char *url)
+bool CCHttpRequest::initHttpRequest(void)
 {
-    NSURL *nsurl = [NSURL URLWithString:[NSString stringWithCString:url encoding:NSUTF8StringEncoding]];
+    NSURL *nsurl = [NSURL URLWithString:[NSString stringWithCString:m_url.c_str() encoding:NSUTF8StringEncoding]];
     
     ASIHTTPRequest *request;
     if (m_method != CCHttpRequestMethodPOST)
