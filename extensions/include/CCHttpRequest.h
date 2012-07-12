@@ -40,6 +40,18 @@ public:
     
     /** @brief True when the request hasn't finished yet. */
     bool getIsInProgress(void);
+
+    CCHttpRequestDelegate* getDelegate(void) {
+        return m_delegate;
+    }
+
+    const std::string& getUrl(void) {
+        return m_url;
+    }
+
+    const CCHttpRequestMethod getMethod(void) {
+        return m_method;
+    }
     
     /** @brief Eexecute an asynchronous request
      
@@ -59,6 +71,8 @@ public:
     
     /** @brief Response data. */
     const void* getResponseData(int* dataLength);
+
+    virtual void update(ccTime dt);
     
 private:
     CCHttpRequest(CCHttpRequestDelegate* delegate, const char* url, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
@@ -66,8 +80,6 @@ private:
     , m_url(url ? url : "")
     , m_method(method)
     , m_request(NULL)
-    , m_responseData(NULL)
-    , m_responseDataLength(0)
     , m_isAutoReleaseOnFinish(isAutoReleaseOnFinish)
 #if CC_LUA_ENGINE_ENABLED > 0
     , m_luaListener(0)
@@ -80,9 +92,6 @@ private:
     const std::string       m_url;
     CCHttpRequestMethod     m_method;
     void*                   m_request;
-    void*                   m_responseData;
-    int                     m_responseDataLength;
-    std::string             m_responseString;
     bool                    m_isAutoReleaseOnFinish;
 #if CC_LUA_ENGINE_ENABLED > 0
     cocos2d::LUA_FUNCTION   m_luaListener;

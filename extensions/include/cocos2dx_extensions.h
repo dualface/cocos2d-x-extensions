@@ -12,8 +12,8 @@
 #include <string>
 
 #ifndef NS_CC_EXT_BEGIN
-#define NS_CC_EXT_BEGIN                 namespace cocos2d { namespace extension { 
-#define NS_CC_EXT_END                   }} 
+#define NS_CC_EXT_BEGIN                 namespace cocos2d { namespace extension {
+#define NS_CC_EXT_END                   }}
 #define USING_NS_CC_EXT                 using namespace cocos2d::extension
 #endif
 
