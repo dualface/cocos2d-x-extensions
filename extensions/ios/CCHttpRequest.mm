@@ -154,4 +154,8 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
     return [[(ASIHTTPRequest*)m_request responseData] bytes];
 }
 
+void CCHttpRequest::update(ccTime dt)
+{
+}
+
 NS_CC_EXT_END
