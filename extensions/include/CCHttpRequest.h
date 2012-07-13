@@ -68,7 +68,7 @@ public:
     int getResponseDataLength(void);
 
     /** @brief timer function. */
-    virtual void update(ccTime dt);
+    virtual void update(cocos2d::ccTime dt);
 
 private:
     CCHttpRequest(CCHttpRequestDelegate* delegate, const char* url, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
