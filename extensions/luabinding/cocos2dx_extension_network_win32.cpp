@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_network_win32
-** Generated automatically by tolua++-1.0.92 on Fri Jul 13 16:53:53 2012.
+** Generated automatically by tolua++-1.0.92 on Fri Jul 13 18:37:15 2012.
 */
 
 #include "cocos2dx_extension_network_win32.h"
