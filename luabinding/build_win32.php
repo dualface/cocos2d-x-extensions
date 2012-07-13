@@ -1,7 +1,7 @@
 <?php
 
 defined('DS') or define('DS', DIRECTORY_SEPARATOR);
-define('SRC_DIR', __DIR__ . DS . 'win32');
+define('SRC_DIR', __DIR__ . DS . 'win32' . DS);
 define('OUT_DIR', dirname(__DIR__) . DS . 'extensions' . DS . 'luabinding' . DS);
 define('TOLUA_BIN', (DS == '\\') ? 'tolua++.exe' : '/usr/local/bin/tolua++');
 
