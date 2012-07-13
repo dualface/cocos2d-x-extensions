@@ -2,6 +2,8 @@
 #include "CCHttpRequest.h"
 #include "CCHttpRequest_win32.h"
 
+using namespace cocos2d;
+
 NS_CC_EXT_BEGIN
 
 CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
@@ -19,8 +21,6 @@ CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
     return request;
 }
 
-#if CC_LUA_ENGINE_ENABLED > 0
-
 CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
                                                const char* url,
                                                CCHttpRequestMethod method)
@@ -32,8 +32,6 @@ CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
     request->retain();
     return request;
 }
-
-#endif
 
 bool CCHttpRequest::initHttpRequest(void)
 {
@@ -102,7 +100,7 @@ int CCHttpRequest::getResponseDataLength()
     return ((CCHttpRequest_win32*)m_request)->getResponseDataLength();
 }
 
-void CCHttpRequest::update(ccTime dt)
+void CCHttpRequest::update(cocos2d::ccTime dt)
 {
     CCHttpRequest_win32* request = (CCHttpRequest_win32*)m_request;
     if (!request || !request->getIsInProgress())
