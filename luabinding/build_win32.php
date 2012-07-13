@@ -205,7 +205,7 @@ $FIX[$find] = $replace;
 // main
 
 $extensions = array(
-    // 'crypto'     => 'cocos2dx_extension_crypto',
+    'crypto'     => 'cocos2dx_extension_crypto_win32',
     // 'native'     => 'cocos2dx_extension_native',
     'network'    => 'cocos2dx_extension_network_win32',
     // 'store'      => 'cocos2dx_extension_store',
