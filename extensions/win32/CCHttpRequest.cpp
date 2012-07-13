@@ -60,22 +60,9 @@ void CCHttpRequest::setTimeout(float timeout)
     ((CCHttpRequest_win32*)m_request)->setTimeout(timeout);
 }
 
-float CCHttpRequest::getTimeout(void)
-{
-    return -1;
-}
-
 bool CCHttpRequest::getIsInProgress(void)
 {
     return ((CCHttpRequest_win32*)m_request)->getIsInProgress();
-}
-
-std::stringbuf buff;
-size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp)
-{
-    printf("write_data(), bytes: %d\n", size * nmemb);
-    buff.sputn((const char*)buffer, size * nmemb);
-    return size * nmemb;
 }
 
 void CCHttpRequest::start(bool isCached)

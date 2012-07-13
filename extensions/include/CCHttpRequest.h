@@ -36,7 +36,6 @@ public:
     
     /** @brief Number of seconds to wait before timing out - default is 10. */
     void setTimeout(float timeout);
-    float getTimeout(void);
     
     /** @brief True when the request hasn't finished yet. */
     bool getIsInProgress(void);
@@ -46,16 +45,6 @@ public:
         return m_delegate;
     }
 
-    /** @brief Return request url */
-    const std::string& getUrl(void) {
-        return m_url;
-    }
-
-    /** @brief Return request method */
-    const CCHttpRequestMethod getMethod(void) {
-        return m_method;
-    }
-    
     /** @brief Execute an asynchronous request
      
      If isCached set to false, it will force request not to be cached.        

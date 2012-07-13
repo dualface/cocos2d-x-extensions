@@ -83,11 +83,6 @@ void CCHttpRequest::setTimeout(float timeout)
     ((ASIHTTPRequest *)m_request).timeOutSeconds = timeout;
 }
 
-float CCHttpRequest::getTimeout(void)
-{
-    return ((ASIHTTPRequest *)m_request).timeOutSeconds;
-}
-
 bool CCHttpRequest::getIsInProgress(void)
 {
     return [(ASIHTTPRequest *)m_request inProgress];

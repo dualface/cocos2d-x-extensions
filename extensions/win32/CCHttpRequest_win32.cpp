@@ -40,17 +40,16 @@ bool CCHttpRequest_win32::start(void)
 {
     if (m_state != STATE_IDLE) return false;
     m_state = STATE_IN_PROGRESS;
-
+    
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
-
-    CreateThread(
-        NULL,           // default security attributes
-        0,              // use default stack size
-        request,        // thread function name
-        this,           // argument to thread function
-        0,              // use default creation flags
-        NULL);
-
+    
+    CreateThread(NULL,          // default security attributes
+                 0,             // use default stack size
+                 request,        // thread function name
+                 this,           // argument to thread function
+                 0,              // use default creation flags
+                 NULL);
+    
     return true;
 }
 
@@ -71,7 +70,7 @@ void CCHttpRequest_win32::onRequest(void)
 {
     struct curl_httppost *post=NULL;
     struct curl_httppost *last=NULL;
-
+    
     for (PostFieldsIterator it = m_postFields.begin(); it != m_postFields.end(); ++it)
     {
         curl_formadd(&post, &last,
@@ -87,7 +86,7 @@ void CCHttpRequest_win32::onRequest(void)
     curl_easy_cleanup(m_curl);
     curl_formfree(post);
     m_curl = NULL;
-
+    
     m_responseData = (BYTE*)malloc(m_rawResponseBuffLength + 1);
     m_responseData[m_rawResponseBuffLength] = '\0';
     m_responseDataLength = 0;
@@ -99,7 +98,7 @@ void CCHttpRequest_win32::onRequest(void)
         m_responseDataLength += bytes;
     }
     cleanupRawResponseBuff();
-
+    
     m_responseString = string(reinterpret_cast<char*>(m_responseData));
     m_state = STATE_COMPLETED;
     CCLOG("completed\n");
