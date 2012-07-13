@@ -149,7 +149,7 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
     return [[(ASIHTTPRequest*)m_request responseData] bytes];
 }
 
-void CCHttpRequest::update(ccTime dt)
+void CCHttpRequest::update(cocos2d::ccTime dt)
 {
 }
 
