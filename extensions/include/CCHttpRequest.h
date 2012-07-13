@@ -61,8 +61,11 @@ public:
     /** @brief Returns the contents of the result. */
     const char* getResponseString(void);
     
-    /** @brief Response data. */
+    /** @brief Get response data. */
     const void* getResponseData(int* dataLength);
+
+    /** @brief Get response data length (bytes). */
+    int getResponseDataLength(void);
 
     /** @brief timer function. */
     virtual void update(ccTime dt);
