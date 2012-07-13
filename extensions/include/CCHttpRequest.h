@@ -30,7 +30,7 @@ public:
     
     /** @brief Add a custom header to the request. */
     void addRequestHeader(const char* key, const char* value);
-    
+
     /** @brief Add a POST variable to the request, POST only. */
     void addPostValue(const char* key, const char* value);
     
@@ -41,19 +41,22 @@ public:
     /** @brief True when the request hasn't finished yet. */
     bool getIsInProgress(void);
 
+    /** @brief Return CCHttpRequestDelegate delegate. */
     CCHttpRequestDelegate* getDelegate(void) {
         return m_delegate;
     }
 
+    /** @brief Return request url */
     const std::string& getUrl(void) {
         return m_url;
     }
 
+    /** @brief Return request method */
     const CCHttpRequestMethod getMethod(void) {
         return m_method;
     }
     
-    /** @brief Eexecute an asynchronous request
+    /** @brief Execute an asynchronous request
      
      If isCached set to false, it will force request not to be cached.        
      Setting isCache to false also appends a query string parameter, "_=[TIMESTAMP]", to the URL.
@@ -72,8 +75,9 @@ public:
     /** @brief Response data. */
     const void* getResponseData(int* dataLength);
 
+    /** @brief timer function. */
     virtual void update(ccTime dt);
-    
+
 private:
     CCHttpRequest(CCHttpRequestDelegate* delegate, const char* url, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
     : m_delegate(delegate)
@@ -87,12 +91,13 @@ private:
     {
     }
     bool initHttpRequest(void);
-    
+
     CCHttpRequestDelegate*  m_delegate;
     const std::string       m_url;
     CCHttpRequestMethod     m_method;
     void*                   m_request;
     bool                    m_isAutoReleaseOnFinish;
+
 #if CC_LUA_ENGINE_ENABLED > 0
     cocos2d::LUA_FUNCTION   m_luaListener;
 #endif

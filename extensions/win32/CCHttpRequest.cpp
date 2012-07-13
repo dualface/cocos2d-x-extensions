@@ -52,6 +52,7 @@ void CCHttpRequest::addRequestHeader(const char* key, const char* value)
 
 void CCHttpRequest::addPostValue(const char* key, const char* value)
 {
+    ((CCHttpRequest_win32*)m_request)->addPostValue(key, value);
 }
 
 void CCHttpRequest::setTimeout(float timeout)
