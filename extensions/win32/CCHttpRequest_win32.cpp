@@ -132,7 +132,6 @@ void CCHttpRequest_win32::onRequest(void)
     
     m_responseString = string(reinterpret_cast<char*>(m_responseData));
     m_state = STATE_COMPLETED;
-    CCLOG("completed\n");
 }
 
 size_t CCHttpRequest_win32::onWriteData(void* buffer, size_t bytes)
@@ -140,7 +139,6 @@ size_t CCHttpRequest_win32::onWriteData(void* buffer, size_t bytes)
     CCHttpRequest_win32::Chunk* chunk = new CCHttpRequest_win32::Chunk(buffer, bytes);
     m_rawResponseBuff.push_back(chunk);
     m_rawResponseBuffLength += bytes;
-    CCLOG("writeData %d bytes\n", bytes);
     return bytes;
 }
 
