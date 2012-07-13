@@ -48,6 +48,7 @@ CCHttpRequest::~CCHttpRequest(void)
 
 void CCHttpRequest::addRequestHeader(const char* key, const char* value)
 {
+    ((CCHttpRequest_win32*)m_request)->addRequestHeader(key, value);
 }
 
 void CCHttpRequest::addPostValue(const char* key, const char* value)
@@ -77,6 +78,7 @@ void CCHttpRequest::start(bool isCached)
 void CCHttpRequest::cancel(void)
 {
     CCScheduler::sharedScheduler()->unscheduleUpdateForTarget(this);
+    ((CCHttpRequest_win32*)m_request)->cancel();
 }
 
 void CCHttpRequest::clearDelegatesAndCancel(void)
@@ -92,15 +94,59 @@ const char* CCHttpRequest::getResponseString(void)
 
 const void* CCHttpRequest::getResponseData(int* dataLength)
 {
-    return NULL;
+    return ((CCHttpRequest_win32*)m_request)->getResponseData();
+}
+
+int CCHttpRequest::getResponseDataLength()
+{
+    return ((CCHttpRequest_win32*)m_request)->getResponseDataLength();
 }
 
 void CCHttpRequest::update(ccTime dt)
 {
-    if (((CCHttpRequest_win32*)m_request)->getIsCompleted())
+    CCHttpRequest_win32* request = (CCHttpRequest_win32*)m_request;
+    if (!request || !request->getIsInProgress())
     {
-        m_delegate->requestFinished(this);
         CCScheduler::sharedScheduler()->unscheduleUpdateForTarget(this);
+    }
+
+    if (request->getIsCompleted())
+    {
+        if (m_delegate) m_delegate->requestFinished(this);
+
+#if CC_LUA_ENGINE_ENABLED > 0
+        
+        if (m_luaListener)
+        {
+            cocos2d::CCScriptValueDict dict;
+            dict["name"] = cocos2d::CCScriptValue::stringValue("completed");
+            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
+            engine->pushCCScriptValueDictToLuaStack(dict);
+            engine->executeFunctionByHandler(m_luaListener, 1);
+        }
+
+#endif
+        
+    }
+    else if (request->getIsCancelled())
+    {
+        if (m_delegate) m_delegate->requestFailed(this);
+
+#if CC_LUA_ENGINE_ENABLED > 0
+        
+        if (m_luaListener)
+        {
+            cocos2d::CCScriptValueDict dict;
+            dict["name"] = cocos2d::CCScriptValue::stringValue("failed");
+            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
+            engine->pushCCScriptValueDictToLuaStack(dict);
+            engine->executeFunctionByHandler(m_luaListener, 1);
+        }
+
+#endif
+        
     }
 }
 

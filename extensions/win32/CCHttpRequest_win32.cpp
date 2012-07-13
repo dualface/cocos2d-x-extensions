@@ -12,7 +12,6 @@ CCHttpRequest_win32::CCHttpRequest_win32(const char* url, CCHttpRequestMethod me
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
     curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1");
-    curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, writeData);
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, DEFAULT_TIMEOUT * 1000);
     if (method == CCHttpRequestMethodPOST)
     {
@@ -26,9 +25,13 @@ CCHttpRequest_win32::~CCHttpRequest_win32(void)
     CCLOG("~~ delete CCHttpRequest_win32\n");
 }
 
-void CCHttpRequest_win32::setTimeout(float timeout)
+void CCHttpRequest_win32::addRequestHeader(const char* key, const char* value)
 {
-    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, timeout * 1000);
+    std::stringbuf buff;
+    buff.sputn(key, strlen(key));
+    buff.sputn(": ", 2);
+    buff.sputn(value, strlen(value));
+    m_headers.push_back(buff.str());
 }
 
 void CCHttpRequest_win32::addPostValue(const char* key, const char* value)
@@ -36,40 +39,59 @@ void CCHttpRequest_win32::addPostValue(const char* key, const char* value)
     m_postFields[std::string(key)] = std::string(value);
 }
 
+void CCHttpRequest_win32::setTimeout(float timeout)
+{
+    curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, timeout * 1000);
+}
+
 bool CCHttpRequest_win32::start(void)
 {
     if (m_state != STATE_IDLE) return false;
     m_state = STATE_IN_PROGRESS;
     
+    curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, curlWriteData);
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
+    curl_easy_setopt(m_curl, CURLOPT_PROGRESSFUNCTION, curlProgress);
+    curl_easy_setopt(m_curl, CURLOPT_PROGRESSDATA, this);
     
     CreateThread(NULL,          // default security attributes
                  0,             // use default stack size
-                 request,        // thread function name
-                 this,           // argument to thread function
-                 0,              // use default creation flags
+                 curlRequest,   // thread function name
+                 this,          // argument to thread function
+                 0,             // use default creation flags
                  NULL);
     
     return true;
 }
 
-DWORD WINAPI CCHttpRequest_win32::request(LPVOID lpParam)
+void CCHttpRequest_win32::cancel(void)
+{
+    m_state = STATE_CANCELLED;
+}
+
+DWORD WINAPI CCHttpRequest_win32::curlRequest(LPVOID lpParam)
 {
     CCHttpRequest_win32* instance = (CCHttpRequest_win32*)lpParam;
     instance->onRequest();
     return 0;
 }
 
-size_t CCHttpRequest_win32::writeData(void* buffer, size_t size, size_t nmemb, void* userp)
+size_t CCHttpRequest_win32::curlWriteData(void* buffer, size_t size, size_t nmemb, void* userp)
 {
     CCHttpRequest_win32* instance = (CCHttpRequest_win32*)userp;
     return instance->onWriteData(buffer, size * nmemb);
 }
 
+int CCHttpRequest_win32::curlProgress(void* userp, double dltotal, double dlnow, double ultotal, double ulnow)
+{
+    CCHttpRequest_win32* instance = (CCHttpRequest_win32*)userp;
+    return instance->onProgress(dltotal, dlnow, ultotal, ulnow);
+}
+
 void CCHttpRequest_win32::onRequest(void)
 {
-    struct curl_httppost *post=NULL;
-    struct curl_httppost *last=NULL;
+    struct curl_httppost* post=NULL;
+    struct curl_httppost* last=NULL;
     
     for (PostFieldsIterator it = m_postFields.begin(); it != m_postFields.end(); ++it)
     {
@@ -82,10 +104,19 @@ void CCHttpRequest_win32::onRequest(void)
     {
         curl_easy_setopt(m_curl, CURLOPT_HTTPPOST, post); 
     }
+
+    struct curl_slist* chunk = NULL;
+    for (HeadersIterator it = m_headers.begin(); it != m_headers.end(); ++it)
+    {
+        chunk = curl_slist_append(chunk, (*it).c_str());
+    }
+
+    curl_easy_setopt(m_curl, CURLOPT_HTTPHEADER, chunk);
     curl_easy_perform(m_curl);
     curl_easy_cleanup(m_curl);
     curl_formfree(post);
     m_curl = NULL;
+    curl_slist_free_all(chunk);
     
     m_responseData = (BYTE*)malloc(m_rawResponseBuffLength + 1);
     m_responseData[m_rawResponseBuffLength] = '\0';
@@ -111,6 +142,11 @@ size_t CCHttpRequest_win32::onWriteData(void* buffer, size_t bytes)
     m_rawResponseBuffLength += bytes;
     CCLOG("writeData %d bytes\n", bytes);
     return bytes;
+}
+
+int CCHttpRequest_win32::onProgress(double dltotal, double dlnow, double ultotal, double ulnow)
+{
+    return m_state == STATE_CANCELLED ? 1: 0;
 }
 
 void CCHttpRequest_win32::cleanup(void)
