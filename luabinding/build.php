@@ -52,7 +52,7 @@ extern "C" {
 
 using namespace cocos2d;
 
-int ${functionName}(lua_State* tolua_S);
+TOLUA_API int ${functionName}(lua_State* tolua_S);
 
 #endif // ${includeOnce}
 

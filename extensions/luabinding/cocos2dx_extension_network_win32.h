@@ -10,6 +10,6 @@ extern "C" {
 
 using namespace cocos2d;
 
-int tolua_cocos2dx_extension_network_win32_open(lua_State* tolua_S);
+TOLUA_API int tolua_cocos2dx_extension_network_win32_open(lua_State* tolua_S);
 
 #endif // __COCOS2DX_EXTENSION_NETWORK_WIN32_H_
