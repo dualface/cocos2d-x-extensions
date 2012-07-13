@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_store
-** Generated automatically by tolua++-1.0.92 on Wed Jul 11 11:55:16 2012.
+** Generated automatically by tolua++-1.0.92 on Fri Jul 13 16:39:41 2012.
 */
 
 #include "cocos2dx_extension_store.h"

@@ -4,12 +4,6 @@ $#include "CCNetwork.h"
 $using namespace cocos2d::extension;
 
 typedef enum {
-    CCNetworkStatusNotReachable = 0,
-    CCNetworkStatusReachableViaWiFi,
-    CCNetworkStatusReachableViaWWAN
-} CCNetworkStatus;
-
-typedef enum {
     CCHttpRequestMethodGET = 0,
     CCHttpRequestMethodPOST,
 } CCHttpRequestMethod;
@@ -31,11 +25,6 @@ class CCHttpRequest : public CCObject
 
 class CCNetwork
 {
-    static bool isLocalWiFiAvailable(void);
-    static bool isInternetConnectionAvailable(void);
-    static bool isHostNameReachable(const char* hostName);
-    static CCNetworkStatus getInternetConnectionStatus(void);
-
     static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
                                          const char* url,
                                          CCHttpRequestMethod method = CCHttpRequestMethodGET);

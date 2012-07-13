@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_network
-** Generated automatically by tolua++-1.0.92 on Wed Jul 11 11:55:15 2012.
+** Generated automatically by tolua++-1.0.92 on Fri Jul 13 16:39:41 2012.
 */
 
 #include "cocos2dx_extension_network.h"
@@ -151,38 +151,6 @@ static int tolua_cocos2dx_extension_network_CCHttpRequest_setTimeout00(lua_State
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'setTimeout'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: getTimeout of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_CCHttpRequest_getTimeout00
-static int tolua_cocos2dx_extension_network_CCHttpRequest_getTimeout00(lua_State* tolua_S)
-{
-#ifndef TOLUA_RELEASE
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,2,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
-#ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getTimeout'", NULL);
-#endif
-  {
-   float tolua_ret = (float)  self->getTimeout();
-   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
-  }
- }
- return 1;
-#ifndef TOLUA_RELEASE
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getTimeout'.",&tolua_err);
  return 0;
 #endif
 }
@@ -513,7 +481,6 @@ TOLUA_API int tolua_cocos2dx_extension_network_open (lua_State* tolua_S)
    tolua_function(tolua_S,"addRequestHeader",tolua_cocos2dx_extension_network_CCHttpRequest_addRequestHeader00);
    tolua_function(tolua_S,"addPostValue",tolua_cocos2dx_extension_network_CCHttpRequest_addPostValue00);
    tolua_function(tolua_S,"setTimeout",tolua_cocos2dx_extension_network_CCHttpRequest_setTimeout00);
-   tolua_function(tolua_S,"getTimeout",tolua_cocos2dx_extension_network_CCHttpRequest_getTimeout00);
    tolua_function(tolua_S,"getIsInProgress",tolua_cocos2dx_extension_network_CCHttpRequest_getIsInProgress00);
    tolua_function(tolua_S,"start",tolua_cocos2dx_extension_network_CCHttpRequest_start00);
    tolua_function(tolua_S,"cancel",tolua_cocos2dx_extension_network_CCHttpRequest_cancel00);
