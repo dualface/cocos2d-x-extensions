@@ -87,6 +87,13 @@ void CCHttpRequest::addPostValue(const char* key, const char* value)
     [(ASIFormDataRequest *)m_request addPostValue:value_ forKey:key_];
 }
 
+void CCHttpRequest::addPostData(const void* data, const unsigned int uiLength)
+{
+    if (m_method != CCHttpRequestMethodPOST) return;
+    
+    [(ASIFormDataRequest *)m_request appendPostData:[NSData dataWithBytes:data length:uiLength]];
+}
+
 void CCHttpRequest::setTimeout(float timeout)
 {
     ((ASIHTTPRequest *)m_request).timeOutSeconds = timeout;

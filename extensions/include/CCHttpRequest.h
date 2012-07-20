@@ -43,6 +43,9 @@ public:
     /** @brief Add a POST variable to the request, POST only. */
     void addPostValue(const char* key, const char* value);
     
+    /** @brief Add a POST data to the request body, POST only. */
+    void addPostData(const void* data, const unsigned int uiLength);
+
     /** @brief Number of seconds to wait before timing out - default is 10. */
     void setTimeout(float timeout);
     
@@ -86,7 +89,7 @@ public:
     const char* getErrorMessage(void);
 
     /** @brief timer function. */
-    virtual void update(cocos2d::ccTime dt);
+    virtual void update(float dt);
 
 private:
     CCHttpRequest(CCHttpRequestDelegate* delegate, const char* url, CCHttpRequestMethod method, bool isAutoReleaseOnFinish)
