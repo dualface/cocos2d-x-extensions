@@ -12,6 +12,15 @@ typedef enum {
     CCHttpRequestMethodPOST,
 } CCHttpRequestMethod;
 
+typedef enum {
+    CCHttpRequestErrorNone = 0,
+    CCHttpRequestErrorConnectionFailure = 1,
+    CCHttpRequestErrorTimeout,
+    CCHttpRequestErrorAuthentication,
+    CCHttpRequestErrorCancelled,
+    CCHttpRequestErrorUnknown
+} CCHttpRequestError;
+
 class CCHttpRequest : public cocos2d::CCObject
 {
 public:
@@ -58,6 +67,9 @@ public:
     /** @brief Cancel an asynchronous request, clearing all delegates first. */
     void clearDelegatesAndCancel(void);
     
+    /** @brief Return HTTP status code. */
+    int getResponseStatusCode(void);
+    
     /** @brief Returns the contents of the result. */
     const char* getResponseString(void);
     
@@ -66,6 +78,12 @@ public:
 
     /** @brief Get response data length (bytes). */
     int getResponseDataLength(void);
+    
+    /** @brief Get error code. */
+    CCHttpRequestError getErrorCode(void);
+    
+    /** @brief Get error message. */
+    const char* getErrorMessage(void);
 
     /** @brief timer function. */
     virtual void update(cocos2d::ccTime dt);
@@ -77,6 +95,7 @@ private:
     , m_method(method)
     , m_request(NULL)
     , m_isAutoReleaseOnFinish(isAutoReleaseOnFinish)
+    , m_errorCode(CCHttpRequestErrorNone)
 #if CC_LUA_ENGINE_ENABLED > 0
     , m_luaListener(0)
 #endif
@@ -89,6 +108,8 @@ private:
     CCHttpRequestMethod     m_method;
     void*                   m_request;
     bool                    m_isAutoReleaseOnFinish;
+    CCHttpRequestError      m_errorCode;
+    std::string             m_errorMessage;
 
 #if CC_LUA_ENGINE_ENABLED > 0
     cocos2d::LUA_FUNCTION   m_luaListener;
