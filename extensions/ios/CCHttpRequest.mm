@@ -77,7 +77,12 @@ void CCHttpRequest::addPostValue(const char* key, const char* value)
     [(ASIFormDataRequest *)m_request addPostValue:[NSString stringWithCString:value encoding:NSUTF8StringEncoding]
                                            forKey:[NSString stringWithCString:key encoding:NSUTF8StringEncoding]];
 }
-
+void CCHttpRequest::addPostData(const void* data, const unsigned int uiLength)
+{
+    if (m_method != CCHttpRequestMethodPOST) return;
+    
+    [(ASIFormDataRequest *)m_request appendPostData:[NSData dataWithBytes:data length:uiLength]];
+}
 void CCHttpRequest::setTimeout(float timeout)
 {
     ((ASIHTTPRequest *)m_request).timeOutSeconds = timeout;
@@ -149,7 +154,7 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
     return [[(ASIHTTPRequest*)m_request responseData] bytes];
 }
 
-void CCHttpRequest::update(cocos2d::ccTime dt)
+void CCHttpRequest::update(float dt)
 {
 }
 
