@@ -204,7 +204,7 @@ const char* CCHttpRequest::getErrorMessage(void)
     return m_errorMessage.c_str();
 }
 
-void CCHttpRequest::update(ccTime dt)
+void CCHttpRequest::update(float dt)
 {
 }
 
