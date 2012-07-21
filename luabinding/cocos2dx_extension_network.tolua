@@ -14,6 +14,15 @@ typedef enum {
     CCHttpRequestMethodPOST,
 } CCHttpRequestMethod;
 
+typedef enum {
+    CCHttpRequestErrorNone = 0,
+    CCHttpRequestErrorConnectionFailure = 1,
+    CCHttpRequestErrorTimeout,
+    CCHttpRequestErrorAuthentication,
+    CCHttpRequestErrorCancelled,
+    CCHttpRequestErrorUnknown
+} CCHttpRequestError;
+
 class CCHttpRequest : public CCObject
 {
     static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
@@ -26,7 +35,10 @@ class CCHttpRequest : public CCObject
     void start(bool isCached = false);
     void cancel(void);
     void clearDelegatesAndCancel(void);
+    int getResponseStatusCode(void);
     const const char* getResponseString(void);
+    int getErrorCode(void);
+    const char* getErrorMessage(void);
 };
 
 class CCNetwork

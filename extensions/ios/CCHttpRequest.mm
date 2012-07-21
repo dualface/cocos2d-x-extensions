@@ -4,6 +4,8 @@
 #import "ASIHTTPRequest.h"
 #import "ASIFormDataRequest.h"
 
+USING_NS_CC;
+
 NS_CC_EXT_BEGIN
 
 CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
@@ -22,7 +24,7 @@ CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
-CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
+CCHttpRequest* CCHttpRequest::createWithUrlLua(LUA_FUNCTION listener,
                                                const char* url,
                                                CCHttpRequestMethod method)
 {
@@ -61,6 +63,13 @@ bool CCHttpRequest::initHttpRequest(void)
 CCHttpRequest::~CCHttpRequest(void)
 {
     [(ASIHTTPRequest *)m_request release];
+    
+#if CC_LUA_ENGINE_ENABLED > 0
+    if (m_luaListener)
+    {
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(m_luaListener);
+    }
+#endif
     CCLOG("~~ delete CCHttpRequest");
 }
 
@@ -72,17 +81,19 @@ void CCHttpRequest::addRequestHeader(const char* key, const char* value)
 
 void CCHttpRequest::addPostValue(const char* key, const char* value)
 {
-    if (m_method != CCHttpRequestMethodPOST) return;
-    
-    [(ASIFormDataRequest *)m_request addPostValue:[NSString stringWithCString:value encoding:NSUTF8StringEncoding]
-                                           forKey:[NSString stringWithCString:key encoding:NSUTF8StringEncoding]];
+    if (m_method != CCHttpRequestMethodPOST || !key) return;
+    NSString *value_ = [NSString stringWithCString:value ? value : "" encoding:NSUTF8StringEncoding];
+    NSString *key_ = [NSString stringWithCString:key encoding:NSUTF8StringEncoding];
+    [(ASIFormDataRequest *)m_request addPostValue:value_ forKey:key_];
 }
+
 void CCHttpRequest::addPostData(const void* data, const unsigned int uiLength)
 {
     if (m_method != CCHttpRequestMethodPOST) return;
     
     [(ASIFormDataRequest *)m_request appendPostData:[NSData dataWithBytes:data length:uiLength]];
 }
+
 void CCHttpRequest::setTimeout(float timeout)
 {
     ((ASIHTTPRequest *)m_request).timeOutSeconds = timeout;
@@ -102,10 +113,10 @@ void CCHttpRequest::start(bool isCached)
 #if CC_LUA_ENGINE_ENABLED > 0
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("completed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
+            CCScriptValueDict dict;
+            dict["name"] = CCScriptValue::stringValue("completed");
+            dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
             engine->pushCCScriptValueDictToLuaStack(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
@@ -114,14 +125,38 @@ void CCHttpRequest::start(bool isCached)
     }];
     
     [(ASIHTTPRequest *)m_request setFailedBlock:^{
+        NSError *nserror = [(ASIHTTPRequest *)m_request error];
+        switch ([nserror code])
+        {
+            case ASIConnectionFailureErrorType:
+                m_errorCode = CCHttpRequestErrorConnectionFailure;
+                break;
+            
+            case ASIRequestTimedOutErrorType:
+                m_errorCode = CCHttpRequestErrorTimeout;
+                break;
+                
+            case ASIAuthenticationErrorType:
+                m_errorCode = CCHttpRequestErrorAuthentication;
+                break;
+            
+            case ASIRequestCancelledErrorType:
+                m_errorCode = CCHttpRequestErrorCancelled;
+                break;
+                
+            default:
+                m_errorCode = CCHttpRequestErrorUnknown;
+        }
+        m_errorMessage = [[nserror localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding];
+        
         if (m_delegate) m_delegate->requestFailed(this);
 #if CC_LUA_ENGINE_ENABLED > 0
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("failed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
+            CCScriptValueDict dict;
+            dict["name"] = CCScriptValue::stringValue("failed");
+            dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
             engine->pushCCScriptValueDictToLuaStack(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
@@ -143,6 +178,11 @@ void CCHttpRequest::clearDelegatesAndCancel(void)
     cancel();
 }
 
+int CCHttpRequest::getResponseStatusCode(void)
+{
+    return [(ASIHTTPRequest*)m_request responseStatusCode];
+}
+
 const char* CCHttpRequest::getResponseString(void)
 {
     return [[(ASIHTTPRequest*)m_request responseString] cStringUsingEncoding:NSUTF8StringEncoding];
@@ -154,7 +194,17 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
     return [[(ASIHTTPRequest*)m_request responseData] bytes];
 }
 
-void CCHttpRequest::update(float dt)
+CCHttpRequestError CCHttpRequest::getErrorCode(void)
+{
+    return m_errorCode;
+}
+
+const char* CCHttpRequest::getErrorMessage(void)
+{
+    return m_errorMessage.c_str();
+}
+
+void CCHttpRequest::update(ccTime dt)
 {
 }
 
