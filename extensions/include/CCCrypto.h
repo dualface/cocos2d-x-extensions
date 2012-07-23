@@ -54,7 +54,10 @@ public:
     /** @brief Calculate MD5, get MD5 code (not string) */
     static void MD5(void* input, int inputLength, unsigned char* output);
     
-    
+    /** @brief Calculate SHA1 with a secret key, return SHA1 code (not string), remember to delete return digest. */
+    static unsigned char* sha1(const char* input, int inputLength, const char* key,
+                     int keyLength);
+
 #pragma mark -
 #pragma mark for Lua
     

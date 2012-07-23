@@ -4,6 +4,7 @@
 extern "C" {
 #include "libb64.h"
 #include "md5.h"
+#include "sha1/sha1.h"
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
@@ -62,6 +63,16 @@ void CCCrypto::MD5(void* input, int inputLength, unsigned char* output)
     MD5_Init(&ctx);
     MD5_Update(&ctx, input, inputLength);
     MD5_Final(output, &ctx);
+}
+
+unsigned char* CCCrypto::sha1(const char* input, int inputLength, const char* key,
+                    int keyLength)
+{
+    SHA1 sha1;
+    sha1.addBytes(input,inputLength);
+    sha1.addBytes(key,keyLength);
+    unsigned char *digest=sha1.getDigest();
+    return digest;
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
