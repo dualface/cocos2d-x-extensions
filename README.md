@@ -5,7 +5,7 @@
 -   CCCrypto: AES256, Base64, MD5
 -   CCOpenFeint: OpenFeint integration
 -   CCNative: show activity indicator, show alert dialog, get OpenUDID, open url
--   CCNetwork: check network status
+-   CCNetwork: async http request(GET/POST), check network status
 -   CCStore: iOS IAP support, with receipt verify
 -   **100% Lua-binding compatibility**
 
