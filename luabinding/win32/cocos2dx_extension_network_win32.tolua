@@ -20,7 +20,10 @@ class CCHttpRequest : public CCObject
     void start(bool isCached = false);
     void cancel(void);
     void clearDelegatesAndCancel(void);
+    int getResponseStatusCode(void);
     const const char* getResponseString(void);
+    int getErrorCode(void);
+    const char* getErrorMessage(void);
 };
 
 class CCNetwork

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_network_win32
-** Generated automatically by tolua++-1.0.92 on Fri Jul 13 18:56:28 2012.
+** Generated automatically by tolua++-1.0.92 on Fri Aug  3 13:31:50 2012.
 */
 
 #include "cocos2dx_extension_network_win32.h"
@@ -283,6 +283,38 @@ static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_clearDelegatesAn
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getResponseStatusCode of class  CCHttpRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseStatusCode00
+static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseStatusCode00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseStatusCode'", NULL);
+#endif
+  {
+   int tolua_ret = (int)  self->getResponseStatusCode();
+   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getResponseStatusCode'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: getResponseString of class  CCHttpRequest */
 #ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseString00
 static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseString00(lua_State* tolua_S)
@@ -310,6 +342,70 @@ static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseStrin
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'getResponseString'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getErrorCode of class  CCHttpRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorCode00
+static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorCode00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getErrorCode'", NULL);
+#endif
+  {
+   int tolua_ret = (int)  self->getErrorCode();
+   tolua_pushnumber(tolua_S,(lua_Number)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getErrorCode'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getErrorMessage of class  CCHttpRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorMessage00
+static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorMessage00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getErrorMessage'", NULL);
+#endif
+  {
+   const char* tolua_ret = (const char*)  self->getErrorMessage();
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getErrorMessage'.",&tolua_err);
  return 0;
 #endif
 }
@@ -368,7 +464,10 @@ TOLUA_API int tolua_cocos2dx_extension_network_win32_open (lua_State* tolua_S)
    tolua_function(tolua_S,"start",tolua_cocos2dx_extension_network_win32_CCHttpRequest_start00);
    tolua_function(tolua_S,"cancel",tolua_cocos2dx_extension_network_win32_CCHttpRequest_cancel00);
    tolua_function(tolua_S,"clearDelegatesAndCancel",tolua_cocos2dx_extension_network_win32_CCHttpRequest_clearDelegatesAndCancel00);
+   tolua_function(tolua_S,"getResponseStatusCode",tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseStatusCode00);
    tolua_function(tolua_S,"getResponseString",tolua_cocos2dx_extension_network_win32_CCHttpRequest_getResponseString00);
+   tolua_function(tolua_S,"getErrorCode",tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorCode00);
+   tolua_function(tolua_S,"getErrorMessage",tolua_cocos2dx_extension_network_win32_CCHttpRequest_getErrorMessage00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCNetwork","CCNetwork","",NULL);
   tolua_beginmodule(tolua_S,"CCNetwork");
