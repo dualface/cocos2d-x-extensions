@@ -8,6 +8,8 @@ CCHttpRequest_win32::CCHttpRequest_win32(const char* url, CCHttpRequestMethod me
 , m_rawResponseBuffLength(0)
 , m_responseData(NULL)
 , m_responseDataLength(0)
+, m_responseCode(0)
+, m_errorCode(CCHttpRequestErrorNone)
 {
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
@@ -48,6 +50,10 @@ bool CCHttpRequest_win32::start(void)
 {
     if (m_state != STATE_IDLE) return false;
     m_state = STATE_IN_PROGRESS;
+
+    m_responseCode = 0;
+    m_errorCode = CCHttpRequestErrorNone;
+    m_errorMessage = "";
     
     curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, curlWriteData);
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
@@ -112,11 +118,15 @@ void CCHttpRequest_win32::onRequest(void)
     }
 
     curl_easy_setopt(m_curl, CURLOPT_HTTPHEADER, chunk);
-    curl_easy_perform(m_curl);
+    CURLcode code = curl_easy_perform(m_curl);
+    curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, &m_responseCode);
     curl_easy_cleanup(m_curl);
     curl_formfree(post);
     m_curl = NULL;
     curl_slist_free_all(chunk);
+
+    m_errorCode = (code == CURLE_OK) ? CCHttpRequestErrorNone : CCHttpRequestErrorUnknown;
+    m_errorMessage = (code == CURLE_OK) ? "" : curl_easy_strerror(code);
     
     m_responseData = (BYTE*)malloc(m_rawResponseBuffLength + 1);
     m_responseData[m_rawResponseBuffLength] = '\0';

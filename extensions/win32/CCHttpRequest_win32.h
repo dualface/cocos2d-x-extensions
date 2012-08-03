@@ -34,6 +34,10 @@ public:
     bool getIsCancelled(void) {
         return m_state == STATE_CANCELLED;
     }
+
+    int getResponseStatusCode(void) {
+        return m_responseCode;
+    }
     
     const std::string& getResposeString(void) {
         return m_responseString;
@@ -45,6 +49,14 @@ public:
     
     int getResponseDataLength(void) {
         return m_responseDataLength;
+    }
+
+    CCHttpRequestError getErrorCode(void) {
+        return m_errorCode;
+    }
+    
+    const char* getErrorMessage(void) {
+        return m_errorMessage.c_str();
     }
     
 private:
@@ -99,6 +111,9 @@ private:
     Headers             m_headers;
     RawResponseDataBuff m_rawResponseBuff;
     size_t              m_rawResponseBuffLength;
+    long                m_responseCode;
+    CCHttpRequestError  m_errorCode;
+    std::string         m_errorMessage;
     
     std::string         m_responseString;
     BYTE*               m_responseData;

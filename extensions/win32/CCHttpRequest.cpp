@@ -85,6 +85,10 @@ void CCHttpRequest::clearDelegatesAndCancel(void)
     cancel();
 }
 
+int CCHttpRequest::getResponseStatusCode(void) {
+    return ((CCHttpRequest_win32*)m_request)->getResponseStatusCode();
+}
+
 const char* CCHttpRequest::getResponseString(void)
 {
     return ((CCHttpRequest_win32*)m_request)->getResposeString().c_str();
@@ -98,6 +102,16 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
 int CCHttpRequest::getResponseDataLength()
 {
     return ((CCHttpRequest_win32*)m_request)->getResponseDataLength();
+}
+
+CCHttpRequestError  CCHttpRequest::getErrorCode(void)
+{
+    return ((CCHttpRequest_win32*)m_request)->getErrorCode();
+}
+
+const char* CCHttpRequest::getErrorMessage(void)
+{
+    return ((CCHttpRequest_win32*)m_request)->getErrorMessage();
 }
 
 void CCHttpRequest::update(cocos2d::ccTime dt)
