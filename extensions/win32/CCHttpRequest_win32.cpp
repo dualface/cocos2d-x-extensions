@@ -1,5 +1,6 @@
 
 #include "CCHttpRequest_win32.h"
+#include <iostream>
 
 NS_CC_EXT_BEGIN
 
@@ -96,19 +97,26 @@ int CCHttpRequest_win32::curlProgress(void* userp, double dltotal, double dlnow,
 
 void CCHttpRequest_win32::onRequest(void)
 {
-    struct curl_httppost* post=NULL;
-    struct curl_httppost* last=NULL;
-    
-    for (PostFieldsIterator it = m_postFields.begin(); it != m_postFields.end(); ++it)
+    if (m_postFields.size() > 0)
     {
-        curl_formadd(&post, &last,
-                     CURLFORM_COPYNAME, it->first.c_str(),
-                     CURLFORM_COPYCONTENTS, it->second.c_str(),
-                     CURLFORM_END);
-    }
-    if (post)
-    {
-        curl_easy_setopt(m_curl, CURLOPT_HTTPPOST, post); 
+        curl_easy_setopt(m_curl, CURLOPT_POST, 1L);
+        std::stringbuf buf;
+        PostFieldsIterator it = m_postFields.begin();
+        while (it != m_postFields.end())
+        {
+            char* part = curl_easy_escape(m_curl, it->first.c_str(), 0);
+            buf.sputn(part, strlen(part));
+            buf.sputc('=');
+            curl_free(part);
+
+            part = curl_easy_escape(m_curl, it->second.c_str(), 0);
+            buf.sputn(part, strlen(part));
+            curl_free(part);
+
+            ++it;
+            if (it != m_postFields.end()) buf.sputc('&');
+        }
+        curl_easy_setopt(m_curl, CURLOPT_COPYPOSTFIELDS, buf.str().c_str());
     }
 
     struct curl_slist* chunk = NULL;
@@ -121,7 +129,6 @@ void CCHttpRequest_win32::onRequest(void)
     CURLcode code = curl_easy_perform(m_curl);
     curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, &m_responseCode);
     curl_easy_cleanup(m_curl);
-    curl_formfree(post);
     m_curl = NULL;
     curl_slist_free_all(chunk);
 
