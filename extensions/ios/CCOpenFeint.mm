@@ -1,8 +1,8 @@
 
 #import "CCOpenFeint.h"
 #import "CCOpenFeint_objc.h"
-#import "OpenFeint/OFAchievement.h"
-#import "OpenFeint/OFLeaderboard.h"
+#import "OpenFeint/include/OFAchievement.h"
+#import "OpenFeint/include/OFLeaderboard.h"
 
 #include "CCOFAchievement.h"
 #include "CCOFLeaderboard.h"

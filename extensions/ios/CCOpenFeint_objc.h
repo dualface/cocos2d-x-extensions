@@ -1,7 +1,7 @@
 
-#import "OpenFeint/OpenFeintDelegate.h"
-#import "OpenFeint/OFNotificationDelegate.h"
-#import "OpenFeint/OFChallengeDelegate.h"
+#import "OpenFeint/OpenFeint.h"
+#import "OpenFeint/delegates/OFNotificationDelegate.h"
+#import "OpenFeint/delegates/OFChallengeDelegate.h"
 
 @class GameOFNotificationDelegate;
 
