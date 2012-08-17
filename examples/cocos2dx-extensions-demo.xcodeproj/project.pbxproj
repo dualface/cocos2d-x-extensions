@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F401BCFE15BF001200900F41 /* sha1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F401BCFC15BF001200900F41 /* sha1.cpp */; };
 		F413E50515AD2698005EE806 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F413E4CB15AD2698005EE806 /* ASIAuthenticationDialog.m */; };
 		F413E50615AD2698005EE806 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = F413E4CE15AD2698005EE806 /* ASIDataCompressor.m */; };
 		F413E50715AD2698005EE806 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = F413E4D015AD2698005EE806 /* ASIDataDecompressor.m */; };
@@ -167,6 +168,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F401BCFC15BF001200900F41 /* sha1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha1.cpp; sourceTree = "<group>"; };
+		F401BCFD15BF001200900F41 /* sha1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha1.h; sourceTree = "<group>"; };
 		F413E4B715AD2698005EE806 /* CCAlertViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAlertViewDelegate.h; sourceTree = "<group>"; };
 		F413E4B815AD2698005EE806 /* CCCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCCrypto.h; sourceTree = "<group>"; };
 		F413E4B915AD2698005EE806 /* CCHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCHttpRequest.h; sourceTree = "<group>"; };
@@ -500,7 +503,7 @@
 		F47325DE15A835F7007430BB /* CCStoreScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CCStoreScene.cpp; path = Classes/CCStoreScene.cpp; sourceTree = "<group>"; };
 		F47325DF15A835F7007430BB /* CCStoreScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCStoreScene.h; path = Classes/CCStoreScene.h; sourceTree = "<group>"; };
 		F47331EF15A84321007430BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		F47E999515AD28F9009D0255 /* cocos2dx_extensions.h */ = {isa = PBXFileReference; path = cocos2dx_extensions.h; sourceTree = "<group>"; };
+		F47E999515AD28F9009D0255 /* cocos2dx_extensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cocos2dx_extensions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -525,6 +528,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F401BCFB15BF001200900F41 /* sha1 */ = {
+			isa = PBXGroup;
+			children = (
+				F401BCFC15BF001200900F41 /* sha1.cpp */,
+				F401BCFD15BF001200900F41 /* sha1.h */,
+			);
+			path = sha1;
+			sourceTree = "<group>";
+		};
 		F413E4B615AD2698005EE806 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -631,6 +643,7 @@
 		F413E4FA15AD2698005EE806 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				F401BCFB15BF001200900F41 /* sha1 */,
 				F413E4FB15AD2698005EE806 /* base64 */,
 				F413E4FD15AD2698005EE806 /* CCCrypto_common.cpp */,
 				F413E4FE15AD2698005EE806 /* CCNetwork_common.cpp */,
@@ -720,8 +733,8 @@
 		F473233815A7EF4B007430BB /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				F4BFF9F715AC2D4F003AB6AF /* extensions */,
 				F473233915A7EF4B007430BB /* cocos2dx */,
+				F4BFF9F715AC2D4F003AB6AF /* extensions */,
 			);
 			name = libs;
 			sourceTree = "<group>";
@@ -1424,6 +1437,7 @@
 				F413E52215AD2698005EE806 /* CCStorePaymentTransaction.cpp in Sources */,
 				F413E52315AD2698005EE806 /* CCStoreProduct.cpp in Sources */,
 				F413E52415AD2698005EE806 /* md5.c in Sources */,
+				F401BCFE15BF001200900F41 /* sha1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

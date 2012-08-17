@@ -2,7 +2,7 @@
 
 ## Features
 
--   CCCrypto: AES256, Base64, MD5
+-   CCCrypto: AES256, Base64, MD5, SHA1
 -   CCOpenFeint: OpenFeint integration
 -   CCNative: show activity indicator, show alert dialog, get OpenUDID, open url
 -   CCNetwork: async http request(GET/POST), check network status

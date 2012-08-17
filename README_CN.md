@@ -2,7 +2,7 @@
 
 ## 主要特征
 
--   CCCrypto: AES256 对称加密, Base64 编码和解码, MD5 计算
+-   CCCrypto: AES256 对称加密，Base64 编码和解码，MD5，SHA1
 -   CCOpenFeint: OpenFeint 集成（目前支持 2.12.8，包括国内九城的汉化版）
 -   CCNative: 显示活动指示器（菊花），显示提示对话框，获取 OpenUDID，在浏览器中打开指定 URL
 -   CCNetwork: 异步 HTTP 请求（GET/POST），检查网络状态
