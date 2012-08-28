@@ -82,7 +82,7 @@ LUA_STRING CCCrypto::encodingBase64Lua(bool isDecoding,
                                        int inputLength)
 {
     CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-    engine->cleanLuaStack();
+    engine->cleanStack();
     lua_State* L = engine->getLuaState();
     
     int outputLength = inputLength * 2;
@@ -117,7 +117,7 @@ LUA_STRING CCCrypto::MD5Lua(char* input, int inputLength, bool isRawOutput)
     MD5(static_cast<void*>(input), inputLength, buffer);
     
     CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-    engine->cleanLuaStack();
+    engine->cleanStack();
     lua_State* L = engine->getLuaState();
     
     if (isRawOutput)

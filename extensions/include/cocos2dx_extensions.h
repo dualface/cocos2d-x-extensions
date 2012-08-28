@@ -5,7 +5,7 @@
 #include "cocos2d.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0
-#include "CCScriptSupport.h"
+#include "script_support/CCScriptSupport.h"
 #endif
 
 #include <map>

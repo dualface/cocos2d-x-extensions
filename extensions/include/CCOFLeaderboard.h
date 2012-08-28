@@ -4,7 +4,7 @@
 
 #include "cocos2dx_extensions.h"
 #include <string>
-#include "CCObject.h"
+#include "cocoa/CCObject.h"
 
 NS_CC_EXT_BEGIN
 

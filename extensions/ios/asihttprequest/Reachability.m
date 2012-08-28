@@ -131,8 +131,12 @@ static NSString *reachabilityFlags_(SCNetworkReachabilityFlags flags) {
 			(flags & kSCNetworkReachabilityFlagsIsDirect)             ? 'd' : '-'];
 #else
 	// Compile out the v3.0 features for v2.2.1 deployment.
+#ifdef kSCNetworkReachabilityFlagsIsWWAN
     return [NSString stringWithFormat:@"Reachability Flags: %c%c %c%c%c%c%c%c",
 			(flags & kSCNetworkReachabilityFlagsIsWWAN)               ? 'W' : '-',
+#else
+    return [NSString stringWithFormat:@"Reachability Flags: %c %c%c%c%c%c%c",
+#endif
 			(flags & kSCNetworkReachabilityFlagsReachable)            ? 'R' : '-',
 			
 			(flags & kSCNetworkReachabilityFlagsConnectionRequired)   ? 'c' : '-',
@@ -439,7 +443,9 @@ const SCNetworkReachabilityFlags kConnectionDown =  kSCNetworkReachabilityFlagsC
 		// WWAN Connection required: Reachability Flag Status: WR ct-----
 		//
 		// Test Value: Reachability Flag Status: WR xxxxxxx
+#ifdef kSCNetworkReachabilityFlagsIsWWAN
 		if (flags & kSCNetworkReachabilityFlagsIsWWAN) { return kReachableViaWWAN; }
+#endif
 		
 		// Clear moot bits.
 		flags &= ~kSCNetworkReachabilityFlagsReachable;

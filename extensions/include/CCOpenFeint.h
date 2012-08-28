@@ -6,7 +6,7 @@
 #if CC_LUA_ENGINE_ENABLED > 0
 #include "CCScriptSupport.h"
 #endif
-#include "CCArray.h"
+#include "cocoa/CCArray.h"
 
 NS_CC_EXT_BEGIN
 

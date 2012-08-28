@@ -113,12 +113,12 @@ void CCHttpRequest::start(bool isCached)
 #if CC_LUA_ENGINE_ENABLED > 0
         if (m_luaListener)
         {
-            CCScriptValueDict dict;
-            dict["name"] = CCScriptValue::stringValue("completed");
-            dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            LuaDict dict;
+            dict["name"] = LuaValue::stringValue("completed");
+            dict["request"] = LuaValue::ccobjectValue(this, "CCHttpRequest");
             CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDictToLuaStack(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            engine->pushLuaDict(dict);
+            engine->executeFunction(m_luaListener, 1);
         }
 #endif
         if (m_isAutoReleaseOnFinish) release();
@@ -153,12 +153,12 @@ void CCHttpRequest::start(bool isCached)
 #if CC_LUA_ENGINE_ENABLED > 0
         if (m_luaListener)
         {
-            CCScriptValueDict dict;
-            dict["name"] = CCScriptValue::stringValue("failed");
-            dict["request"] = CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            LuaDict dict;
+            dict["name"] = LuaValue::stringValue("failed");
+            dict["request"] = LuaValue::ccobjectValue(this, "CCHttpRequest");
             CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDictToLuaStack(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            engine->pushLuaDict(dict);
+            engine->executeFunction(m_luaListener, 1);
         }
 #endif
         if (m_isAutoReleaseOnFinish) release();

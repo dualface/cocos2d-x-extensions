@@ -227,6 +227,8 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
         switch (transaction.transactionState)
         {
             case SKPaymentTransactionStatePurchased:
+                CCLOG("transaction '%s' SKPaymentTransactionStatePurchased",
+                      [transaction.transactionIdentifier cStringUsingEncoding:NSUTF8StringEncoding]);
                 if (receiptVerifyMode_ != CCStoreReceiptVerifyModeNone)
                 {
                     [self verifyTransactionReceipt:transaction];
@@ -237,9 +239,15 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
                 }
                 break;
             case SKPaymentTransactionStateFailed:
+                CCLOG("transaction '%s' SKPaymentTransactionStateFailed",
+                      [transaction.transactionIdentifier cStringUsingEncoding:NSUTF8StringEncoding]);
+                CCLOG("error: %s",
+                       [[transaction.error localizedDescription] cStringUsingEncoding:NSUTF8StringEncoding]);
                 [self transactionFailed:transaction andReceiptVerifyStatus:CCStoreReceiptVerifyStatusNone];
                 break;
             case SKPaymentTransactionStateRestored:
+                CCLOG("transaction '%s' SKPaymentTransactionStateRestored",
+                      [transaction.transactionIdentifier cStringUsingEncoding:NSUTF8StringEncoding]);
                 [self transactionRestored:transaction andReceiptVerifyStatus:CCStoreReceiptVerifyStatusNone];
                 break;
         }
