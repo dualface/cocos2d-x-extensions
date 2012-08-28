@@ -147,7 +147,7 @@ void CCHttpRequest_win32::onRequest(void)
     }
     cleanupRawResponseBuff();
     
-    m_responseString = string(reinterpret_cast<char*>(m_responseData));
+    m_responseString = std::string(reinterpret_cast<char*>(m_responseData));
     m_state = STATE_COMPLETED;
 }
 
@@ -191,7 +191,7 @@ const std::wstring CCHttpRequest_win32::cstr2wstring(const char* source)
     wchar_t* buff = new wchar_t[bufflen];
     memset(buff, 0, bufflen * sizeof(wchar_t));
     MultiByteToWideChar(CP_UTF8, 0, source, -1, buff, bufflen);
-    std::wstring result = wstring(buff);
+    std::wstring result = std::wstring(buff);
     delete buff;
     return result;
 }

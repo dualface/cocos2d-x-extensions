@@ -46,12 +46,18 @@ CCHttpRequest::~CCHttpRequest(void)
 
 void CCHttpRequest::addRequestHeader(const char* key, const char* value)
 {
-    ((CCHttpRequest_win32*)m_request)->addRequestHeader(key, value);
+    if (key && value)
+    {
+        ((CCHttpRequest_win32*)m_request)->addRequestHeader(key, value);
+    }
 }
 
 void CCHttpRequest::addPostValue(const char* key, const char* value)
 {
-    ((CCHttpRequest_win32*)m_request)->addPostValue(key, value);
+    if (key && value)
+    {
+        ((CCHttpRequest_win32*)m_request)->addPostValue(key, value);
+    }
 }
 
 void CCHttpRequest::setTimeout(float timeout)
@@ -66,16 +72,16 @@ bool CCHttpRequest::getIsInProgress(void)
 
 void CCHttpRequest::start(bool isCached)
 {
-    CCScheduler::sharedScheduler()->unscheduleUpdateForTarget(this);
+    CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
     if (((CCHttpRequest_win32*)m_request)->start())
     {
-        CCScheduler::sharedScheduler()->scheduleUpdateForTarget(this, 0, false);
+        CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
     }
 }
 
 void CCHttpRequest::cancel(void)
 {
-    CCScheduler::sharedScheduler()->unscheduleUpdateForTarget(this);
+    CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
     ((CCHttpRequest_win32*)m_request)->cancel();
 }
 
@@ -114,12 +120,12 @@ const char* CCHttpRequest::getErrorMessage(void)
     return ((CCHttpRequest_win32*)m_request)->getErrorMessage();
 }
 
-void CCHttpRequest::update(cocos2d::ccTime dt)
+void CCHttpRequest::update(float dt)
 {
     CCHttpRequest_win32* request = (CCHttpRequest_win32*)m_request;
     if (!request || !request->getIsInProgress())
     {
-        CCScheduler::sharedScheduler()->unscheduleUpdateForTarget(this);
+        CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
     }
 
     if (request->getIsCompleted())
@@ -127,38 +133,38 @@ void CCHttpRequest::update(cocos2d::ccTime dt)
         if (m_delegate) m_delegate->requestFinished(this);
 
 #if CC_LUA_ENGINE_ENABLED > 0
-        
+
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("completed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::LuaDict dict;
+            dict["name"] = cocos2d::LuaValue::stringValue("completed");
+            dict["request"] = cocos2d::LuaValue::ccobjectValue(this, "CCHttpRequest");
             cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDictToLuaStack(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            engine->pushLuaDict(dict);
+            engine->executeFunction(m_luaListener, 1);
         }
 
 #endif
-        
+
     }
     else if (request->getIsCancelled())
     {
         if (m_delegate) m_delegate->requestFailed(this);
 
 #if CC_LUA_ENGINE_ENABLED > 0
-        
+
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("failed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::LuaDict dict;
+            dict["name"] = cocos2d::LuaValue::stringValue("failed");
+            dict["request"] = cocos2d::LuaValue::ccobjectValue(this, "CCHttpRequest");
             cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDictToLuaStack(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            engine->pushLuaDict(dict);
+            engine->executeFunction(m_luaListener, 1);
         }
 
 #endif
-        
+
     }
 }
 
