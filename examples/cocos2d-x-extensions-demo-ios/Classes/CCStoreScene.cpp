@@ -18,7 +18,7 @@ CCStoreScene* CCStoreScene::scene(void)
 bool CCStoreScene::init(void)
 {
     CCScene::init();
-    const char* contents = "1. CHANGE PROJECT INFO, SET BUNDLE IDENTIFIER.\n2. CHANGE CCStoreScene::testLoadProducts(), SET PRODUCTS ID.";
+    const char* contents = "1. TEST ON DEVICE\n2. CHANGE PROJECT INFO, SET BUNDLE IDENTIFIER\n3. CHANGE CCStoreScene::testLoadProducts(), SET PRODUCTS ID";
     const CCSize& winSize = CCDirector::sharedDirector()->getWinSize();
     CCLabelTTF* label = CCLabelTTF::create(contents,
                                            "Arial",
@@ -64,13 +64,10 @@ void CCStoreScene::testLoadProducts(CCObject* pSender)
     CCNative::createAlert("Waiting", "Retrieving Product Information", NULL);
     CCNative::showAlert();
     
-    // SET YOUR IAP PRODUCT ID TO HERE
-//    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap01"));
-//    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap02"));
-//    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap03"));
-    productsId->addObject(newCCString("com.qeeplay.games.killfruitcn.iap.buycoins01"));
-    productsId->addObject(newCCString("com.qeeplay.games.killfruitcn.iap.buycoins02"));
-    productsId->addObject(newCCString("com.qeeplay.games.killfruitcn.iap.buycoins03"));
+    // SET IAP PRODUCTS ID
+    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap01"));
+    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap02"));
+    productsId->addObject(newCCString("org.cocos2d-x.games.demo.iap03"));
     CCStore::sharedStore()->loadProducts(productsId, this);
 }
 
@@ -160,7 +157,7 @@ void CCStoreScene::requestProductsCompleted(CCArray* products, CCArray* invalidP
         for (int i = 0; i < invalidProductsId->count(); ++i)
         {
             CCString* ccid = static_cast<CCString*>(invalidProductsId->objectAtIndex(i));
-//            printf("  %s\n", ccid->toStdString().c_str());
+            printf("  %s\n", ccid->getCString());
         }
     }
     
