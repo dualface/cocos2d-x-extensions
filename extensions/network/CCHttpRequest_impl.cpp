@@ -1,6 +1,8 @@
 
 #include "network/CCHttpRequest_impl.h"
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
 #include <pthread.h>
+#endif
 #include <iostream>
 
 NS_CC_EXT_BEGIN

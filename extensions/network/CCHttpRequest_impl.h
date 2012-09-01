@@ -2,10 +2,10 @@
 #ifndef __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 #define __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 
-#ifdef _WINDOWS_
-#include <Windows.h>
-#else
+#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
 #include <pthread.h>
+#else
+#include <Windows.h>
 #endif
 
 #include <vector>
