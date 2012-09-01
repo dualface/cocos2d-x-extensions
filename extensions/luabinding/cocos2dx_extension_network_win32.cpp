@@ -1,13 +1,13 @@
 /*
 ** Lua binding: cocos2dx_extension_network_win32
-** Generated automatically by tolua++-1.0.92 on Fri Aug  3 13:31:50 2012.
+** Generated automatically by tolua++-1.0.92 on Sun Sep  2 02:23:59 2012.
 */
 
 #include "cocos2dx_extension_network_win32.h"
 
 
 
-#include "CCNetwork.h"
+#include "network/CCNetwork.h"
 using namespace cocos2d::extension;
 
 /* function to register type */
@@ -118,6 +118,39 @@ static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_addPostValue00(l
 #ifndef TOLUA_RELEASE
  tolua_lerror:
  tolua_error(tolua_S,"#ferror in function 'addPostValue'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: setPostData of class  CCHttpRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_win32_CCHttpRequest_setPostData00
+static int tolua_cocos2dx_extension_network_win32_CCHttpRequest_setPostData00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  const char* data = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setPostData'", NULL);
+#endif
+  {
+   self->setPostData(data);
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'setPostData'.",&tolua_err);
  return 0;
 #endif
 }
@@ -459,6 +492,7 @@ TOLUA_API int tolua_cocos2dx_extension_network_win32_open (lua_State* tolua_S)
    tolua_function(tolua_S,"createWithUrlLua",tolua_cocos2dx_extension_network_win32_CCHttpRequest_createWithUrlLua00);
    tolua_function(tolua_S,"addRequestHeader",tolua_cocos2dx_extension_network_win32_CCHttpRequest_addRequestHeader00);
    tolua_function(tolua_S,"addPostValue",tolua_cocos2dx_extension_network_win32_CCHttpRequest_addPostValue00);
+   tolua_function(tolua_S,"setPostData",tolua_cocos2dx_extension_network_win32_CCHttpRequest_setPostData00);
    tolua_function(tolua_S,"setTimeout",tolua_cocos2dx_extension_network_win32_CCHttpRequest_setTimeout00);
    tolua_function(tolua_S,"getIsInProgress",tolua_cocos2dx_extension_network_win32_CCHttpRequest_getIsInProgress00);
    tolua_function(tolua_S,"start",tolua_cocos2dx_extension_network_win32_CCHttpRequest_start00);

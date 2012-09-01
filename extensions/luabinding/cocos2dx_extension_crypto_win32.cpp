@@ -1,13 +1,13 @@
 /*
 ** Lua binding: cocos2dx_extension_crypto_win32
-** Generated automatically by tolua++-1.0.92 on Fri Aug  3 13:31:49 2012.
+** Generated automatically by tolua++-1.0.92 on Sun Sep  2 02:23:59 2012.
 */
 
 #include "cocos2dx_extension_crypto_win32.h"
 
 
 
-#include "CCCrypto.h"
+#include "crypto/CCCrypto.h"
 using namespace cocos2d::extension;
 
 /* function to release collected object via destructor */
@@ -95,7 +95,39 @@ static int tolua_cocos2dx_extension_crypto_win32_CCCrypto_MD5Lua00(lua_State* to
  if (
      !tolua_isusertable(tolua_S,1,"CCCrypto",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,3,0,&tolua_err) ||
+     !tolua_isboolean(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  char* input = ((char*)  tolua_tostring(tolua_S,2,0));
+  bool isRawOutput = ((bool)  tolua_toboolean(tolua_S,3,0));
+  {
+     CCCrypto::MD5Lua(input,isRawOutput);
+   
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'MD5Lua'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: sha1Lua of class  CCCrypto */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_win32_CCCrypto_sha1Lua00
+static int tolua_cocos2dx_extension_crypto_win32_CCCrypto_sha1Lua00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCCrypto",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
      !tolua_isboolean(tolua_S,4,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,5,&tolua_err)
  )
@@ -104,17 +136,17 @@ static int tolua_cocos2dx_extension_crypto_win32_CCCrypto_MD5Lua00(lua_State* to
 #endif
  {
   char* input = ((char*)  tolua_tostring(tolua_S,2,0));
-  int inputLength = ((int)  tolua_tonumber(tolua_S,3,0));
+  char* key = ((char*)  tolua_tostring(tolua_S,3,0));
   bool isRawOutput = ((bool)  tolua_toboolean(tolua_S,4,0));
   {
-     CCCrypto::MD5Lua(input,inputLength,isRawOutput);
+     CCCrypto::sha1Lua(input,key,isRawOutput);
    
   }
  }
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'MD5Lua'.",&tolua_err);
+ tolua_error(tolua_S,"#ferror in function 'sha1Lua'.",&tolua_err);
  return 0;
 #endif
 }
@@ -132,6 +164,7 @@ TOLUA_API int tolua_cocos2dx_extension_crypto_win32_open (lua_State* tolua_S)
    tolua_function(tolua_S,"encodeBase64Lua",tolua_cocos2dx_extension_crypto_win32_CCCrypto_encodeBase64Lua00);
    tolua_function(tolua_S,"decodeBase64Lua",tolua_cocos2dx_extension_crypto_win32_CCCrypto_decodeBase64Lua00);
    tolua_function(tolua_S,"MD5Lua",tolua_cocos2dx_extension_crypto_win32_CCCrypto_MD5Lua00);
+   tolua_function(tolua_S,"sha1Lua",tolua_cocos2dx_extension_crypto_win32_CCCrypto_sha1Lua00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

@@ -1,5 +1,5 @@
 
-$#include "CCNative.h"
+$#include "native/CCNative.h"
 
 $using namespace cocos2d::extension;
 

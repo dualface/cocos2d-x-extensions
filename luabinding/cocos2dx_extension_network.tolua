@@ -1,5 +1,5 @@
 
-$#include "CCNetwork.h"
+$#include "network/CCNetwork.h"
 
 $using namespace cocos2d::extension;
 
@@ -30,6 +30,7 @@ class CCHttpRequest : public CCObject
                                            CCHttpRequestMethod method = CCHttpRequestMethodGET);
     void addRequestHeader(const char* key, const char* value);
     void addPostValue(const char* key, const char* value);
+    void setPostData(const char* data);
     void setTimeout(float timeout);
     bool getIsInProgress(void);
     void start(bool isCached = false);

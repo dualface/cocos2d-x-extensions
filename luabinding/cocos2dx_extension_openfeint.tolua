@@ -1,5 +1,5 @@
 
-$#include "CCOpenFeint.h"
+$#include "openfeint/CCOpenFeint.h"
 
 $using namespace cocos2d::extension;
 
