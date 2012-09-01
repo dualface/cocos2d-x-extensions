@@ -3,7 +3,7 @@
 #define __COCOS2DX_EXTENSIONS_H_
 
 #include "cocos2d.h"
-#include "CCObject.h"
+#include "cocoa/CCObject.h"
 #include "script_support/CCScriptSupport.h"
 
 #ifndef NS_CC_EXT_BEGIN

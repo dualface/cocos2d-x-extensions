@@ -96,29 +96,29 @@ bool CCStorePaymentTransaction::initWithState(CCStorePaymentTransactionWrapper* 
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
-const LuaDict CCStorePaymentTransaction::convertToLuaTable(void)
+const CCScriptValueDict CCStorePaymentTransaction::convertToLuaTable(void)
 {
-    LuaDict transaction_;
+    CCScriptValueDict transaction_;
     
-    transaction_["state"] = LuaValue::stringValue(CCStorePaymentTransactionStateNames[m_transactionState]);
-    transaction_["transactionIdentifier"] = LuaValue::stringValue(m_transactionIdentifier);
-    transaction_["productIdentifier"] = LuaValue::stringValue(m_productIdentifier);
-    transaction_["quantity"] = LuaValue::intValue(m_quantity);
-    transaction_["date"] = LuaValue::floatValue(m_dateTime);
-    transaction_["errorCode"] = LuaValue::intValue(m_errorCode);
-    transaction_["errorString"] = LuaValue::stringValue(m_errorDescription);
-    transaction_["receiptVerifyMode"] = LuaValue::intValue(m_receiptVerifyMode);
-    transaction_["receiptVerifyStatus"] = LuaValue::intValue(m_receiptVerifyStatus);
+    transaction_["state"] = CCScriptValue::stringValue(CCStorePaymentTransactionStateNames[m_transactionState]);
+    transaction_["transactionIdentifier"] = CCScriptValue::stringValue(m_transactionIdentifier);
+    transaction_["productIdentifier"] = CCScriptValue::stringValue(m_productIdentifier);
+    transaction_["quantity"] = CCScriptValue::intValue(m_quantity);
+    transaction_["date"] = CCScriptValue::floatValue(m_dateTime);
+    transaction_["errorCode"] = CCScriptValue::intValue(m_errorCode);
+    transaction_["errorString"] = CCScriptValue::stringValue(m_errorDescription);
+    transaction_["receiptVerifyMode"] = CCScriptValue::intValue(m_receiptVerifyMode);
+    transaction_["receiptVerifyStatus"] = CCScriptValue::intValue(m_receiptVerifyStatus);
     
     if (m_receiptDataLength > 0)
     {
-        transaction_["receipt"] = LuaValue::stringValue((const char*)(m_receiptData));
+        transaction_["receipt"] = CCScriptValue::stringValue((const char*)(m_receiptData));
     }
     
     if (m_originalTransaction)
     {
-        const LuaDict originalTransaction_ = m_originalTransaction->convertToLuaTable();
-        transaction_["originalTransaction"] = LuaValue::dictValue(originalTransaction_);
+        const CCScriptValueDict originalTransaction_ = m_originalTransaction->convertToLuaTable();
+        transaction_["originalTransaction"] = CCScriptValue::dictValue(originalTransaction_);
     }
     
     return transaction_;

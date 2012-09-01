@@ -123,7 +123,7 @@ public:
     }
     
 #if CC_LUA_ENGINE_ENABLED > 0
-    const cocos2d::LuaDict convertToLuaTable(void);
+    const cocos2d::CCScriptValueDict convertToLuaTable(void);
 #endif
     
 private:

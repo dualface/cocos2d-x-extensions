@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_openfeint
-** Generated automatically by tolua++-1.0.92 on Fri Jul 20 15:14:57 2012.
+** Generated automatically by tolua++-1.0.92 on Sun Sep  2 01:05:15 2012.
 */
 
 #include "cocos2dx_extension_openfeint.h"

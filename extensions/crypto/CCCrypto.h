@@ -100,7 +100,7 @@ public:
     static cocos2d::LUA_STRING MD5Lua(char* input, bool isRawOutput);
     
     /** @brief Calculate SHA1 with a secret key, return digest string */
-    static cocos2d::LUA_STRING sha1Lua(char* input, char* key, bool isRawOutput)
+    static cocos2d::LUA_STRING sha1Lua(char* input, char* key, bool isRawOutput);
     
 #endif /* CC_LUA_ENGINE_ENABLED */
     
