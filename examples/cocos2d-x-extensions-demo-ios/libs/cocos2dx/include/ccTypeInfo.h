@@ -1,5 +1,5 @@
 /****************************************************************************
-Copyright (c) 2010 cocos2d-x.org
+Copyright (c) 2012 cocos2d-x.org
 
 http://www.cocos2d-x.org
 
@@ -22,26 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#ifndef __CC_STD_C_H__
-#define __CC_STD_C_H__
+#ifndef cocos2dx_ccTypeInfo_h
+#define cocos2dx_ccTypeInfo_h
 
 #include "platform/CCPlatformMacros.h"
-#include <float.h>
-#include <math.h>
-#include <string.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <sys/time.h>
-#include <stdint.h>
 
-#ifndef MIN
-#define MIN(x,y) (((x) > (y)) ? (y) : (x))
-#endif  // MIN
+#include <typeinfo>
 
-#ifndef MAX
-#define MAX(x,y) (((x) < (y)) ? (y) : (x))
-#endif  // MAX
+NS_CC_BEGIN
 
-#endif  // __CC_STD_C_H__
+class TypeInfo
+{
+public:
+	virtual long getClassTypeInfo() = 0;
+};
+
+static unsigned int getHashCodeByString(const char *key)
+{
+	unsigned int len = strlen(key);
+	const char *end=key+len;
+	unsigned int hash;
+
+	for (hash = 0; key < end; key++)
+	{
+		hash *= 16777619;
+		hash ^= (unsigned int) (unsigned char) toupper(*key);
+	}
+	return (hash);
+}
+NS_CC_END
+
+#endif
