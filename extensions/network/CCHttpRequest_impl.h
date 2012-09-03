@@ -2,6 +2,8 @@
 #ifndef __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 #define __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 
+#include "network/CCHttpRequest.h"
+
 #ifdef _WINDOWS_
 #include <Windows.h>
 #else
@@ -10,7 +12,6 @@
 
 #include <vector>
 #include <map>
-#include "network/CCHttpRequest.h"
 #include "curl/curl.h"
 
 NS_CC_EXT_BEGIN
