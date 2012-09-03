@@ -2,10 +2,10 @@
 #ifndef __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 #define __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 
-#if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
-#include <pthread.h>
-#else
+#ifdef _WINDOWS_
 #include <Windows.h>
+#else
+#include <pthread.h>
 #endif
 
 #include <vector>
@@ -36,11 +36,11 @@ public:
     bool getIsCompleted(void) {
         return m_state == STATE_COMPLETED;
     }
-
+    
     bool getIsCancelled(void) {
         return m_state == STATE_CANCELLED;
     }
-
+    
     int getResponseStatusCode(void) {
         return m_responseCode;
     }
@@ -56,7 +56,7 @@ public:
     int getResponseDataLength(void) {
         return m_responseDataLength;
     }
-
+    
     CCHttpRequestError getErrorCode(void) {
         return m_errorCode;
     }
@@ -107,7 +107,7 @@ private:
     
     typedef std::map<std::string, std::string>  PostFields;
     typedef PostFields::iterator                PostFieldsIterator;
-
+    
     typedef std::vector<std::string>            Headers;
     typedef Headers::iterator                   HeadersIterator;
     
