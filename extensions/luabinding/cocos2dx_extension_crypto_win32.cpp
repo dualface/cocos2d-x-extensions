@@ -3,7 +3,7 @@
 ** Generated automatically by tolua++-1.0.92 on Sun Sep  2 02:23:59 2012.
 */
 
-#include "luabinding/cocos2dx_extension_crypto_win32.h"
+#include "cocos2dx_extension_crypto_win32.h"
 
 
 
