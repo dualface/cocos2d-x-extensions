@@ -8,6 +8,9 @@ extern "C" {
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
+
+#include "CCLuaEngine.h"
+
 extern "C" {
 #include "lua.h"
 #include "lapi.h"
@@ -81,9 +84,8 @@ LUA_STRING CCCrypto::encodingBase64Lua(bool isDecoding,
                                        const char* input,
                                        int inputLength)
 {
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     engine->cleanStack();
-    lua_State* L = engine->getLuaState();
     
     int outputLength = inputLength * 2;
     char* output = static_cast<char*>(malloc(outputLength));
@@ -99,11 +101,11 @@ LUA_STRING CCCrypto::encodingBase64Lua(bool isDecoding,
     }
     if (dataUsed > 0 && dataUsed < outputLength)
     {
-        lua_pushlstring(L, output, dataUsed);
+        engine->pushString(output, dataUsed);
     }
     else
     {
-        lua_pushnil(L);
+        engine->pushNil();
     }
     free(output);
     return 1;
@@ -114,17 +116,17 @@ LUA_STRING CCCrypto::MD5Lua(char* input, bool isRawOutput)
     unsigned char buffer[MD5_BUFFER_LENGTH];
     MD5(static_cast<void*>(input), strlen(input), buffer);
     
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-    lua_State* L = engine->getLuaState();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    engine->cleanStack();
     
     if (isRawOutput)
     {
-        lua_pushlstring(L, (char*)buffer, MD5_BUFFER_LENGTH);
+        engine->pushString((char*)buffer, MD5_BUFFER_LENGTH);
     }
     else
     {
         char* hex = bin2hex(buffer, MD5_BUFFER_LENGTH);
-        lua_pushstring(L, hex);
+        engine->pushString(hex);
         delete[] hex;
     }
     
@@ -136,17 +138,17 @@ cocos2d::LUA_STRING CCCrypto::sha1Lua(char* input, char* key, bool isRawOutput)
     unsigned char buffer[SHA1_BUFFER_LENGTH];
     MD5(static_cast<void*>(input), strlen(input), buffer);
     
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
-    lua_State* L = engine->getLuaState();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    engine->cleanStack();
     
     if (isRawOutput)
     {
-        lua_pushlstring(L, (char*)buffer, SHA1_BUFFER_LENGTH);
+        engine->pushString((char*)buffer, SHA1_BUFFER_LENGTH);
     }
     else
     {
         char* hex = bin2hex(buffer, SHA1_BUFFER_LENGTH);
-        lua_pushstring(L, hex);
+        engine->pushString(hex);
         delete[] hex;
     }
     
