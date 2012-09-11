@@ -2,6 +2,10 @@
 #include "network/CCHttpRequest.h"
 #include "network/CCHttpRequest_impl.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCLuaEngine.h"
+#endif
+
 using namespace cocos2d;
 
 NS_CC_EXT_BEGIN
@@ -146,11 +150,11 @@ void CCHttpRequest::update(float dt)
 
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("completed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDict(dict);
+            cocos2d::CCLuaValueDict dict;
+            dict["name"] = cocos2d::CCLuaValue::stringValue("completed");
+            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
+            engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
 
@@ -165,11 +169,11 @@ void CCHttpRequest::update(float dt)
 
         if (m_luaListener)
         {
-            cocos2d::CCScriptValueDict dict;
-            dict["name"] = cocos2d::CCScriptValue::stringValue("failed");
-            dict["request"] = cocos2d::CCScriptValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCScriptEngineProtocol* engine = cocos2d::CCScriptEngineManager::sharedManager()->getScriptEngine();
-            engine->pushCCScriptValueDict(dict);
+            cocos2d::CCLuaValueDict dict;
+            dict["name"] = cocos2d::CCLuaValue::stringValue("failed");
+            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
+            cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
+            engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
 
