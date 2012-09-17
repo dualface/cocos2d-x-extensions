@@ -168,7 +168,7 @@ static CCNative_objc *s_sharedInstance;
 {
     if (alertViewLuaListener_)
     {
-        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(alertViewLuaListener_);
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(alertViewLuaListener_);
     }
 }
 #endif
@@ -186,13 +186,13 @@ static CCNative_objc *s_sharedInstance;
 #if CC_LUA_ENGINE_ENABLED > 0
     if (alertViewLuaListener_)
     {
-        CCScriptEngineProtocol *engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+        CCLuaEngine *engine = CCLuaEngine::defaultEngine();
         
-        CCScriptValueDict event;
-        event["action"] = CCScriptValue::stringValue("clicked");
-        event["buttonIndex"] = CCScriptValue::intValue(buttonIndex + 1);
-        engine->pushCCScriptValueDict(event);
-        engine->executeFunction(alertViewLuaListener_, 1);
+        CCLuaValueDict event;
+        event["action"] = CCLuaValue::stringValue("clicked");
+        event["buttonIndex"] = CCLuaValue::intValue(buttonIndex + 1);
+        engine->pushCCLuaValueDict(event);
+        engine->executeFunctionByHandler(alertViewLuaListener_, 1);
     }
 #endif
     [self removeAlertView];

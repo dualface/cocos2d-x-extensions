@@ -94,7 +94,7 @@ cocos2d::LUA_STRING CCCrypto::cryptAES256Lua(bool isDecrypt,
     int bufferSize = inputLength + getAES256KeyLength();
     void* buffer = malloc(bufferSize);
     int dataUsed = cryptAES256(isDecrypt, input, inputLength, buffer, bufferSize, key, keyLength);
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     engine->cleanStack();
     lua_State* L = engine->getLuaState();
     if (dataUsed > 0)

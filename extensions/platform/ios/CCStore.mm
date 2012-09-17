@@ -29,7 +29,7 @@ CCStore::~CCStore(void)
 #if CC_LUA_ENGINE_ENABLED > 0
     if (m_listener)
     {
-        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(m_listener);
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_listener);
     }
 #endif
     for (CCStorePaymentTransactionsIterator it = m_transactions.begin(); it != m_transactions.end(); ++it)
@@ -64,7 +64,7 @@ void CCStore::postInitWithTransactionListenerLua(LUA_FUNCTION listener)
 {
     if (m_listener)
     {
-        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeLuaHandler(m_listener);
+        CCScriptEngineManager::sharedManager()->getScriptEngine()->removeScriptHandler(m_listener);
     }
     m_listener = listener;
     [[CCStore_objc sharedStore] postInitWithTransactionObserver:this];
@@ -93,7 +93,7 @@ void CCStore::loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback)
     CC_UNUSED_PARAM(__LUA_TABLE__);
     if (m_isLoadProductsLuaNotCompleted) return;
     
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     lua_State* L = engine->getLuaState();
     if (!lua_isfunction(L, -1) || !lua_istable(L, -2)) return;
     
@@ -258,36 +258,36 @@ void CCStore::transactionRestored(CCStorePaymentTransaction* transaction)
 #if CC_LUA_ENGINE_ENABLED > 0
 void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProductsId)
 {
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     
-    CCScriptValueDict event;
-    CCScriptValueArray products_;
+    CCLuaValueDict event;
+    CCLuaValueArray products_;
     
     for (int i = 0; i < products->count(); ++i)
     {
         CCStoreProduct* product = static_cast<CCStoreProduct*>(products->objectAtIndex(i));
-        CCScriptValueDict product_;
-        product_["productIdentifier"]    = CCScriptValue::stringValue(product->getProductIdentifier());
-        product_["localizedTitle"]       = CCScriptValue::stringValue(product->getLocalizedTitle());
-        product_["localizedDescription"] = CCScriptValue::stringValue(product->getLocalizedDescription());
-        product_["priceLocale"]          = CCScriptValue::stringValue(product->getPriceLocale());
-        product_["price"]                = CCScriptValue::floatValue(product->getPrice());
-        products_.push_back(CCScriptValue::dictValue(product_));
+        CCLuaValueDict product_;
+        product_["productIdentifier"]    = CCLuaValue::stringValue(product->getProductIdentifier());
+        product_["localizedTitle"]       = CCLuaValue::stringValue(product->getLocalizedTitle());
+        product_["localizedDescription"] = CCLuaValue::stringValue(product->getLocalizedDescription());
+        product_["priceLocale"]          = CCLuaValue::stringValue(product->getPriceLocale());
+        product_["price"]                = CCLuaValue::floatValue(product->getPrice());
+        products_.push_back(CCLuaValue::dictValue(product_));
     }
-    event["products"] = CCScriptValue::arrayValue(products_);
+    event["products"] = CCLuaValue::arrayValue(products_);
     
     if (invalidProductsId)
     {
-        CCScriptValueArray invalidProductsId_;
+        CCLuaValueArray invalidProductsId_;
         for (int i = 0; i < invalidProductsId->count(); ++i)
         {
             CCString* ccid = static_cast<CCString*>(invalidProductsId->objectAtIndex(i));
-            invalidProductsId_.push_back(CCScriptValue::stringValue(ccid->toStdString()));
+            invalidProductsId_.push_back(CCLuaValue::stringValue(ccid->getCString()));
         }            
-        event["invalidProductsId"] = CCScriptValue::arrayValue(invalidProductsId_);
+        event["invalidProductsId"] = CCLuaValue::arrayValue(invalidProductsId_);
     }
     
-    engine->pushCCScriptValueDictToLuaStack(event);
+    engine->pushCCLuaValueDict(event);
     engine->executeFunctionByHandler(m_loadProductsCallback, 1);
     
     m_loadProductsCallback = 0;
@@ -296,13 +296,13 @@ void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProduc
 
 void CCStore::requestProductsFailed(int errorCode, const char* errorString)
 {
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     
-    CCScriptValueDict event;
-    event["errorCode"] = CCScriptValue::intValue(errorCode);
-    event["errorString"] = CCScriptValue::stringValue(errorString);
+    CCLuaValueDict event;
+    event["errorCode"] = CCLuaValue::intValue(errorCode);
+    event["errorString"] = CCLuaValue::stringValue(errorString);
     
-    engine->pushCCScriptValueDictToLuaStack(event);
+    engine->pushCCLuaValueDict(event);
     engine->executeFunctionByHandler(m_loadProductsCallback, 1);
     
     m_loadProductsCallback = 0;
@@ -316,12 +316,12 @@ void CCStore::requestProductsFailed(int errorCode, const char* errorString)
 #if CC_LUA_ENGINE_ENABLED > 0
 void CCStore::passCCStorePaymentTransactionToLuaListener(CCStorePaymentTransaction* transaction)
 {
-    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
+    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
     
-    CCScriptValueDict event;
-    event["transaction"] = CCScriptValue::dictValue(transaction->convertToLuaTable());
+    CCLuaValueDict event;
+    event["transaction"] = CCLuaValue::dictValue(transaction->convertToLuaTable());
     
-    engine->pushCCScriptValueDictToLuaStack(event);
+    engine->pushCCLuaValueDict(event);
     engine->executeFunctionByHandler(m_listener, 1);
 }
 #endif

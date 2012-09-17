@@ -5,6 +5,10 @@
 #include "cocos2dx_extensions.h"
 #include "CCAlertViewDelegate.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCLuaEngine.h"
+#endif
+
 NS_CC_EXT_BEGIN
 
 /** @brief Activity indicator style */

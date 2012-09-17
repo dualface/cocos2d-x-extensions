@@ -1,6 +1,10 @@
 
 #include "native/CCAlertViewDelegate.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCLuaEngine.h"
+#endif
+
 USING_NS_CC;
 USING_NS_CC_EXT;
 

@@ -5,6 +5,10 @@
 #include "cocos2dx_extensions.h"
 #include "store/CCStorePaymentTransactionWrapper.h"
 
+#if CC_LUA_ENGINE_ENABLED > 0
+#include "CCLuaEngine.h"
+#endif
+
 NS_CC_EXT_BEGIN
 
 typedef enum {
@@ -123,7 +127,7 @@ public:
     }
     
 #if CC_LUA_ENGINE_ENABLED > 0
-    const cocos2d::CCScriptValueDict convertToLuaTable(void);
+    const cocos2d::CCLuaValueDict convertToLuaTable(void);
 #endif
     
 private:

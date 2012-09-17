@@ -8,7 +8,6 @@ extern "C" {
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
-
 #include "CCLuaEngine.h"
 
 extern "C" {
