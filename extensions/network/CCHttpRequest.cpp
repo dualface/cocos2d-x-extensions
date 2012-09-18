@@ -154,6 +154,7 @@ void CCHttpRequest::update(float dt)
             dict["name"] = cocos2d::CCLuaValue::stringValue("completed");
             dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
             cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
+            engine->cleanStack();
             engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
@@ -173,6 +174,7 @@ void CCHttpRequest::update(float dt)
             dict["name"] = cocos2d::CCLuaValue::stringValue("failed");
             dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
             cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
+            engine->cleanStack();
             engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
