@@ -23,7 +23,7 @@ public:
     static void showAlertLua(LUA_FUNCTION listener);
     static void cancelAlert(void);
 
-    static const char* getOpenUDID(void);
+    static const std::string getOpenUDID(void);
     static void openURL(const char* url);
 };
 

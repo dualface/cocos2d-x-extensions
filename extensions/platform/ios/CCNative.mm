@@ -73,9 +73,9 @@ void CCNative::openURL(const char* url)
 #pragma mark -
 #pragma mark OpenUDID
 
-const char* CCNative::getOpenUDID(void)
+const std::string CCNative::getOpenUDID(void)
 {
-    return [[OpenUDID_objc value] cStringUsingEncoding:NSUTF8StringEncoding];
+    return std::string([[OpenUDID_objc value] cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 NS_CC_EXT_END

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native
-** Generated automatically by tolua++-1.0.92 on Tue Oct 30 23:59:51 2012.
+** Generated automatically by tolua++-1.0.92 on Wed Oct 31 00:36:01 2012.
 */
 
 #include "cocos2dx_extension_native.h"
@@ -207,8 +207,8 @@ static int tolua_cocos2dx_extension_native_CCNative_getOpenUDID00(lua_State* tol
 #endif
  {
   {
-   const char* tolua_ret = (const char*)  CCNative::getOpenUDID();
-   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+   const std::string tolua_ret = (const std::string)  CCNative::getOpenUDID();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
   }
  }
  return 1;
