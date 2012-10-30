@@ -9,6 +9,8 @@
 #include "CCLuaEngine.h"
 #endif
 
+#include <string>
+
 NS_CC_EXT_BEGIN
 
 /** @brief Activity indicator style */
@@ -56,7 +58,7 @@ public:
 #pragma mark OpenUDID
     
     /** @brief Get OpenUDID value */
-    static const char* getOpenUDID(void);
+    static const std::string getOpenUDID(void);
     
 #pragma mark -
 #pragma mark misc
@@ -64,9 +66,8 @@ public:
     /** @brief Open a web page in the browser; create an email; or call a phone number. */
     static void openURL(const char* url);
     
-#ifdef TARGET_OS_MAC
-    static const char* getInputText(const char* title, const char* message);
-#endif
+	/** @brief Show alert view, and get user input */
+    static const std::string getInputText(const char* title, const char* message);
     
 #pragma mark -
 #pragma mark helper

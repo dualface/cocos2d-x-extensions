@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_crypto_win32
-** Generated automatically by tolua++-1.0.92 on Sun Sep  2 02:23:59 2012.
+** Generated automatically by tolua++-1.0.92 on 10/30/12 17:35:50.
 */
 
 #include "cocos2dx_extension_crypto_win32.h"

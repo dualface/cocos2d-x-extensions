@@ -70,6 +70,7 @@ EOT;
     {
         $contents = file_get_contents($this->_outputCppPath);
         $contents = str_replace("\t", '    ', $contents);
+        $contents = str_replace("\r\n", "\n", $contents);
         foreach ($this->_fix as $find => $replace)
         {
             $find = str_replace('##LUABINDING_FILENAME##', $this->_luabindingFilename, $find);
@@ -206,7 +207,7 @@ $FIX[$find] = $replace;
 
 $extensions = array(
     'crypto'     => 'cocos2dx_extension_crypto_win32',
-    // 'native'     => 'cocos2dx_extension_native',
+    'native'     => 'cocos2dx_extension_native_win32',
     'network'    => 'cocos2dx_extension_network_win32',
     // 'store'      => 'cocos2dx_extension_store',
     // 'openfeint'  => 'cocos2dx_extension_openfeint',
