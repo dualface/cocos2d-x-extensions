@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native_mac
-** Generated automatically by tolua++-1.0.92 on Tue Oct 30 13:11:43 2012.
+** Generated automatically by tolua++-1.0.92 on Tue Oct 30 23:59:47 2012.
 */
 
 #include "cocos2dx_extension_native_mac.h"
@@ -180,8 +180,8 @@ static int tolua_cocos2dx_extension_native_mac_CCNative_getOpenUDID00(lua_State*
 #endif
  {
   {
-   const char* tolua_ret = (const char*)  CCNative::getOpenUDID();
-   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+   const std::string tolua_ret = (const std::string)  CCNative::getOpenUDID();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
   }
  }
  return 1;
@@ -212,8 +212,8 @@ static int tolua_cocos2dx_extension_native_mac_CCNative_getInputText00(lua_State
   const char* title = ((const char*)  tolua_tostring(tolua_S,2,0));
   const char* message = ((const char*)  tolua_tostring(tolua_S,3,0));
   {
-   const char* tolua_ret = (const char*)  CCNative::getInputText(title,message);
-   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+   const std::string tolua_ret = (const std::string)  CCNative::getInputText(title,message);
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
   }
  }
  return 1;

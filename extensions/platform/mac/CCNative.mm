@@ -74,21 +74,21 @@ void CCNative::openURL(const char* url)
     [[NSWorkspace sharedWorkspace] openURL:nsurl];
 }
 
-const char* CCNative::getInputText(const char* title, const char* message)
+const std::string CCNative::getInputText(const char* title, const char* message)
 {
     NSString *title_ = [NSString stringWithUTF8String:title ? title : ""];
     NSString *message_ = [NSString stringWithUTF8String:message ? message : ""];
     NSString *input = [[CCNative_objc sharedInstance] getInputText:title_ message:message_];
-    return [input cStringUsingEncoding:NSUTF8StringEncoding];
+    return std::string([input cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 
 #pragma mark -
 #pragma mark OpenUDID
 
-const char* CCNative::getOpenUDID(void)
+const std::string CCNative::getOpenUDID(void)
 {
-    return [[OpenUDID_mac value] cStringUsingEncoding:NSUTF8StringEncoding];
+    return std::string([[OpenUDID_mac value] cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
 NS_CC_EXT_END

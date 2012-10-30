@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_network_mac
-** Generated automatically by tolua++-1.0.92 on Tue Oct 30 13:11:43 2012.
+** Generated automatically by tolua++-1.0.92 on Tue Oct 30 23:59:47 2012.
 */
 
 #include "cocos2dx_extension_network_mac.h"
