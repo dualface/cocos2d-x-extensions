@@ -206,7 +206,7 @@ $FIX[$find] = $replace;
 
 $extensions = array(
     'crypto'     => 'cocos2dx_extension_crypto_mac',
-    // 'native'     => 'cocos2dx_extension_native',
+    'native'     => 'cocos2dx_extension_native_mac',
     'network'    => 'cocos2dx_extension_network_mac',
     // 'store'      => 'cocos2dx_extension_store',
     // 'openfeint'  => 'cocos2dx_extension_openfeint',

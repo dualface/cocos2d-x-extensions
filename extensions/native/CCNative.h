@@ -64,6 +64,10 @@ public:
     /** @brief Open a web page in the browser; create an email; or call a phone number. */
     static void openURL(const char* url);
     
+#ifdef TARGET_OS_MAC
+    static const char* getInputText(const char* title, const char* message);
+#endif
+    
 #pragma mark -
 #pragma mark helper
     
