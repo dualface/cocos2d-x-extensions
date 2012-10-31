@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native_win32
-** Generated automatically by tolua++-1.0.92 on Wed Oct 31 00:00:39 2012.
+** Generated automatically by tolua++-1.0.92 on Wed Oct 31 14:59:45 2012.
 */
 
 #include "cocos2dx_extension_native_win32.h"
@@ -204,7 +204,8 @@ static int tolua_cocos2dx_extension_native_win32_CCNative_getInputText00(lua_Sta
      !tolua_isusertable(tolua_S,1,"CCNative",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
+     !tolua_isstring(tolua_S,4,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,5,&tolua_err)
  )
   goto tolua_lerror;
  else
@@ -212,8 +213,9 @@ static int tolua_cocos2dx_extension_native_win32_CCNative_getInputText00(lua_Sta
  {
   const char* title = ((const char*)  tolua_tostring(tolua_S,2,0));
   const char* message = ((const char*)  tolua_tostring(tolua_S,3,0));
+  const char* defaultValue = ((const char*)  tolua_tostring(tolua_S,4,0));
   {
-   const std::string tolua_ret = (const std::string)  CCNative::getInputText(title,message);
+   const std::string tolua_ret = (const std::string)  CCNative::getInputText(title,message,defaultValue);
    tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
   }
  }

@@ -67,7 +67,7 @@ public:
     static void openURL(const char* url);
     
 	/** @brief Show alert view, and get user input */
-    static const std::string getInputText(const char* title, const char* message);
+    static const std::string getInputText(const char* title, const char* message, const char* defaultValue);
     
 #pragma mark -
 #pragma mark helper

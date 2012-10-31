@@ -182,7 +182,7 @@ static CCNative_objc *s_sharedInstance;
 #pragma mark -
 #pragma mark misc
 
-- (NSString*)getInputText:(NSString*)title message:(NSString*)message
+- (NSString*)getInputText:(NSString*)title message:(NSString*)message defaultValue:(NSString*)defaultValue
 {
     NSAlert *alert = [NSAlert alertWithMessageText:title
                                      defaultButton:@"OK"
@@ -192,6 +192,7 @@ static CCNative_objc *s_sharedInstance;
     
     NSRect frame = NSMakeRect(0, 0, 320, 22);
     NSTextField *textField = [[NSTextField alloc] initWithFrame:frame];
+    [textField setStringValue:defaultValue];
     [alert setAccessoryView:textField];
     NSInteger buttonIndex = [alert runModal];
     if (buttonIndex == 0)

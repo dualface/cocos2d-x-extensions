@@ -28,6 +28,6 @@ public:
     static void openURL(const char* url);
 
     static const std::string getOpenUDID(void);
-    static const std::string getInputText(const char* title, const char* message);
+    static const std::string getInputText(const char* title, const char* message, const char* defaultValue);
 };
 

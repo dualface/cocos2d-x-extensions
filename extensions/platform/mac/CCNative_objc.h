@@ -44,6 +44,6 @@ USING_NS_CC_EXT;
 #pragma mark -
 #pragma mark misc
 
-- (NSString*)getInputText:(NSString*)title message:(NSString*)message;
+- (NSString*)getInputText:(NSString*)title message:(NSString*)message defaultValue:(NSString*)defaultValue;
 
 @end

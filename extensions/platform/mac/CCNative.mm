@@ -74,11 +74,14 @@ void CCNative::openURL(const char* url)
     [[NSWorkspace sharedWorkspace] openURL:nsurl];
 }
 
-const std::string CCNative::getInputText(const char* title, const char* message)
+const std::string CCNative::getInputText(const char* title, const char* message, const char* defaultValue)
 {
     NSString *title_ = [NSString stringWithUTF8String:title ? title : ""];
     NSString *message_ = [NSString stringWithUTF8String:message ? message : ""];
-    NSString *input = [[CCNative_objc sharedInstance] getInputText:title_ message:message_];
+    NSString *defaultValue_ = [NSString stringWithUTF8String:defaultValue ? defaultValue : ""];
+    NSString *input = [[CCNative_objc sharedInstance] getInputText:title_
+                                                           message:message_
+                                                      defaultValue:defaultValue_];
     return std::string([input cStringUsingEncoding:NSUTF8StringEncoding]);
 }
 
