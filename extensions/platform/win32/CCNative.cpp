@@ -61,9 +61,9 @@ void CCNative::openURL(const char* url)
     if (!url) return;
 }
 
-const std::string CCNative::getInputText(const char* title, const char* message)
+const std::string CCNative::getInputText(const char* title, const char* message, const char* defaultValue)
 {
-	return CCNative_win32::sharedInstance()->getInputText(title, message);
+	return CCNative_win32::sharedInstance()->getInputText(title, message, defaultValue);
 }
 
 

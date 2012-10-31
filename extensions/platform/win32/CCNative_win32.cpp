@@ -89,13 +89,14 @@ void CCNative_win32::removeAlertViewLuaListener(void)
 }
 #endif
 
-const string CCNative_win32::getInputText(const char* title, const char* message)
+const string CCNative_win32::getInputText(const char* title, const char* message, const char* defaultValue)
 {
 	HWND handle = CCEGLView::sharedOpenGLView()->getHWnd();
 
 	CCNativeWin32InputBoxStruct inputbox;
 	inputbox.title = string(title ? title : "INPUT TEXT");
 	inputbox.message = string(message ? message : "INPUT TEXT, PRESS ENTER");
+	inputbox.value = string(defaultValue ? defaultValue : "");
 	SendMessage(handle, WM_CUT, 998, (LPARAM)&inputbox);
 	return inputbox.value;
 }

@@ -33,7 +33,7 @@ public:
 	void removeAlertViewLuaListener(void);
 #endif
 
-	const string getInputText(const char* title, const char* message);
+	const string getInputText(const char* title, const char* message, const char* defaultValue);
 
 private:
 	static CCNative_win32* s_sharedInstance;
