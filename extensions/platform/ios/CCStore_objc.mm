@@ -371,7 +371,7 @@ static const char* const SANDBOX_RECEIPT_VERIFY_URL = "https://sandbox.itunes.ap
                 break;
             }
             
-            SKPaymentTransaction *transaction = transaction;
+//            SKPaymentTransaction *transaction = transaction;
             NSString *transactionId = [receiptData objectForKey:@"transaction_id"];
             if (!transactionId || [transaction.transactionIdentifier compare:transactionId] != NSOrderedSame)
             {

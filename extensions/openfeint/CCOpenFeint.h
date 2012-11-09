@@ -4,9 +4,8 @@
 
 #include "cocos2dx_extensions.h"
 #if CC_LUA_ENGINE_ENABLED > 0
-#include "CCScriptSupport.h"
+#include "CCLuaEngine.h"
 #endif
-#include "cocoa/CCArray.h"
 
 NS_CC_EXT_BEGIN
 

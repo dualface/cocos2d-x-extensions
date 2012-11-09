@@ -1,4 +1,7 @@
 
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #include "native/CCAlertViewDelegate.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0
