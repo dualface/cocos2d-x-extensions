@@ -2,6 +2,7 @@
 #include "native/CCNative.h"
 #import "platform/ios/CCNative_objc.h"
 #import "platform/ios/openudid/OpenUDID_objc.h"
+#import "AudioToolbox/AudioServices.h"
 
 NS_CC_EXT_BEGIN
 
@@ -76,6 +77,19 @@ void CCNative::openURL(const char* url)
 const std::string CCNative::getOpenUDID(void)
 {
     return std::string([[OpenUDID_objc value] cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+
+const char* CCNative::getDeviceName(void)
+{
+    UIDevice *device = [UIDevice currentDevice];
+    return [[device name] cStringUsingEncoding:NSUTF8StringEncoding];
+}
+
+void CCNative::vibrate()
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    
 }
 
 NS_CC_EXT_END

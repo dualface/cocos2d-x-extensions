@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native
-** Generated automatically by tolua++-1.0.92 on Wed Oct 31 00:36:01 2012.
+** Generated automatically by tolua++-1.0.92 on Sat Nov 10 15:11:26 2012.
 */
 
 #include "cocos2dx_extension_native.h"
@@ -249,6 +249,61 @@ static int tolua_cocos2dx_extension_native_CCNative_openURL00(lua_State* tolua_S
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: getDeviceName of class  CCNative */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_getDeviceName00
+static int tolua_cocos2dx_extension_native_CCNative_getDeviceName00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCNative",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   const char* tolua_ret = (const char*)  CCNative::getDeviceName();
+   tolua_pushstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getDeviceName'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: vibrate of class  CCNative */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_vibrate00
+static int tolua_cocos2dx_extension_native_CCNative_vibrate00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"CCNative",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   CCNative::vibrate();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'vibrate'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_cocos2dx_extension_native_open (lua_State* tolua_S)
 {
@@ -269,6 +324,8 @@ TOLUA_API int tolua_cocos2dx_extension_native_open (lua_State* tolua_S)
    tolua_function(tolua_S,"cancelAlert",tolua_cocos2dx_extension_native_CCNative_cancelAlert00);
    tolua_function(tolua_S,"getOpenUDID",tolua_cocos2dx_extension_native_CCNative_getOpenUDID00);
    tolua_function(tolua_S,"openURL",tolua_cocos2dx_extension_native_CCNative_openURL00);
+   tolua_function(tolua_S,"getDeviceName",tolua_cocos2dx_extension_native_CCNative_getDeviceName00);
+   tolua_function(tolua_S,"vibrate",tolua_cocos2dx_extension_native_CCNative_vibrate00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
