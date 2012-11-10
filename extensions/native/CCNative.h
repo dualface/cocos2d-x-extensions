@@ -72,6 +72,9 @@ public:
 #pragma mark -
 #pragma mark helper
     
+    static const char* getDeviceName(void);
+    static void vibrate();
+    
 private:
     CCNative(void) {}
 };
