@@ -1,6 +1,7 @@
 
 #include "network/CCHttpRequest.h"
 #include "network/CCHttpRequest_impl.h"
+#include "cocos2d.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0
 #include "CCLuaEngine.h"

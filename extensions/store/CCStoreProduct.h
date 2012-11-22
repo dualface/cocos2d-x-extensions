@@ -3,6 +3,7 @@
 #define __CC_EXTENSION_CCSTORE_PRODUCT_H_
 
 #include "cocos2dx_extensions.h"
+#include "cocos2d.h"
 
 NS_CC_EXT_BEGIN
 

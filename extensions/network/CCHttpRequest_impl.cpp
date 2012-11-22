@@ -1,5 +1,6 @@
 
 #include "network/CCHttpRequest_impl.h"
+#include "cocos2d.h"
 #if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
 #include <pthread.h>
 #endif
