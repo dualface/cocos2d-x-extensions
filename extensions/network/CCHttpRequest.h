@@ -3,6 +3,7 @@
 #define __CC_EXTENSION_CCHTTP_REQUEST_H_
 
 #include "cocos2dx_extensions.h"
+#include "cocos2d.h"
 #include "network/CCHttpRequestDelegate.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0

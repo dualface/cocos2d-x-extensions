@@ -1,0 +1,35 @@
+
+$#include "network/CCNetwork.h"
+
+$using namespace cocos2d::extension;
+
+typedef enum {
+    CCHttpRequestMethodGET = 0,
+    CCHttpRequestMethodPOST,
+} CCHttpRequestMethod;
+
+class CCHttpRequest : public CCObject
+{
+    static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
+                                           const char* url,
+                                           CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    void addRequestHeader(const char* key, const char* value);
+    void addPostValue(const char* key, const char* value);
+    void setPostData(const char* data);
+    void setTimeout(float timeout);
+    bool getIsInProgress(void);
+    void start(bool isCached = false);
+    void cancel(void);
+    void clearDelegatesAndCancel(void);
+    int getResponseStatusCode(void);
+    const const char* getResponseString(void);
+    int getErrorCode(void);
+    const char* getErrorMessage(void);
+};
+
+class CCNetwork
+{
+    static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
+                                         const char* url,
+                                         CCHttpRequestMethod method = CCHttpRequestMethodGET);
+};

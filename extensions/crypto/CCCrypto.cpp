@@ -12,7 +12,6 @@ extern "C" {
 
 extern "C" {
 #include "lua.h"
-#include "lapi.h"
 #include "tolua_fix.h"
 }
 #endif
@@ -157,7 +156,7 @@ cocos2d::LUA_STRING CCCrypto::sha1Lua(char* input, char* key, bool isRawOutput)
 char* CCCrypto::bin2hex(unsigned char* bin, int binLength)
 {
     static const char* hextable = "0123456789abcdef";
-
+    
     int hexLength = binLength * 2 + 1;
     char* hex = new char[hexLength];
     memset(hex, 0, sizeof(char) * hexLength);
@@ -169,7 +168,7 @@ char* CCCrypto::bin2hex(unsigned char* bin, int binLength)
         hex[ci++] = hextable[(c >> 4) & 0x0f];
         hex[ci++] = hextable[c & 0x0f];
     }
-
+    
     return hex;
 }
 

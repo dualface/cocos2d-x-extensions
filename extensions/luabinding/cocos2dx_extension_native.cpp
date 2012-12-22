@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native
-** Generated automatically by tolua++-1.0.92 on Sat Nov 10 15:11:26 2012.
+** Generated automatically by tolua++-1.0.92 on Fri Dec 14 12:15:24 2012.
 */
 
 #include "cocos2dx_extension_native.h"

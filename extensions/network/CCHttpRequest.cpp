@@ -142,13 +142,13 @@ void CCHttpRequest::update(float dt)
     {
         CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
     }
-
+    
     if (request->getIsCompleted())
     {
         if (m_delegate) m_delegate->requestFinished(this);
-
+        
 #if CC_LUA_ENGINE_ENABLED > 0
-
+        
         if (m_luaListener)
         {
             cocos2d::CCLuaValueDict dict;
@@ -159,16 +159,16 @@ void CCHttpRequest::update(float dt)
             engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
-
+        
 #endif
-
+        
     }
     else if (request->getIsCancelled())
     {
         if (m_delegate) m_delegate->requestFailed(this);
-
+        
 #if CC_LUA_ENGINE_ENABLED > 0
-
+        
         if (m_luaListener)
         {
             cocos2d::CCLuaValueDict dict;
@@ -179,9 +179,9 @@ void CCHttpRequest::update(float dt)
             engine->pushCCLuaValueDict(dict);
             engine->executeFunctionByHandler(m_luaListener, 1);
         }
-
+        
 #endif
-
+        
     }
 }
 

@@ -4,7 +4,6 @@
 #if CC_LUA_ENGINE_ENABLED > 0
 extern "C" {
 #include "lua.h"
-#include "lapi.h"
 #include "tolua_fix.h"
 }
 #endif
