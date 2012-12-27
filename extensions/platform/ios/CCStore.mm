@@ -99,8 +99,7 @@ void CCStore::loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback)
     
     NSMutableSet* set = [NSMutableSet set];
     
-    /* L: this table function */
-    
+                                                /* L: this table function */
     lua_pushnil(L);                             /* L: this table function query_key */
     /* lua_next() remove 'query_key', push 'next_key' */
     while (lua_next(L, -3) != 0)                /* L: this table function next_key value */
@@ -115,9 +114,7 @@ void CCStore::loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback)
         }
         /* removes 'value'; keeps 'key' for next iteration */
         lua_pop(L, 1);                          /* this table function next_key */
-    }
-    
-    lua_pop(L, 1);                              /* this table function */
+    }                                           /* this table function */
     
     m_isLoadProductsLuaNotCompleted = true;
     m_loadProductsCallback = callback;
