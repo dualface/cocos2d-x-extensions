@@ -174,6 +174,21 @@ static CCNative_objc *s_sharedInstance;
 #endif
 
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+- (void)showAlertViewWithObjcDelegate:(id<UIAlertViewDelegate>)delegate
+{
+    if (!alertView_)
+    {
+        CCLOG("[CCNative_objc] ERR, showAlertViewWithDelegate() alert view not exists");
+        return;
+    }
+    
+    CCLOG("[CCNative_objc] showAlertViewWithObjcDelegate()");
+    [alertView_ setDelegate:delegate];
+    [alertView_ show];
+}
+#endif
+
 #pragma mark -
 #pragma mark UIAlertView delegates
 

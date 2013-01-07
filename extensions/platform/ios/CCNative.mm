@@ -1,5 +1,6 @@
 
 #include "native/CCNative.h"
+#import <UIKit/UIKit.h>
 #import "platform/ios/CCNative_objc.h"
 #import "platform/ios/openudid/OpenUDID_objc.h"
 #import "AudioToolbox/AudioServices.h"
@@ -40,24 +41,10 @@ int CCNative::addAlertButton(const char* buttonTitle)
     return [[CCNative_objc sharedInstance] addAlertButton:buttonTitle_];
 }
 
-#if CC_LUA_ENGINE_ENABLED > 0
-int CCNative::addAlertButtonLua(const char* buttonTitle)
-{
-    return addAlertButton(buttonTitle) + 1;
-}
-#endif
-
 void CCNative::showAlert(CCAlertViewDelegate* delegate)
 {
     [[CCNative_objc sharedInstance] showAlertViewWithDelegate:delegate];
 }
-
-#if CC_LUA_ENGINE_ENABLED > 0
-void CCNative::showAlertLua(cocos2d::LUA_FUNCTION listener)
-{
-    [[CCNative_objc sharedInstance] showAlertViewWithLuaListener:listener];
-}
-#endif
 
 void CCNative::cancelAlert(void)
 {
@@ -89,7 +76,25 @@ const char* CCNative::getDeviceName(void)
 void CCNative::vibrate()
 {
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    
 }
+
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+void CCNative::showAlertObjc(void *delegate)
+{
+    [[CCNative_objc sharedInstance] showAlertViewWithObjcDelegate:(id<UIAlertViewDelegate>)delegate];
+}
+#endif
+
+#if CC_LUA_ENGINE_ENABLED > 0
+int CCNative::addAlertButtonLua(const char* buttonTitle)
+{
+    return addAlertButton(buttonTitle) + 1;
+}
+
+void CCNative::showAlertLua(cocos2d::LUA_FUNCTION listener)
+{
+    [[CCNative_objc sharedInstance] showAlertViewWithLuaListener:listener];
+}
+#endif
 
 NS_CC_EXT_END

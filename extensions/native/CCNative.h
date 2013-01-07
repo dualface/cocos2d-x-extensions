@@ -43,14 +43,9 @@ public:
     
     /** @brief Add button to alert view, return button index */
     static int addAlertButton(const char* buttonTitle);
-#if CC_LUA_ENGINE_ENABLED > 0
-    static int addAlertButtonLua(const char* buttonTitle);
-#endif        
+
     /** @brief Show alert view */
     static void showAlert(CCAlertViewDelegate* delegate = NULL);
-#if CC_LUA_ENGINE_ENABLED > 0
-    static void showAlertLua(cocos2d::LUA_FUNCTION listener);
-#endif        
     /** @brief Hide and remove alert view */
     static void cancelAlert(void);
     
@@ -75,6 +70,15 @@ public:
     static const char* getDeviceName(void);
     static void vibrate();
     
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+    static void showAlertObjc(void *delegate);
+#endif
+    
+#if CC_LUA_ENGINE_ENABLED > 0
+    static int addAlertButtonLua(const char* buttonTitle);
+    static void showAlertLua(cocos2d::LUA_FUNCTION listener);
+#endif
+
 private:
     CCNative(void) {}
 };
