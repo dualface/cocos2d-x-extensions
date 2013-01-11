@@ -162,13 +162,14 @@ static CCNative_objc *s_sharedInstance;
     
     CCLOG("[CCNative_objc] showAlertViewWithLuaListener()");
     NSInteger buttonIndex = [alertView_ runModal];
-    CCLuaEngine *engine = CCLuaEngine::defaultEngine();
     
     CCLuaValueDict event;
     event["action"] = CCLuaValue::stringValue("clicked");
     event["buttonIndex"] = CCLuaValue::intValue(buttonIndex + 1);
-    engine->pushCCLuaValueDict(event);
-    engine->executeFunctionByHandler(listener, 1);
+    
+    CCLuaStack *stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->pushCCLuaValueDict(event);
+    stack->executeFunctionByHandler(listener, 1);
     
     [self removeAlertView];
 }
