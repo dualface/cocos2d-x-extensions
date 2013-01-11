@@ -93,16 +93,15 @@ cocos2d::LUA_STRING CCCrypto::cryptAES256Lua(bool isDecrypt,
     int bufferSize = inputLength + getAES256KeyLength();
     void* buffer = malloc(bufferSize);
     int dataUsed = cryptAES256(isDecrypt, input, inputLength, buffer, bufferSize, key, keyLength);
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
-    engine->cleanStack();
-    lua_State* L = engine->getLuaState();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->clean();
     if (dataUsed > 0)
     {
-        lua_pushlstring(L, static_cast<const char*>(buffer), dataUsed);
+        stack->pushString(static_cast<const char*>(buffer), dataUsed);
     }
     else
     {
-        lua_pushnil(L);
+        stack->pushNil();
     }
     free(buffer);
     return 1;

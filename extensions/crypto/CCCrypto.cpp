@@ -82,8 +82,8 @@ LUA_STRING CCCrypto::encodingBase64Lua(bool isDecoding,
                                        const char* input,
                                        int inputLength)
 {
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
-    engine->cleanStack();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->clean();
     
     int outputLength = inputLength * 2;
     char* output = static_cast<char*>(malloc(outputLength));
@@ -99,11 +99,11 @@ LUA_STRING CCCrypto::encodingBase64Lua(bool isDecoding,
     }
     if (dataUsed > 0 && dataUsed < outputLength)
     {
-        engine->pushString(output, dataUsed);
+        stack->pushString(output, dataUsed);
     }
     else
     {
-        engine->pushNil();
+        stack->pushNil();
     }
     free(output);
     return 1;
@@ -114,17 +114,17 @@ LUA_STRING CCCrypto::MD5Lua(char* input, bool isRawOutput)
     unsigned char buffer[MD5_BUFFER_LENGTH];
     MD5(static_cast<void*>(input), strlen(input), buffer);
     
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
-    engine->cleanStack();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->clean();
     
     if (isRawOutput)
     {
-        engine->pushString((char*)buffer, MD5_BUFFER_LENGTH);
+        stack->pushString((char*)buffer, MD5_BUFFER_LENGTH);
     }
     else
     {
         char* hex = bin2hex(buffer, MD5_BUFFER_LENGTH);
-        engine->pushString(hex);
+        stack->pushString(hex);
         delete[] hex;
     }
     
@@ -136,17 +136,17 @@ cocos2d::LUA_STRING CCCrypto::sha1Lua(char* input, char* key, bool isRawOutput)
     unsigned char buffer[SHA1_BUFFER_LENGTH];
     MD5(static_cast<void*>(input), strlen(input), buffer);
     
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
-    engine->cleanStack();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
+    stack->clean();
     
     if (isRawOutput)
     {
-        engine->pushString((char*)buffer, SHA1_BUFFER_LENGTH);
+        stack->pushString((char*)buffer, SHA1_BUFFER_LENGTH);
     }
     else
     {
         char* hex = bin2hex(buffer, SHA1_BUFFER_LENGTH);
-        engine->pushString(hex);
+        stack->pushString(hex);
         delete[] hex;
     }
     

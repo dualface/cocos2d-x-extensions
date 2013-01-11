@@ -154,10 +154,10 @@ void CCHttpRequest::update(float dt)
             cocos2d::CCLuaValueDict dict;
             dict["name"] = cocos2d::CCLuaValue::stringValue("completed");
             dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
-            engine->cleanStack();
-            engine->pushCCLuaValueDict(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            cocos2d::CCLuaStack *stack = cocos2d::CCLuaEngine::defaultEngine()->getLuaStack();
+            stack->clean();
+            stack->pushCCLuaValueDict(dict);
+            stack->executeFunctionByHandler(m_luaListener, 1);
         }
         
 #endif
@@ -174,10 +174,10 @@ void CCHttpRequest::update(float dt)
             cocos2d::CCLuaValueDict dict;
             dict["name"] = cocos2d::CCLuaValue::stringValue("failed");
             dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
-            cocos2d::CCLuaEngine* engine = cocos2d::CCLuaEngine::defaultEngine();
-            engine->cleanStack();
-            engine->pushCCLuaValueDict(dict);
-            engine->executeFunctionByHandler(m_luaListener, 1);
+            cocos2d::CCLuaStack *stack = cocos2d::CCLuaEngine::defaultEngine()->getLuaStack();
+            stack->clean();
+            stack->pushCCLuaValueDict(dict);
+            stack->executeFunctionByHandler(m_luaListener, 1);
         }
         
 #endif

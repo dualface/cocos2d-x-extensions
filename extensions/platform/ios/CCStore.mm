@@ -94,7 +94,7 @@ void CCStore::loadProductsLua(LUA_TABLE __LUA_TABLE__, LUA_FUNCTION callback)
     if (m_isLoadProductsLuaNotCompleted) return;
     
     CCLuaEngine* engine = CCLuaEngine::defaultEngine();
-    lua_State* L = engine->getLuaState();
+    lua_State* L = engine->getLuaStack()->getLuaState();
     if (!lua_isfunction(L, -1) || !lua_istable(L, -2)) return;
     
     NSMutableSet* set = [NSMutableSet set];
@@ -255,7 +255,7 @@ void CCStore::transactionRestored(CCStorePaymentTransaction* transaction)
 #if CC_LUA_ENGINE_ENABLED > 0
 void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProductsId)
 {
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
     
     CCLuaValueDict event;
     CCLuaValueArray products_;
@@ -284,8 +284,8 @@ void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProduc
         event["invalidProductsId"] = CCLuaValue::arrayValue(invalidProductsId_);
     }
     
-    engine->pushCCLuaValueDict(event);
-    engine->executeFunctionByHandler(m_loadProductsCallback, 1);
+    stack->pushCCLuaValueDict(event);
+    stack->executeFunctionByHandler(m_loadProductsCallback, 1);
     
     m_loadProductsCallback = 0;
     m_isLoadProductsLuaNotCompleted = false;
@@ -293,14 +293,14 @@ void CCStore::requestProductsCompleted(CCArray* products, CCArray* invalidProduc
 
 void CCStore::requestProductsFailed(int errorCode, const char* errorString)
 {
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
     
     CCLuaValueDict event;
     event["errorCode"] = CCLuaValue::intValue(errorCode);
     event["errorString"] = CCLuaValue::stringValue(errorString);
     
-    engine->pushCCLuaValueDict(event);
-    engine->executeFunctionByHandler(m_loadProductsCallback, 1);
+    stack->pushCCLuaValueDict(event);
+    stack->executeFunctionByHandler(m_loadProductsCallback, 1);
     
     m_loadProductsCallback = 0;
     m_isLoadProductsLuaNotCompleted = false;
@@ -313,13 +313,13 @@ void CCStore::requestProductsFailed(int errorCode, const char* errorString)
 #if CC_LUA_ENGINE_ENABLED > 0
 void CCStore::passCCStorePaymentTransactionToLuaListener(CCStorePaymentTransaction* transaction)
 {
-    CCLuaEngine* engine = CCLuaEngine::defaultEngine();
+    CCLuaStack* stack = CCLuaEngine::defaultEngine()->getLuaStack();
     
     CCLuaValueDict event;
     event["transaction"] = CCLuaValue::dictValue(transaction->convertToLuaTable());
     
-    engine->pushCCLuaValueDict(event);
-    engine->executeFunctionByHandler(m_listener, 1);
+    stack->pushCCLuaValueDict(event);
+    stack->executeFunctionByHandler(m_listener, 1);
 }
 #endif
 
