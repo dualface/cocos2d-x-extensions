@@ -2,6 +2,7 @@
 #include "network/CCHttpRequest.h"
 #include "network/CCHttpRequest_impl.h"
 #include "cocos2d.h"
+#include <stdio.h>
 
 #if CC_LUA_ENGINE_ENABLED > 0
 #include "CCLuaEngine.h"
@@ -123,6 +124,21 @@ const void* CCHttpRequest::getResponseData(int* dataLength)
 int CCHttpRequest::getResponseDataLength()
 {
     return ((CCHttpRequest_impl*)m_request)->getResponseDataLength();
+}
+
+int CCHttpRequest::saveResponseData(const char* filename)
+{
+    FILE *fp = fopen(filename, "wb");
+    int writedBytes = 0;
+    if (fp)
+    {
+        writedBytes = fwrite(((CCHttpRequest_impl*)m_request)->getResponseData(),
+                             ((CCHttpRequest_impl*)m_request)->getResponseDataLength(),
+                             1,
+                             fp);
+        fclose(fp);
+    }
+    return writedBytes;
 }
 
 CCHttpRequestError  CCHttpRequest::getErrorCode(void)

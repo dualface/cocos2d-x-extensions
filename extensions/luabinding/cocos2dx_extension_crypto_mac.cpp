@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_crypto_mac
-** Generated automatically by tolua++-1.0.92 on Wed Oct 31 14:59:42 2012.
+** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:24 2013.
 */
 
 #include "cocos2dx_extension_crypto_mac.h"

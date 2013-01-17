@@ -19,7 +19,7 @@ CCHttpRequest_impl::CCHttpRequest_impl(const char* url, CCHttpRequestMethod meth
 {
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
-//    curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; rv:2.0.1) Gecko/20100101 Firefox/4.0.1");
+    curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "libcurl");
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, DEFAULT_TIMEOUT * 1000);
     if (method == CCHttpRequestMethodPOST)
     {
@@ -67,6 +67,7 @@ bool CCHttpRequest_impl::start(void)
     m_errorCode = CCHttpRequestErrorNone;
     m_errorMessage = "";
     
+    curl_easy_setopt(m_curl, CURLOPT_HTTP_TRANSFER_DECODING, 1);
     curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, curlWriteData);
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
     curl_easy_setopt(m_curl, CURLOPT_PROGRESSFUNCTION, curlProgress);

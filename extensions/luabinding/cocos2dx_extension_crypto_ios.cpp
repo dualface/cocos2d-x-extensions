@@ -1,9 +1,9 @@
 /*
-** Lua binding: cocos2dx_extension_crypto
-** Generated automatically by tolua++-1.0.92 on Thu Jan 17 15:36:39 2013.
+** Lua binding: cocos2dx_extension_crypto_ios
+** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:20 2013.
 */
 
-#include "cocos2dx_extension_crypto.h"
+#include "cocos2dx_extension_crypto_ios.h"
 
 
 
@@ -25,8 +25,8 @@ static void tolua_reg_types (lua_State* tolua_S)
 }
 
 /* method: getAES256KeyLength of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_getAES256KeyLength00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_getAES256KeyLength00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_getAES256KeyLength00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_getAES256KeyLength00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -53,8 +53,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_getAES256KeyLength00(lua_Sta
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: encryptAES256Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_encryptAES256Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_encryptAES256Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_encryptAES256Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_encryptAES256Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -89,8 +89,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_encryptAES256Lua00(lua_State
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: decryptAES256Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_decryptAES256Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_decryptAES256Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_decryptAES256Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_decryptAES256Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -125,8 +125,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_decryptAES256Lua00(lua_State
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: encodeBase64Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_encodeBase64Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_encodeBase64Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_encodeBase64Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_encodeBase64Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -157,8 +157,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_encodeBase64Lua00(lua_State*
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: decodeBase64Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_decodeBase64Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_decodeBase64Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_decodeBase64Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_decodeBase64Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -187,8 +187,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_decodeBase64Lua00(lua_State*
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: MD5Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_MD5Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_MD5Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_MD5Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_MD5Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -219,8 +219,8 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_MD5Lua00(lua_State* tolua_S)
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: sha1Lua of class  CCCrypto */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_CCCrypto_sha1Lua00
-static int tolua_cocos2dx_extension_crypto_CCCrypto_sha1Lua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_crypto_ios_CCCrypto_sha1Lua00
+static int tolua_cocos2dx_extension_crypto_ios_CCCrypto_sha1Lua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -253,7 +253,7 @@ static int tolua_cocos2dx_extension_crypto_CCCrypto_sha1Lua00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* Open function */
-TOLUA_API int tolua_cocos2dx_extension_crypto_open (lua_State* tolua_S)
+TOLUA_API int tolua_cocos2dx_extension_crypto_ios_open (lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
@@ -261,13 +261,13 @@ TOLUA_API int tolua_cocos2dx_extension_crypto_open (lua_State* tolua_S)
  tolua_beginmodule(tolua_S,NULL);
   tolua_cclass(tolua_S,"CCCrypto","CCCrypto","",NULL);
   tolua_beginmodule(tolua_S,"CCCrypto");
-   tolua_function(tolua_S,"getAES256KeyLength",tolua_cocos2dx_extension_crypto_CCCrypto_getAES256KeyLength00);
-   tolua_function(tolua_S,"encryptAES256Lua",tolua_cocos2dx_extension_crypto_CCCrypto_encryptAES256Lua00);
-   tolua_function(tolua_S,"decryptAES256Lua",tolua_cocos2dx_extension_crypto_CCCrypto_decryptAES256Lua00);
-   tolua_function(tolua_S,"encodeBase64Lua",tolua_cocos2dx_extension_crypto_CCCrypto_encodeBase64Lua00);
-   tolua_function(tolua_S,"decodeBase64Lua",tolua_cocos2dx_extension_crypto_CCCrypto_decodeBase64Lua00);
-   tolua_function(tolua_S,"MD5Lua",tolua_cocos2dx_extension_crypto_CCCrypto_MD5Lua00);
-   tolua_function(tolua_S,"sha1Lua",tolua_cocos2dx_extension_crypto_CCCrypto_sha1Lua00);
+   tolua_function(tolua_S,"getAES256KeyLength",tolua_cocos2dx_extension_crypto_ios_CCCrypto_getAES256KeyLength00);
+   tolua_function(tolua_S,"encryptAES256Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_encryptAES256Lua00);
+   tolua_function(tolua_S,"decryptAES256Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_decryptAES256Lua00);
+   tolua_function(tolua_S,"encodeBase64Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_encodeBase64Lua00);
+   tolua_function(tolua_S,"decodeBase64Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_decodeBase64Lua00);
+   tolua_function(tolua_S,"MD5Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_MD5Lua00);
+   tolua_function(tolua_S,"sha1Lua",tolua_cocos2dx_extension_crypto_ios_CCCrypto_sha1Lua00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
@@ -275,8 +275,8 @@ TOLUA_API int tolua_cocos2dx_extension_crypto_open (lua_State* tolua_S)
 
 
 #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM >= 501
- TOLUA_API int luaopen_cocos2dx_extension_crypto (lua_State* tolua_S) {
- return tolua_cocos2dx_extension_crypto_open(tolua_S);
+ TOLUA_API int luaopen_cocos2dx_extension_crypto_ios (lua_State* tolua_S) {
+ return tolua_cocos2dx_extension_crypto_ios_open(tolua_S);
 };
 #endif
 

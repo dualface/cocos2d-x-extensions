@@ -87,6 +87,9 @@ public:
     /** @brief Get response data length (bytes). */
     int getResponseDataLength(void);
     
+    /** @brief Save response data to file. */
+    int saveResponseData(const char* filename);
+    
     /** @brief Get error code. */
     CCHttpRequestError getErrorCode(void);
     

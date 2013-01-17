@@ -1,9 +1,9 @@
 /*
-** Lua binding: cocos2dx_extension_native
-** Generated automatically by tolua++-1.0.92 on Thu Jan 17 15:36:39 2013.
+** Lua binding: cocos2dx_extension_native_ios
+** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:20 2013.
 */
 
-#include "cocos2dx_extension_native.h"
+#include "cocos2dx_extension_native_ios.h"
 
 
 
@@ -18,8 +18,8 @@ static void tolua_reg_types (lua_State* tolua_S)
 }
 
 /* method: showActivityIndicator of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_showActivityIndicator00
-static int tolua_cocos2dx_extension_native_CCNative_showActivityIndicator00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_showActivityIndicator00
+static int tolua_cocos2dx_extension_native_ios_CCNative_showActivityIndicator00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -47,8 +47,8 @@ static int tolua_cocos2dx_extension_native_CCNative_showActivityIndicator00(lua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: hideActivityIndicator of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_hideActivityIndicator00
-static int tolua_cocos2dx_extension_native_CCNative_hideActivityIndicator00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_hideActivityIndicator00
+static int tolua_cocos2dx_extension_native_ios_CCNative_hideActivityIndicator00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -74,8 +74,8 @@ static int tolua_cocos2dx_extension_native_CCNative_hideActivityIndicator00(lua_
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: createAlert of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_createAlert00
-static int tolua_cocos2dx_extension_native_CCNative_createAlert00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_createAlert00
+static int tolua_cocos2dx_extension_native_ios_CCNative_createAlert00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -107,8 +107,8 @@ static int tolua_cocos2dx_extension_native_CCNative_createAlert00(lua_State* tol
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: addAlertButton of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_addAlertButton00
-static int tolua_cocos2dx_extension_native_CCNative_addAlertButton00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_addAlertButton00
+static int tolua_cocos2dx_extension_native_ios_CCNative_addAlertButton00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -137,8 +137,8 @@ static int tolua_cocos2dx_extension_native_CCNative_addAlertButton00(lua_State* 
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showAlertLua of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_showAlertLua00
-static int tolua_cocos2dx_extension_native_CCNative_showAlertLua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_showAlertLua00
+static int tolua_cocos2dx_extension_native_ios_CCNative_showAlertLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -166,8 +166,8 @@ static int tolua_cocos2dx_extension_native_CCNative_showAlertLua00(lua_State* to
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: cancelAlert of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_cancelAlert00
-static int tolua_cocos2dx_extension_native_CCNative_cancelAlert00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_cancelAlert00
+static int tolua_cocos2dx_extension_native_ios_CCNative_cancelAlert00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -193,8 +193,8 @@ static int tolua_cocos2dx_extension_native_CCNative_cancelAlert00(lua_State* tol
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: getOpenUDID of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_getOpenUDID00
-static int tolua_cocos2dx_extension_native_CCNative_getOpenUDID00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_getOpenUDID00
+static int tolua_cocos2dx_extension_native_ios_CCNative_getOpenUDID00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -221,8 +221,8 @@ static int tolua_cocos2dx_extension_native_CCNative_getOpenUDID00(lua_State* tol
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: openURL of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_openURL00
-static int tolua_cocos2dx_extension_native_CCNative_openURL00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_openURL00
+static int tolua_cocos2dx_extension_native_ios_CCNative_openURL00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -250,8 +250,8 @@ static int tolua_cocos2dx_extension_native_CCNative_openURL00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: getDeviceName of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_getDeviceName00
-static int tolua_cocos2dx_extension_native_CCNative_getDeviceName00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_getDeviceName00
+static int tolua_cocos2dx_extension_native_ios_CCNative_getDeviceName00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -278,8 +278,8 @@ static int tolua_cocos2dx_extension_native_CCNative_getDeviceName00(lua_State* t
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: vibrate of class  CCNative */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_CCNative_vibrate00
-static int tolua_cocos2dx_extension_native_CCNative_vibrate00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_native_ios_CCNative_vibrate00
+static int tolua_cocos2dx_extension_native_ios_CCNative_vibrate00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -305,7 +305,7 @@ static int tolua_cocos2dx_extension_native_CCNative_vibrate00(lua_State* tolua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* Open function */
-TOLUA_API int tolua_cocos2dx_extension_native_open (lua_State* tolua_S)
+TOLUA_API int tolua_cocos2dx_extension_native_ios_open (lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
@@ -316,16 +316,16 @@ TOLUA_API int tolua_cocos2dx_extension_native_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"CCActivityIndicatorViewStyleGray",CCActivityIndicatorViewStyleGray);
   tolua_cclass(tolua_S,"CCNative","CCNative","",NULL);
   tolua_beginmodule(tolua_S,"CCNative");
-   tolua_function(tolua_S,"showActivityIndicator",tolua_cocos2dx_extension_native_CCNative_showActivityIndicator00);
-   tolua_function(tolua_S,"hideActivityIndicator",tolua_cocos2dx_extension_native_CCNative_hideActivityIndicator00);
-   tolua_function(tolua_S,"createAlert",tolua_cocos2dx_extension_native_CCNative_createAlert00);
-   tolua_function(tolua_S,"addAlertButton",tolua_cocos2dx_extension_native_CCNative_addAlertButton00);
-   tolua_function(tolua_S,"showAlertLua",tolua_cocos2dx_extension_native_CCNative_showAlertLua00);
-   tolua_function(tolua_S,"cancelAlert",tolua_cocos2dx_extension_native_CCNative_cancelAlert00);
-   tolua_function(tolua_S,"getOpenUDID",tolua_cocos2dx_extension_native_CCNative_getOpenUDID00);
-   tolua_function(tolua_S,"openURL",tolua_cocos2dx_extension_native_CCNative_openURL00);
-   tolua_function(tolua_S,"getDeviceName",tolua_cocos2dx_extension_native_CCNative_getDeviceName00);
-   tolua_function(tolua_S,"vibrate",tolua_cocos2dx_extension_native_CCNative_vibrate00);
+   tolua_function(tolua_S,"showActivityIndicator",tolua_cocos2dx_extension_native_ios_CCNative_showActivityIndicator00);
+   tolua_function(tolua_S,"hideActivityIndicator",tolua_cocos2dx_extension_native_ios_CCNative_hideActivityIndicator00);
+   tolua_function(tolua_S,"createAlert",tolua_cocos2dx_extension_native_ios_CCNative_createAlert00);
+   tolua_function(tolua_S,"addAlertButton",tolua_cocos2dx_extension_native_ios_CCNative_addAlertButton00);
+   tolua_function(tolua_S,"showAlertLua",tolua_cocos2dx_extension_native_ios_CCNative_showAlertLua00);
+   tolua_function(tolua_S,"cancelAlert",tolua_cocos2dx_extension_native_ios_CCNative_cancelAlert00);
+   tolua_function(tolua_S,"getOpenUDID",tolua_cocos2dx_extension_native_ios_CCNative_getOpenUDID00);
+   tolua_function(tolua_S,"openURL",tolua_cocos2dx_extension_native_ios_CCNative_openURL00);
+   tolua_function(tolua_S,"getDeviceName",tolua_cocos2dx_extension_native_ios_CCNative_getDeviceName00);
+   tolua_function(tolua_S,"vibrate",tolua_cocos2dx_extension_native_ios_CCNative_vibrate00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
@@ -333,8 +333,8 @@ TOLUA_API int tolua_cocos2dx_extension_native_open (lua_State* tolua_S)
 
 
 #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM >= 501
- TOLUA_API int luaopen_cocos2dx_extension_native (lua_State* tolua_S) {
- return tolua_cocos2dx_extension_native_open(tolua_S);
+ TOLUA_API int luaopen_cocos2dx_extension_native_ios (lua_State* tolua_S) {
+ return tolua_cocos2dx_extension_native_ios_open(tolua_S);
 };
 #endif
 

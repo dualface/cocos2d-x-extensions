@@ -1,9 +1,9 @@
 /*
-** Lua binding: cocos2dx_extension_openfeint
-** Generated automatically by tolua++-1.0.92 on Thu Jan 17 15:36:39 2013.
+** Lua binding: cocos2dx_extension_openfeint_ios
+** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:21 2013.
 */
 
-#include "cocos2dx_extension_openfeint.h"
+#include "cocos2dx_extension_openfeint_ios.h"
 
 
 
@@ -25,8 +25,8 @@ static void tolua_reg_types (lua_State* tolua_S)
 }
 
 /* method: postInitWithProductKey of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_postInitWithProductKey00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_postInitWithProductKey00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_postInitWithProductKey00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_postInitWithProductKey00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -58,8 +58,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_postInitWithProductKey
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showDashboard of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showDashboard00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showDashboard00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showDashboard00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showDashboard00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -85,8 +85,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showDashboard00(lua_St
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showLeaderboards of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -112,8 +112,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards00(lua
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showLeaderboards of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards01
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards01(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards01
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards01(lua_State* tolua_S)
 {
  tolua_Error tolua_err;
  if (
@@ -131,13 +131,13 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards01(lua
  }
  return 0;
 tolua_lerror:
- return tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards00(tolua_S);
+ return tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards00(tolua_S);
 }
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showAchievements of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showAchievements00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showAchievements00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showAchievements00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showAchievements00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -163,8 +163,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showAchievements00(lua
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showChallenges of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showChallenges00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showChallenges00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showChallenges00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showChallenges00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -190,8 +190,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showChallenges00(lua_S
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showFriends of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showFriends00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showFriends00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showFriends00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showFriends00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -217,8 +217,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showFriends00(lua_Stat
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: showPlaying of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_showPlaying00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showPlaying00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showPlaying00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showPlaying00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -244,8 +244,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_showPlaying00(lua_Stat
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: getAchievementsLua of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_getAchievementsLua00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_getAchievementsLua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getAchievementsLua00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getAchievementsLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -272,8 +272,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_getAchievementsLua00(l
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: unlockAchievement of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_unlockAchievement00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_unlockAchievement00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_unlockAchievement00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_unlockAchievement00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -301,8 +301,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_unlockAchievement00(lu
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: getLeaderboardsLua of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_getLeaderboardsLua00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_getLeaderboardsLua00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getLeaderboardsLua00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getLeaderboardsLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -329,8 +329,8 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_getLeaderboardsLua00(l
 #endif //#ifndef TOLUA_DISABLE
 
 /* method: setHighScore of class  CCOpenFeint */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_CCOpenFeint_setHighScore00
-static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_setHighScore00(lua_State* tolua_S)
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_setHighScore00
+static int tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_setHighScore00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -362,7 +362,7 @@ static int tolua_cocos2dx_extension_openfeint_CCOpenFeint_setHighScore00(lua_Sta
 #endif //#ifndef TOLUA_DISABLE
 
 /* Open function */
-TOLUA_API int tolua_cocos2dx_extension_openfeint_open (lua_State* tolua_S)
+TOLUA_API int tolua_cocos2dx_extension_openfeint_ios_open (lua_State* tolua_S)
 {
  tolua_open(tolua_S);
  tolua_reg_types(tolua_S);
@@ -370,18 +370,18 @@ TOLUA_API int tolua_cocos2dx_extension_openfeint_open (lua_State* tolua_S)
  tolua_beginmodule(tolua_S,NULL);
   tolua_cclass(tolua_S,"CCOpenFeint","CCOpenFeint","",NULL);
   tolua_beginmodule(tolua_S,"CCOpenFeint");
-   tolua_function(tolua_S,"postInitWithProductKey",tolua_cocos2dx_extension_openfeint_CCOpenFeint_postInitWithProductKey00);
-   tolua_function(tolua_S,"showDashboard",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showDashboard00);
-   tolua_function(tolua_S,"showLeaderboards",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards00);
-   tolua_function(tolua_S,"showLeaderboards",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showLeaderboards01);
-   tolua_function(tolua_S,"showAchievements",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showAchievements00);
-   tolua_function(tolua_S,"showChallenges",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showChallenges00);
-   tolua_function(tolua_S,"showFriends",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showFriends00);
-   tolua_function(tolua_S,"showPlaying",tolua_cocos2dx_extension_openfeint_CCOpenFeint_showPlaying00);
-   tolua_function(tolua_S,"getAchievementsLua",tolua_cocos2dx_extension_openfeint_CCOpenFeint_getAchievementsLua00);
-   tolua_function(tolua_S,"unlockAchievement",tolua_cocos2dx_extension_openfeint_CCOpenFeint_unlockAchievement00);
-   tolua_function(tolua_S,"getLeaderboardsLua",tolua_cocos2dx_extension_openfeint_CCOpenFeint_getLeaderboardsLua00);
-   tolua_function(tolua_S,"setHighScore",tolua_cocos2dx_extension_openfeint_CCOpenFeint_setHighScore00);
+   tolua_function(tolua_S,"postInitWithProductKey",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_postInitWithProductKey00);
+   tolua_function(tolua_S,"showDashboard",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showDashboard00);
+   tolua_function(tolua_S,"showLeaderboards",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards00);
+   tolua_function(tolua_S,"showLeaderboards",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showLeaderboards01);
+   tolua_function(tolua_S,"showAchievements",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showAchievements00);
+   tolua_function(tolua_S,"showChallenges",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showChallenges00);
+   tolua_function(tolua_S,"showFriends",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showFriends00);
+   tolua_function(tolua_S,"showPlaying",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_showPlaying00);
+   tolua_function(tolua_S,"getAchievementsLua",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getAchievementsLua00);
+   tolua_function(tolua_S,"unlockAchievement",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_unlockAchievement00);
+   tolua_function(tolua_S,"getLeaderboardsLua",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_getLeaderboardsLua00);
+   tolua_function(tolua_S,"setHighScore",tolua_cocos2dx_extension_openfeint_ios_CCOpenFeint_setHighScore00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;
@@ -389,8 +389,8 @@ TOLUA_API int tolua_cocos2dx_extension_openfeint_open (lua_State* tolua_S)
 
 
 #if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM >= 501
- TOLUA_API int luaopen_cocos2dx_extension_openfeint (lua_State* tolua_S) {
- return tolua_cocos2dx_extension_openfeint_open(tolua_S);
+ TOLUA_API int luaopen_cocos2dx_extension_openfeint_ios (lua_State* tolua_S) {
+ return tolua_cocos2dx_extension_openfeint_ios_open(tolua_S);
 };
 #endif
 

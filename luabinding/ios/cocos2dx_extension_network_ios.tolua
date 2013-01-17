@@ -38,6 +38,9 @@ class CCHttpRequest : public CCObject
     void clearDelegatesAndCancel(void);
     int getResponseStatusCode(void);
     const const char* getResponseString(void);
+    const void* getResponseData(int* dataLength);
+    int getResponseDataLength(void);
+    int saveResponseData(const char* filename);
     int getErrorCode(void);
     const char* getErrorMessage(void);
 };

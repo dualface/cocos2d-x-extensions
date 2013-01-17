@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_native_win32
-** Generated automatically by tolua++-1.0.92 on Wed Oct 31 14:59:45 2012.
+** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:27 2013.
 */
 
 #include "cocos2dx_extension_native_win32.h"
