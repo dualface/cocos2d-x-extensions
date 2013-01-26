@@ -74,7 +74,8 @@ bool CCStorePaymentTransaction::initWithState(CCStorePaymentTransactionWrapper* 
     m_receiptDataLength = receiptDataLength;
     if (receiptDataLength > 0)
     {
-        m_receiptData = malloc(receiptDataLength);
+        m_receiptData = malloc(receiptDataLength + 1);
+        memset(m_receiptData, 0, receiptDataLength + 1);
         memcpy(m_receiptData, receiptData, receiptDataLength);
     }
     else
