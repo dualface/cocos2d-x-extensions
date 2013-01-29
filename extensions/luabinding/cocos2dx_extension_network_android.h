@@ -7,7 +7,6 @@ extern "C" {
 #include "tolua_fix.h"
 }
 #include "cocos2d.h"
-#include "CCLuaEngine.h"
 
 using namespace cocos2d;
 

@@ -3,8 +3,8 @@
 #define __CC_EXTENSION_CCNETWORK_H_
 
 #include "cocos2dx_extensions.h"
-#include "network/CCHttpRequest.h"
-#include "network/CCHttpRequestDelegate.h"
+#include "network/CCHTTPRequest.h"
+#include "network/CCHTTPRequestDelegate.h"
 
 NS_CC_EXT_BEGIN
 
@@ -37,14 +37,14 @@ public:
 #pragma mark -
 #pragma mark HTTP
     
-    static CCHttpRequest* httpRequest(CCHttpRequestDelegate* delegate,
-                                      const char* url,
-                                      CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    static CCHTTPRequest* createHTTPRequest(CCHTTPRequestDelegate* delegate,
+                                            const char* url,
+                                            CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
     
 #if CC_LUA_ENGINE_ENABLED > 0
-    static CCHttpRequest* httpRequestLua(cocos2d::LUA_FUNCTION listener,
-                                         const char* url,
-                                         CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    static CCHTTPRequest* createHTTPRequestLua(cocos2d::LUA_FUNCTION listener,
+                                               const char* url,
+                                               CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
 #endif
     
 private:

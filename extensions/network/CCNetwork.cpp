@@ -5,21 +5,21 @@ using namespace cocos2d;
 
 NS_CC_EXT_BEGIN
 
-CCHttpRequest* CCNetwork::httpRequest(CCHttpRequestDelegate* delegate,
-                                      const char* url,
-                                      CCHttpRequestMethod method)
+CCHTTPRequest* CCNetwork::createHTTPRequest(CCHTTPRequestDelegate* delegate,
+                                            const char* url,
+                                            CCHTTPRequestMethod method)
 {
-    CCHttpRequest* request = CCHttpRequest::createWithUrl(delegate, url, method);
+    CCHTTPRequest* request = CCHTTPRequest::createWithUrl(delegate, url, method);
     request->start();
     return request;
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
-CCHttpRequest* CCNetwork::httpRequestLua(LUA_FUNCTION listener,
-                                         const char* url,
-                                         CCHttpRequestMethod method)
+CCHTTPRequest* CCNetwork::createHTTPRequestLua(LUA_FUNCTION listener,
+                                               const char* url,
+                                               CCHTTPRequestMethod method)
 {
-    CCHttpRequest* request = CCHttpRequest::createWithUrlLua(listener, url, method);
+    CCHTTPRequest* request = CCHTTPRequest::createWithUrlLua(listener, url, method);
     request->start();
     return request;
 }

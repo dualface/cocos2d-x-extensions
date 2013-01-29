@@ -1,6 +1,6 @@
 /*
 ** Lua binding: cocos2dx_extension_network_ios
-** Generated automatically by tolua++-1.0.92 on Thu Jan 17 16:11:20 2013.
+** Generated automatically by tolua++-1.0.92 on Tue Jan 29 10:38:36 2013.
 */
 
 #include "cocos2dx_extension_network_ios.h"
@@ -10,23 +10,31 @@
 #include "network/CCNetwork.h"
 using namespace cocos2d::extension;
 
+/* function to release collected object via destructor */
+#ifdef __cplusplus
+
+
+#endif
+
+
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)
 {
- 
- tolua_usertype(tolua_S,"CCHttpRequest");
  tolua_usertype(tolua_S,"CCNetwork");
+ 
+ 
+ tolua_usertype(tolua_S,"CCHTTPRequest");
  tolua_usertype(tolua_S,"CCObject");
 }
 
-/* method: createWithUrlLua of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_createWithUrlLua00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_createWithUrlLua00(lua_State* tolua_S)
+/* method: createWithUrlLua of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_createWithUrlLua00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_createWithUrlLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertable(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertable(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      (tolua_isvaluenil(tolua_S,2,&tolua_err) || !toluafix_isfunction(tolua_S,2,"LUA_FUNCTION",0,&tolua_err)) ||
      !tolua_isstring(tolua_S,3,0,&tolua_err) ||
      !tolua_isnumber(tolua_S,4,1,&tolua_err) ||
@@ -38,10 +46,10 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_createWithUrlLua00
  {
   LUA_FUNCTION listener = (  toluafix_ref_function(tolua_S,2,0));
   const char* url = ((const char*)  tolua_tostring(tolua_S,3,0));
-  CCHttpRequestMethod method = ((CCHttpRequestMethod) (int)  tolua_tonumber(tolua_S,4,CCHttpRequestMethodGET));
+  CCHTTPRequestMethod method = ((CCHTTPRequestMethod) (int)  tolua_tonumber(tolua_S,4,CCHTTPRequestMethodGET));
   {
-   CCHttpRequest* tolua_ret = (CCHttpRequest*)  CCHttpRequest::createWithUrlLua(listener,url,method);
-    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCHttpRequest");
+   CCHTTPRequest* tolua_ret = (CCHTTPRequest*)  CCHTTPRequest::createWithUrlLua(listener,url,method);
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCHTTPRequest");
   }
  }
  return 1;
@@ -53,14 +61,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_createWithUrlLua00
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: addRequestHeader of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_addRequestHeader00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addRequestHeader00(lua_State* tolua_S)
+/* method: addRequestHeader of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addRequestHeader00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addRequestHeader00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      !tolua_isstring(tolua_S,3,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
@@ -69,7 +77,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addRequestHeader00
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   const char* key = ((const char*)  tolua_tostring(tolua_S,2,0));
   const char* value = ((const char*)  tolua_tostring(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
@@ -88,14 +96,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addRequestHeader00
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: addPostValue of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_addPostValue00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addPostValue00(lua_State* tolua_S)
+/* method: addPostValue of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addPostValue00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addPostValue00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      !tolua_isstring(tolua_S,3,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,4,&tolua_err)
@@ -104,7 +112,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addPostValue00(lua
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   const char* key = ((const char*)  tolua_tostring(tolua_S,2,0));
   const char* value = ((const char*)  tolua_tostring(tolua_S,3,0));
 #ifndef TOLUA_RELEASE
@@ -123,14 +131,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_addPostValue00(lua
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: setPostData of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_setPostData00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setPostData00(lua_State* tolua_S)
+/* method: setPostData of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setPostData00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setPostData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
@@ -138,7 +146,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setPostData00(lua_
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   const char* data = ((const char*)  tolua_tostring(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setPostData'", NULL);
@@ -156,14 +164,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setPostData00(lua_
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: setTimeout of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_setTimeout00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setTimeout00(lua_State* tolua_S)
+/* method: setTimeout of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setTimeout00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setTimeout00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
@@ -171,7 +179,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setTimeout00(lua_S
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   float timeout = ((float)  tolua_tonumber(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'setTimeout'", NULL);
@@ -189,21 +197,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_setTimeout00(lua_S
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getIsInProgress of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getIsInProgress00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getIsInProgress00(lua_State* tolua_S)
+/* method: getIsInProgress of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getIsInProgress00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getIsInProgress00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getIsInProgress'", NULL);
 #endif
@@ -221,14 +229,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getIsInProgress00(
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: start of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_start00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_start00(lua_State* tolua_S)
+/* method: start of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_start00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_start00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isboolean(tolua_S,2,1,&tolua_err) ||
      !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
@@ -236,7 +244,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_start00(lua_State*
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   bool isCached = ((bool)  tolua_toboolean(tolua_S,2,false));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'start'", NULL);
@@ -254,21 +262,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_start00(lua_State*
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: cancel of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_cancel00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_cancel00(lua_State* tolua_S)
+/* method: cancel of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_cancel00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_cancel00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'cancel'", NULL);
 #endif
@@ -285,21 +293,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_cancel00(lua_State
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: clearDelegatesAndCancel of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_clearDelegatesAndCancel00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_clearDelegatesAndCancel00(lua_State* tolua_S)
+/* method: clearDelegatesAndCancel of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_clearDelegatesAndCancel00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_clearDelegatesAndCancel00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'clearDelegatesAndCancel'", NULL);
 #endif
@@ -316,21 +324,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_clearDelegatesAndC
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getResponseStatusCode of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseStatusCode00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseStatusCode00(lua_State* tolua_S)
+/* method: getResponseStatusCode of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseStatusCode00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseStatusCode00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseStatusCode'", NULL);
 #endif
@@ -348,26 +356,26 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseStatusC
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getResponseString of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseString00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseString00(lua_State* tolua_S)
+/* method: getResponseString of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseString00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseString00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseString'", NULL);
 #endif
   {
-    const char* tolua_ret = (  const char*)  self->getResponseString();
+   const char* tolua_ret = (const char*)  self->getResponseString();
    tolua_pushstring(tolua_S,(const char*)tolua_ret);
   }
  }
@@ -380,56 +388,53 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseString0
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getResponseData of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseData00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseData00(lua_State* tolua_S)
+/* method: getResponseDataLua of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLua00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
-     !tolua_isnumber(tolua_S,2,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,3,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
-  int dataLength = ((int)  tolua_tonumber(tolua_S,2,0));
-#ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseData'", NULL);
-#endif
-  {
-   const void* tolua_ret = (const void*)  self->getResponseData(&dataLength);
-   tolua_pushuserdata(tolua_S,(void*)tolua_ret);
-   tolua_pushnumber(tolua_S,(lua_Number)dataLength);
-  }
- }
- return 2;
-#ifndef TOLUA_RELEASE
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'getResponseData'.",&tolua_err);
- return 0;
-#endif
-}
-#endif //#ifndef TOLUA_DISABLE
-
-/* method: getResponseDataLength of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseDataLength00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseDataLength00(lua_State* tolua_S)
-{
-#ifndef TOLUA_RELEASE
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseDataLua'", NULL);
+#endif
+  {
+     self->getResponseDataLua();
+   
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'getResponseDataLua'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: getResponseDataLength of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLength00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLength00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getResponseDataLength'", NULL);
 #endif
@@ -447,14 +452,14 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseDataLen
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: saveResponseData of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_saveResponseData00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_saveResponseData00(lua_State* tolua_S)
+/* method: saveResponseData of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_saveResponseData00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_saveResponseData00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isstring(tolua_S,2,0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,3,&tolua_err)
  )
@@ -462,7 +467,7 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_saveResponseData00
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
   const char* filename = ((const char*)  tolua_tostring(tolua_S,2,0));
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'saveResponseData'", NULL);
@@ -481,21 +486,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_saveResponseData00
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getErrorCode of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorCode00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorCode00(lua_State* tolua_S)
+/* method: getErrorCode of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorCode00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorCode00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getErrorCode'", NULL);
 #endif
@@ -513,21 +518,21 @@ static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorCode00(lua
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: getErrorMessage of class  CCHttpRequest */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorMessage00
-static int tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorMessage00(lua_State* tolua_S)
+/* method: getErrorMessage of class  CCHTTPRequest */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorMessage00
+static int tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorMessage00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
  if (
-     !tolua_isusertype(tolua_S,1,"CCHttpRequest",0,&tolua_err) ||
+     !tolua_isusertype(tolua_S,1,"CCHTTPRequest",0,&tolua_err) ||
      !tolua_isnoobj(tolua_S,2,&tolua_err)
  )
   goto tolua_lerror;
  else
 #endif
  {
-  CCHttpRequest* self = (CCHttpRequest*)  tolua_tousertype(tolua_S,1,0);
+  CCHTTPRequest* self = (CCHTTPRequest*)  tolua_tousertype(tolua_S,1,0);
 #ifndef TOLUA_RELEASE
   if (!self) tolua_error(tolua_S,"invalid 'self' in function 'getErrorMessage'", NULL);
 #endif
@@ -659,9 +664,9 @@ static int tolua_cocos2dx_extension_network_ios_CCNetwork_getInternetConnectionS
 }
 #endif //#ifndef TOLUA_DISABLE
 
-/* method: httpRequestLua of class  CCNetwork */
-#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCNetwork_httpRequestLua00
-static int tolua_cocos2dx_extension_network_ios_CCNetwork_httpRequestLua00(lua_State* tolua_S)
+/* method: createHTTPRequestLua of class  CCNetwork */
+#ifndef TOLUA_DISABLE_tolua_cocos2dx_extension_network_ios_CCNetwork_createHTTPRequestLua00
+static int tolua_cocos2dx_extension_network_ios_CCNetwork_createHTTPRequestLua00(lua_State* tolua_S)
 {
 #ifndef TOLUA_RELEASE
  tolua_Error tolua_err;
@@ -678,16 +683,16 @@ static int tolua_cocos2dx_extension_network_ios_CCNetwork_httpRequestLua00(lua_S
  {
   LUA_FUNCTION listener = (  toluafix_ref_function(tolua_S,2,0));
   const char* url = ((const char*)  tolua_tostring(tolua_S,3,0));
-  CCHttpRequestMethod method = ((CCHttpRequestMethod) (int)  tolua_tonumber(tolua_S,4,CCHttpRequestMethodGET));
+  CCHTTPRequestMethod method = ((CCHTTPRequestMethod) (int)  tolua_tonumber(tolua_S,4,CCHTTPRequestMethodGET));
   {
-   CCHttpRequest* tolua_ret = (CCHttpRequest*)  CCNetwork::httpRequestLua(listener,url,method);
-    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCHttpRequest");
+   CCHTTPRequest* tolua_ret = (CCHTTPRequest*)  CCNetwork::createHTTPRequestLua(listener,url,method);
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"CCHTTPRequest");
   }
  }
  return 1;
 #ifndef TOLUA_RELEASE
  tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'httpRequestLua'.",&tolua_err);
+ tolua_error(tolua_S,"#ferror in function 'createHTTPRequestLua'.",&tolua_err);
  return 0;
 #endif
 }
@@ -703,32 +708,32 @@ TOLUA_API int tolua_cocos2dx_extension_network_ios_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"CCNetworkStatusNotReachable",CCNetworkStatusNotReachable);
   tolua_constant(tolua_S,"CCNetworkStatusReachableViaWiFi",CCNetworkStatusReachableViaWiFi);
   tolua_constant(tolua_S,"CCNetworkStatusReachableViaWWAN",CCNetworkStatusReachableViaWWAN);
-  tolua_constant(tolua_S,"CCHttpRequestMethodGET",CCHttpRequestMethodGET);
-  tolua_constant(tolua_S,"CCHttpRequestMethodPOST",CCHttpRequestMethodPOST);
-  tolua_constant(tolua_S,"CCHttpRequestErrorNone",CCHttpRequestErrorNone);
-  tolua_constant(tolua_S,"CCHttpRequestErrorConnectionFailure",CCHttpRequestErrorConnectionFailure);
-  tolua_constant(tolua_S,"CCHttpRequestErrorTimeout",CCHttpRequestErrorTimeout);
-  tolua_constant(tolua_S,"CCHttpRequestErrorAuthentication",CCHttpRequestErrorAuthentication);
-  tolua_constant(tolua_S,"CCHttpRequestErrorCancelled",CCHttpRequestErrorCancelled);
-  tolua_constant(tolua_S,"CCHttpRequestErrorUnknown",CCHttpRequestErrorUnknown);
-  tolua_cclass(tolua_S,"CCHttpRequest","CCHttpRequest","CCObject",NULL);
-  tolua_beginmodule(tolua_S,"CCHttpRequest");
-   tolua_function(tolua_S,"createWithUrlLua",tolua_cocos2dx_extension_network_ios_CCHttpRequest_createWithUrlLua00);
-   tolua_function(tolua_S,"addRequestHeader",tolua_cocos2dx_extension_network_ios_CCHttpRequest_addRequestHeader00);
-   tolua_function(tolua_S,"addPostValue",tolua_cocos2dx_extension_network_ios_CCHttpRequest_addPostValue00);
-   tolua_function(tolua_S,"setPostData",tolua_cocos2dx_extension_network_ios_CCHttpRequest_setPostData00);
-   tolua_function(tolua_S,"setTimeout",tolua_cocos2dx_extension_network_ios_CCHttpRequest_setTimeout00);
-   tolua_function(tolua_S,"getIsInProgress",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getIsInProgress00);
-   tolua_function(tolua_S,"start",tolua_cocos2dx_extension_network_ios_CCHttpRequest_start00);
-   tolua_function(tolua_S,"cancel",tolua_cocos2dx_extension_network_ios_CCHttpRequest_cancel00);
-   tolua_function(tolua_S,"clearDelegatesAndCancel",tolua_cocos2dx_extension_network_ios_CCHttpRequest_clearDelegatesAndCancel00);
-   tolua_function(tolua_S,"getResponseStatusCode",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseStatusCode00);
-   tolua_function(tolua_S,"getResponseString",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseString00);
-   tolua_function(tolua_S,"getResponseData",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseData00);
-   tolua_function(tolua_S,"getResponseDataLength",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getResponseDataLength00);
-   tolua_function(tolua_S,"saveResponseData",tolua_cocos2dx_extension_network_ios_CCHttpRequest_saveResponseData00);
-   tolua_function(tolua_S,"getErrorCode",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorCode00);
-   tolua_function(tolua_S,"getErrorMessage",tolua_cocos2dx_extension_network_ios_CCHttpRequest_getErrorMessage00);
+  tolua_constant(tolua_S,"CCHTTPRequestMethodGET",CCHTTPRequestMethodGET);
+  tolua_constant(tolua_S,"CCHTTPRequestMethodPOST",CCHTTPRequestMethodPOST);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorNone",CCHTTPRequestErrorNone);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorConnectionFailure",CCHTTPRequestErrorConnectionFailure);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorTimeout",CCHTTPRequestErrorTimeout);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorAuthentication",CCHTTPRequestErrorAuthentication);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorCancelled",CCHTTPRequestErrorCancelled);
+  tolua_constant(tolua_S,"CCHTTPRequestErrorUnknown",CCHTTPRequestErrorUnknown);
+  tolua_cclass(tolua_S,"CCHTTPRequest","CCHTTPRequest","CCObject",NULL);
+  tolua_beginmodule(tolua_S,"CCHTTPRequest");
+   tolua_function(tolua_S,"createWithUrlLua",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_createWithUrlLua00);
+   tolua_function(tolua_S,"addRequestHeader",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addRequestHeader00);
+   tolua_function(tolua_S,"addPostValue",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_addPostValue00);
+   tolua_function(tolua_S,"setPostData",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setPostData00);
+   tolua_function(tolua_S,"setTimeout",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_setTimeout00);
+   tolua_function(tolua_S,"getIsInProgress",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getIsInProgress00);
+   tolua_function(tolua_S,"start",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_start00);
+   tolua_function(tolua_S,"cancel",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_cancel00);
+   tolua_function(tolua_S,"clearDelegatesAndCancel",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_clearDelegatesAndCancel00);
+   tolua_function(tolua_S,"getResponseStatusCode",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseStatusCode00);
+   tolua_function(tolua_S,"getResponseString",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseString00);
+   tolua_function(tolua_S,"getResponseDataLua",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLua00);
+   tolua_function(tolua_S,"getResponseDataLength",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getResponseDataLength00);
+   tolua_function(tolua_S,"saveResponseData",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_saveResponseData00);
+   tolua_function(tolua_S,"getErrorCode",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorCode00);
+   tolua_function(tolua_S,"getErrorMessage",tolua_cocos2dx_extension_network_ios_CCHTTPRequest_getErrorMessage00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CCNetwork","CCNetwork","",NULL);
   tolua_beginmodule(tolua_S,"CCNetwork");
@@ -736,7 +741,7 @@ TOLUA_API int tolua_cocos2dx_extension_network_ios_open (lua_State* tolua_S)
    tolua_function(tolua_S,"isInternetConnectionAvailable",tolua_cocos2dx_extension_network_ios_CCNetwork_isInternetConnectionAvailable00);
    tolua_function(tolua_S,"isHostNameReachable",tolua_cocos2dx_extension_network_ios_CCNetwork_isHostNameReachable00);
    tolua_function(tolua_S,"getInternetConnectionStatus",tolua_cocos2dx_extension_network_ios_CCNetwork_getInternetConnectionStatus00);
-   tolua_function(tolua_S,"httpRequestLua",tolua_cocos2dx_extension_network_ios_CCNetwork_httpRequestLua00);
+   tolua_function(tolua_S,"createHTTPRequestLua",tolua_cocos2dx_extension_network_ios_CCNetwork_createHTTPRequestLua00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

@@ -1,39 +1,41 @@
 
-#include "network/CCHttpRequest_impl.h"
+#include "network/CCHTTPRequest_impl.h"
 #include "cocos2d.h"
 #if CC_TARGET_PLATFORM != CC_PLATFORM_WIN32
 #include <pthread.h>
 #endif
 #include <iostream>
+#include "zlib.h"
 
 NS_CC_EXT_BEGIN
 
-CCHttpRequest_impl::CCHttpRequest_impl(const char* url, CCHttpRequestMethod method)
+CCHTTPRequest_impl::CCHTTPRequest_impl(const char* url, CCHTTPRequestMethod method)
 : m_state(STATE_IDLE)
-, m_isPost(method == CCHttpRequestMethodPOST)
+, m_isPost(method == CCHTTPRequestMethodPOST)
 , m_rawResponseBuffLength(0)
 , m_responseData(NULL)
 , m_responseDataLength(0)
+, m_responseEncoding(ENCODING_IDENTITY)
 , m_responseCode(0)
-, m_errorCode(CCHttpRequestErrorNone)
+, m_errorCode(CCHTTPRequestErrorNone)
 {
     m_curl = curl_easy_init();
     curl_easy_setopt(m_curl, CURLOPT_URL, url);
     curl_easy_setopt(m_curl, CURLOPT_USERAGENT, "libcurl");
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, DEFAULT_TIMEOUT * 1000);
-    if (method == CCHttpRequestMethodPOST)
+    if (method == CCHTTPRequestMethodPOST)
     {
         curl_easy_setopt(m_curl, CURLOPT_POST, 1L);
     }
 }
 
-CCHttpRequest_impl::~CCHttpRequest_impl(void)
+CCHTTPRequest_impl::~CCHTTPRequest_impl(void)
 {
     cleanup();
-    CCLOG("~~ delete CCHttpRequest_impl\n");
+    CCLOG("~~ delete CCHTTPRequest_impl\n");
 }
 
-void CCHttpRequest_impl::addRequestHeader(const char* key, const char* value)
+void CCHTTPRequest_impl::addRequestHeader(const char* key, const char* value)
 {
     std::stringbuf buff;
     buff.sputn(key, strlen(key));
@@ -42,34 +44,37 @@ void CCHttpRequest_impl::addRequestHeader(const char* key, const char* value)
     m_headers.push_back(buff.str());
 }
 
-void CCHttpRequest_impl::addPostValue(const char* key, const char* value)
+void CCHTTPRequest_impl::addPostValue(const char* key, const char* value)
 {
     m_postFields[std::string(key)] = std::string(value);
 }
 
-void CCHttpRequest_impl::setPostData(const char* data)
+void CCHTTPRequest_impl::setPostData(const char* data)
 {
     m_postFields.clear();
     m_postdata = std::string(data);
 }
 
-void CCHttpRequest_impl::setTimeout(float timeout)
+void CCHTTPRequest_impl::setTimeout(float timeout)
 {
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, timeout * 1000);
 }
 
-bool CCHttpRequest_impl::start(void)
+bool CCHTTPRequest_impl::start(void)
 {
     if (m_state != STATE_IDLE) return false;
     m_state = STATE_IN_PROGRESS;
 
     m_responseCode = 0;
-    m_errorCode = CCHttpRequestErrorNone;
+    m_errorCode = CCHTTPRequestErrorNone;
     m_errorMessage = "";
     
-    curl_easy_setopt(m_curl, CURLOPT_HTTP_TRANSFER_DECODING, 1);
+    curl_easy_setopt(m_curl, CURLOPT_ACCEPT_ENCODING, "gzip");
+    curl_easy_setopt(m_curl, CURLOPT_HTTP_CONTENT_DECODING, 1);
     curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, curlWriteData);
     curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, this);
+    curl_easy_setopt(m_curl, CURLOPT_HEADERFUNCTION, curlWriteHeader);
+    curl_easy_setopt(m_curl, CURLOPT_WRITEHEADER, this);
     curl_easy_setopt(m_curl, CURLOPT_PROGRESSFUNCTION, curlProgress);
     curl_easy_setopt(m_curl, CURLOPT_PROGRESSDATA, this);
     
@@ -88,43 +93,51 @@ bool CCHttpRequest_impl::start(void)
     return true;
 }
 
-void CCHttpRequest_impl::cancel(void)
+void CCHTTPRequest_impl::cancel(void)
 {
     if (m_state != STATE_IN_PROGRESS) return;
     m_state = STATE_CANCELLED;
 }
 
+// ----------------------------------------
+
 #ifdef _WINDOWS_
-DWORD WINAPI CCHttpRequest_impl::curlRequest(LPVOID lpParam)
+DWORD WINAPI CCHTTPRequest_impl::curlRequest(LPVOID lpParam)
 {
-    CCHttpRequest_impl* instance = (CCHttpRequest_impl*)lpParam;
+    CCHTTPRequest_impl* instance = (CCHTTPRequest_impl*)lpParam;
     instance->onRequest();
     return 0;
 }
-
 #else // _WINDOWS_
-
-void* CCHttpRequest_impl::curlRequest(void *data)
+void* CCHTTPRequest_impl::curlRequest(void *data)
 {
-    CCHttpRequest_impl* instance = (CCHttpRequest_impl*)data;
+    CCHTTPRequest_impl* instance = (CCHTTPRequest_impl*)data;
     instance->onRequest();
     return NULL;
 }
 #endif // _WINDOWS_
 
-size_t CCHttpRequest_impl::curlWriteData(void* buffer, size_t size, size_t nmemb, void* userp)
+size_t CCHTTPRequest_impl::curlWriteData(void* buffer, size_t size, size_t nmemb, void* userdata)
 {
-    CCHttpRequest_impl* instance = (CCHttpRequest_impl*)userp;
+    CCHTTPRequest_impl* instance = (CCHTTPRequest_impl*)userdata;
     return instance->onWriteData(buffer, size * nmemb);
 }
 
-int CCHttpRequest_impl::curlProgress(void* userp, double dltotal, double dlnow, double ultotal, double ulnow)
+size_t CCHTTPRequest_impl::curlWriteHeader(void* buffer, size_t size, size_t nmemb, void* userdata)
 {
-    CCHttpRequest_impl* instance = (CCHttpRequest_impl*)userp;
+    CCHTTPRequest_impl* instance = (CCHTTPRequest_impl*)userdata;
+    return instance->onWriteHeader(buffer, size * nmemb);
+}
+
+int CCHTTPRequest_impl::curlProgress(void* userp, double dltotal, double dlnow, double ultotal, double ulnow)
+{
+    CCHTTPRequest_impl* instance = (CCHTTPRequest_impl*)userp;
     return instance->onProgress(dltotal, dlnow, ultotal, ulnow);
 }
 
-void CCHttpRequest_impl::onRequest(void)
+// ----------------------------------------
+
+void CCHTTPRequest_impl::onRequest(void)
 {
     if (m_postFields.size() > 0)
     {
@@ -170,7 +183,7 @@ void CCHttpRequest_impl::onRequest(void)
     m_curl = NULL;
     curl_slist_free_all(chunk);
 
-    m_errorCode = (code == CURLE_OK) ? CCHttpRequestErrorNone : CCHttpRequestErrorUnknown;
+    m_errorCode = (code == CURLE_OK) ? CCHTTPRequestErrorNone : CCHTTPRequestErrorUnknown;
     m_errorMessage = (code == CURLE_OK) ? "" : curl_easy_strerror(code);
     
     m_responseData = (unsigned char*)malloc(m_rawResponseBuffLength + 1);
@@ -178,31 +191,60 @@ void CCHttpRequest_impl::onRequest(void)
     m_responseDataLength = 0;
     for (RawResponseDataBuffIterator it = m_rawResponseBuff.begin(); it != m_rawResponseBuff.end(); ++it)
     {
-        CCHttpRequest_impl::Chunk* chunk = *it;
+        CCHTTPRequest_impl::Chunk* chunk = *it;
         size_t bytes = chunk->getBytes();
         memcpy(m_responseData + m_responseDataLength, chunk->getChunk(), bytes);
         m_responseDataLength += bytes;
     }
     cleanupRawResponseBuff();
-    
+        
     m_responseString = std::string(reinterpret_cast<char*>(m_responseData));
     m_state = STATE_COMPLETED;
 }
 
-size_t CCHttpRequest_impl::onWriteData(void* buffer, size_t bytes)
+size_t CCHTTPRequest_impl::onWriteData(void* buffer, size_t bytes)
 {
-    CCHttpRequest_impl::Chunk* chunk = new CCHttpRequest_impl::Chunk(buffer, bytes);
+    CCHTTPRequest_impl::Chunk* chunk = new CCHTTPRequest_impl::Chunk(buffer, bytes);
     m_rawResponseBuff.push_back(chunk);
     m_rawResponseBuffLength += bytes;
     return bytes;
 }
 
-int CCHttpRequest_impl::onProgress(double dltotal, double dlnow, double ultotal, double ulnow)
+size_t CCHTTPRequest_impl::onWriteHeader(void* buffer, size_t bytes)
+{
+    char* headerBuffer = new char[bytes + 1];
+    memset(headerBuffer, 0, bytes + 1);
+    memcpy(headerBuffer, buffer, bytes);
+    delete []headerBuffer;
+    
+    std::string header(headerBuffer);
+    size_t pos = header.find("Content-Encoding:");
+    if (pos != header.npos)
+    {
+        CCLOG("Content-Encoding: %s", header.substr(pos + 18).c_str());
+        
+        if (header.compare(pos + 18, std::string::npos, "gzip") == 0)
+        {
+            m_responseEncoding = ENCODING_GZIP;
+        }
+        else if (header.compare(pos + 18, std::string::npos, "deflate") == 0)
+        {
+            m_responseEncoding = ENCODING_DEFLATE;
+        }
+    }
+    
+    m_responseHeaders.push_back(header);
+    return bytes;
+}
+
+int CCHTTPRequest_impl::onProgress(double dltotal, double dlnow, double ultotal, double ulnow)
 {
     return m_state == STATE_CANCELLED ? 1: 0;
 }
 
-void CCHttpRequest_impl::cleanup(void)
+// ----------------------------------------
+
+void CCHTTPRequest_impl::cleanup(void)
 {
     cleanupRawResponseBuff();
     if (m_responseData) free(m_responseData);
@@ -213,7 +255,7 @@ void CCHttpRequest_impl::cleanup(void)
     m_curl = NULL;
 }
 
-void CCHttpRequest_impl::cleanupRawResponseBuff(void)
+void CCHTTPRequest_impl::cleanupRawResponseBuff(void)
 {
     for (RawResponseDataBuffIterator it = m_rawResponseBuff.begin(); it != m_rawResponseBuff.end(); ++it)
     {

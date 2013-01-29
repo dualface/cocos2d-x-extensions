@@ -6,13 +6,13 @@
 
 NS_CC_EXT_BEGIN
 
-class CCHttpRequest;
+class CCHTTPRequest;
 
-class CCHttpRequestDelegate
+class CCHTTPRequestDelegate
 {
 public:
-    virtual void requestFinished(CCHttpRequest* request) = 0;
-    virtual void requestFailed(CCHttpRequest* request) {
+    virtual void requestFinished(CCHTTPRequest* request) = 0;
+    virtual void requestFailed(CCHTTPRequest* request) {
     }
 };
 

@@ -10,24 +10,24 @@ typedef enum {
 } CCNetworkStatus;
 
 typedef enum {
-    CCHttpRequestMethodGET = 0,
-    CCHttpRequestMethodPOST,
-} CCHttpRequestMethod;
+    CCHTTPRequestMethodGET = 0,
+    CCHTTPRequestMethodPOST,
+} CCHTTPRequestMethod;
 
 typedef enum {
-    CCHttpRequestErrorNone = 0,
-    CCHttpRequestErrorConnectionFailure = 1,
-    CCHttpRequestErrorTimeout,
-    CCHttpRequestErrorAuthentication,
-    CCHttpRequestErrorCancelled,
-    CCHttpRequestErrorUnknown
-} CCHttpRequestError;
+    CCHTTPRequestErrorNone = 0,
+    CCHTTPRequestErrorConnectionFailure = 1,
+    CCHTTPRequestErrorTimeout,
+    CCHTTPRequestErrorAuthentication,
+    CCHTTPRequestErrorCancelled,
+    CCHTTPRequestErrorUnknown
+} CCHTTPRequestError;
 
-class CCHttpRequest : public CCObject
+class CCHTTPRequest : public CCObject
 {
-    static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
+    static CCHTTPRequest* createWithUrlLua(LUA_FUNCTION listener,
                                            const char* url,
-                                           CCHttpRequestMethod method = CCHttpRequestMethodGET);
+                                           CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
     void addRequestHeader(const char* key, const char* value);
     void addPostValue(const char* key, const char* value);
     void setPostData(const char* data);
@@ -37,8 +37,8 @@ class CCHttpRequest : public CCObject
     void cancel(void);
     void clearDelegatesAndCancel(void);
     int getResponseStatusCode(void);
-    const const char* getResponseString(void);
-    const void* getResponseData(int* dataLength);
+    const char* getResponseString(void);
+    LUA_STRING getResponseDataLua(void);
     int getResponseDataLength(void);
     int saveResponseData(const char* filename);
     int getErrorCode(void);
@@ -52,7 +52,7 @@ class CCNetwork
     static bool isHostNameReachable(const char* hostName);
     static CCNetworkStatus getInternetConnectionStatus(void);
 
-    static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
-                                         const char* url,
-                                         CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    static CCHTTPRequest* createHTTPRequestLua(LUA_FUNCTION listener,
+                                               const char* url,
+                                               CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
 };

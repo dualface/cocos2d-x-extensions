@@ -1,6 +1,6 @@
 
-#include "network/CCHttpRequest.h"
-#include "network/CCHttpRequest_impl.h"
+#include "network/CCHTTPRequest.h"
+#include "network/CCHTTPRequest_impl.h"
 #include "cocos2d.h"
 #include <stdio.h>
 
@@ -12,12 +12,12 @@ using namespace cocos2d;
 
 NS_CC_EXT_BEGIN
 
-CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
+CCHTTPRequest* CCHTTPRequest::createWithUrl(CCHTTPRequestDelegate* delegate,
                                             const char* url,
-                                            CCHttpRequestMethod method,
+                                            CCHTTPRequestMethod method,
                                             bool isAutoReleaseOnFinish)
 {
-    CCHttpRequest* request = new CCHttpRequest(delegate, url, method, isAutoReleaseOnFinish);
+    CCHTTPRequest* request = new CCHTTPRequest(delegate, url, method, isAutoReleaseOnFinish);
     request->initHttpRequest();
     request->autorelease();
     if (isAutoReleaseOnFinish)
@@ -28,11 +28,11 @@ CCHttpRequest* CCHttpRequest::createWithUrl(CCHttpRequestDelegate* delegate,
 }
 
 #if CC_LUA_ENGINE_ENABLED > 0
-CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
+CCHTTPRequest* CCHTTPRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
                                                const char* url,
-                                               CCHttpRequestMethod method)
+                                               CCHTTPRequestMethod method)
 {
-    CCHttpRequest* request = new CCHttpRequest(NULL, url, method, true);
+    CCHTTPRequest* request = new CCHTTPRequest(NULL, url, method, true);
     request->m_luaListener = listener;
     request->initHttpRequest();
     request->autorelease();
@@ -41,99 +41,110 @@ CCHttpRequest* CCHttpRequest::createWithUrlLua(cocos2d::LUA_FUNCTION listener,
 }
 #endif
 
-bool CCHttpRequest::initHttpRequest(void)
+bool CCHTTPRequest::initHttpRequest(void)
 {
-    m_request = new CCHttpRequest_impl(m_url.c_str(), m_method);
+    m_request = new CCHTTPRequest_impl(m_url.c_str(), m_method);
     return true;
 }
 
-CCHttpRequest::~CCHttpRequest(void)
+CCHTTPRequest::~CCHTTPRequest(void)
 {
-    delete (CCHttpRequest_impl*)m_request;
+    delete (CCHTTPRequest_impl*)m_request;
 }
 
-void CCHttpRequest::addRequestHeader(const char* key, const char* value)
-{
-    if (key && value)
-    {
-        ((CCHttpRequest_impl*)m_request)->addRequestHeader(key, value);
-    }
-}
-
-void CCHttpRequest::addPostValue(const char* key, const char* value)
+void CCHTTPRequest::addRequestHeader(const char* key, const char* value)
 {
     if (key && value)
     {
-        ((CCHttpRequest_impl*)m_request)->addPostValue(key, value);
+        ((CCHTTPRequest_impl*)m_request)->addRequestHeader(key, value);
     }
 }
 
-void CCHttpRequest::setPostData(const char* data)
+void CCHTTPRequest::addPostValue(const char* key, const char* value)
+{
+    if (key && value)
+    {
+        ((CCHTTPRequest_impl*)m_request)->addPostValue(key, value);
+    }
+}
+
+void CCHTTPRequest::setPostData(const char* data)
 {
     if (data)
     {
-        ((CCHttpRequest_impl*)m_request)->setPostData(data);
+        ((CCHTTPRequest_impl*)m_request)->setPostData(data);
     }
 }
 
-void CCHttpRequest::setTimeout(float timeout)
+void CCHTTPRequest::setTimeout(float timeout)
 {
-    ((CCHttpRequest_impl*)m_request)->setTimeout(timeout);
+    ((CCHTTPRequest_impl*)m_request)->setTimeout(timeout);
 }
 
-bool CCHttpRequest::getIsInProgress(void)
+bool CCHTTPRequest::getIsInProgress(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getIsInProgress();
+    return ((CCHTTPRequest_impl*)m_request)->getIsInProgress();
 }
 
-void CCHttpRequest::start(bool isCached)
+void CCHTTPRequest::start(bool isCached)
 {
     CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
-    if (((CCHttpRequest_impl*)m_request)->start())
+    if (((CCHTTPRequest_impl*)m_request)->start())
     {
         CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
     }
 }
 
-void CCHttpRequest::cancel(void)
+void CCHTTPRequest::cancel(void)
 {
     CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
-    ((CCHttpRequest_impl*)m_request)->cancel();
+    ((CCHTTPRequest_impl*)m_request)->cancel();
 }
 
-void CCHttpRequest::clearDelegatesAndCancel(void)
+void CCHTTPRequest::clearDelegatesAndCancel(void)
 {
     m_delegate = NULL;
     cancel();
 }
 
-int CCHttpRequest::getResponseStatusCode(void) {
-    return ((CCHttpRequest_impl*)m_request)->getResponseStatusCode();
-}
-
-const char* CCHttpRequest::getResponseString(void)
+int CCHTTPRequest::getResponseStatusCode(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getResposeString().c_str();
+    return ((CCHTTPRequest_impl*)m_request)->getResponseStatusCode();
 }
 
-const void* CCHttpRequest::getResponseData(int* dataLength)
+const char* CCHTTPRequest::getResponseHeaders(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getResponseData();
+    return ((CCHTTPRequest_impl*)m_request)->getResponseHeaders().c_str();
 }
 
-int CCHttpRequest::getResponseDataLength()
+const char* CCHTTPRequest::getResponseString(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getResponseDataLength();
+    return ((CCHTTPRequest_impl*)m_request)->getResponseString().c_str();
 }
 
-int CCHttpRequest::saveResponseData(const char* filename)
+const void* CCHTTPRequest::getResponseData(void)
+{
+    return ((CCHTTPRequest_impl*)m_request)->getResponseData();
+}
+
+cocos2d::LUA_STRING CCHTTPRequest::getResponseDataLua(void)
+{
+    
+}
+
+int CCHTTPRequest::getResponseDataLength()
+{
+    return ((CCHTTPRequest_impl*)m_request)->getResponseDataLength();
+}
+
+int CCHTTPRequest::saveResponseData(const char* filename)
 {
     FILE *fp = fopen(filename, "wb");
     int writedBytes = 0;
     if (fp)
     {
-        writedBytes = fwrite(((CCHttpRequest_impl*)m_request)->getResponseData(),
-                             ((CCHttpRequest_impl*)m_request)->getResponseDataLength(),
+        writedBytes = fwrite(((CCHTTPRequest_impl*)m_request)->getResponseData(),
+                             ((CCHTTPRequest_impl*)m_request)->getResponseDataLength(),
                              1,
                              fp);
         fclose(fp);
@@ -141,19 +152,19 @@ int CCHttpRequest::saveResponseData(const char* filename)
     return writedBytes;
 }
 
-CCHttpRequestError  CCHttpRequest::getErrorCode(void)
+CCHTTPRequestError  CCHTTPRequest::getErrorCode(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getErrorCode();
+    return ((CCHTTPRequest_impl*)m_request)->getErrorCode();
 }
 
-const char* CCHttpRequest::getErrorMessage(void)
+const char* CCHTTPRequest::getErrorMessage(void)
 {
-    return ((CCHttpRequest_impl*)m_request)->getErrorMessage();
+    return ((CCHTTPRequest_impl*)m_request)->getErrorMessage();
 }
 
-void CCHttpRequest::update(float dt)
+void CCHTTPRequest::update(float dt)
 {
-    CCHttpRequest_impl* request = (CCHttpRequest_impl*)m_request;
+    CCHTTPRequest_impl* request = (CCHTTPRequest_impl*)m_request;
     if (!request || !request->getIsInProgress())
     {
         CCDirector::sharedDirector()->getScheduler()->unscheduleUpdateForTarget(this);
@@ -169,7 +180,7 @@ void CCHttpRequest::update(float dt)
         {
             cocos2d::CCLuaValueDict dict;
             dict["name"] = cocos2d::CCLuaValue::stringValue("completed");
-            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
+            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHTTPRequest");
             cocos2d::CCLuaStack *stack = cocos2d::CCLuaEngine::defaultEngine()->getLuaStack();
             stack->clean();
             stack->pushCCLuaValueDict(dict);
@@ -189,7 +200,7 @@ void CCHttpRequest::update(float dt)
         {
             cocos2d::CCLuaValueDict dict;
             dict["name"] = cocos2d::CCLuaValue::stringValue("failed");
-            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHttpRequest");
+            dict["request"] = cocos2d::CCLuaValue::ccobjectValue(this, "CCHTTPRequest");
             cocos2d::CCLuaStack *stack = cocos2d::CCLuaEngine::defaultEngine()->getLuaStack();
             stack->clean();
             stack->pushCCLuaValueDict(dict);

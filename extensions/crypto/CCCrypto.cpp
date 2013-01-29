@@ -131,7 +131,7 @@ LUA_STRING CCCrypto::MD5Lua(char* input, bool isRawOutput)
     return 1;
 }
 
-cocos2d::LUA_STRING CCCrypto::sha1Lua(char* input, char* key, bool isRawOutput)
+LUA_STRING CCCrypto::sha1Lua(char* input, char* key, bool isRawOutput)
 {
     unsigned char buffer[SHA1_BUFFER_LENGTH];
     MD5(static_cast<void*>(input), strlen(input), buffer);

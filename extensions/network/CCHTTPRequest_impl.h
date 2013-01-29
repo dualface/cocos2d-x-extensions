@@ -2,7 +2,7 @@
 #ifndef __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 #define __CC_EXTENSION_CCHTTP_REQUEST_WIN32_H_
 
-#include "network/CCHttpRequest.h"
+#include "network/CCHTTPRequest.h"
 
 #ifdef _WINDOWS_
 #include <Windows.h>
@@ -16,11 +16,11 @@
 
 NS_CC_EXT_BEGIN
 
-class CCHttpRequest_impl
+class CCHTTPRequest_impl
 {
 public:
-    CCHttpRequest_impl(const char* url, CCHttpRequestMethod method);
-    virtual ~CCHttpRequest_impl(void);
+    CCHTTPRequest_impl(const char* url, CCHTTPRequestMethod method);
+    virtual ~CCHTTPRequest_impl(void);
     
     void addRequestHeader(const char* key, const char* value);
     void addPostValue(const char* key, const char* value);
@@ -46,7 +46,12 @@ public:
         return m_responseCode;
     }
     
-    const std::string& getResposeString(void) {
+    const std::string& getResponseHeaders(void) {
+//        return m_responseHeaders;
+        return std::string("");
+    }
+    
+    const std::string& getResponseString(void) {
         return m_responseString;
     }
     
@@ -58,7 +63,7 @@ public:
         return m_responseDataLength;
     }
     
-    CCHttpRequestError getErrorCode(void) {
+    CCHTTPRequestError getErrorCode(void) {
         return m_errorCode;
     }
     
@@ -77,6 +82,12 @@ private:
         STATE_COMPLETED,
         STATE_CANCELLED
     } State;
+    
+    typedef enum {
+        ENCODING_IDENTITY,
+        ENCODING_GZIP,
+        ENCODING_DEFLATE
+    } Encoding;
     
     class Chunk
     {
@@ -122,12 +133,14 @@ private:
     RawResponseDataBuff m_rawResponseBuff;
     size_t              m_rawResponseBuffLength;
     long                m_responseCode;
-    CCHttpRequestError  m_errorCode;
+    CCHTTPRequestError  m_errorCode;
     std::string         m_errorMessage;
     
+    Headers             m_responseHeaders;
     std::string         m_responseString;
     unsigned char*      m_responseData;
     int                 m_responseDataLength;
+    Encoding            m_responseEncoding;
     
 #ifdef _WINDOWS_
     static DWORD WINAPI curlRequest(LPVOID lpParam);
@@ -136,11 +149,13 @@ private:
     static void*        curlRequest(void *data);
 #endif
     
-    static size_t curlWriteData(void* buffer, size_t size, size_t nmemb, void *userp);
+    static size_t curlWriteData(void* buffer, size_t size, size_t nmemb, void* userdata);
+    static size_t curlWriteHeader(void* buffer, size_t size, size_t nmemb, void* userdata);
     static int curlProgress(void* userp, double dltotal, double dlnow, double ultotal, double ulnow);
     
     void onRequest(void);
     size_t onWriteData(void* buffer, size_t bytes);
+    size_t onWriteHeader(void* buffer, size_t bytes);
     int onProgress(double dltotal, double dlnow, double ultotal, double ulnow);
     
     void cleanup(void);

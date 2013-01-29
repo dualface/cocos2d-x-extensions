@@ -4,15 +4,15 @@ $#include "network/CCNetwork.h"
 $using namespace cocos2d::extension;
 
 typedef enum {
-    CCHttpRequestMethodGET = 0,
-    CCHttpRequestMethodPOST,
-} CCHttpRequestMethod;
+    CCHTTPRequestMethodGET = 0,
+    CCHTTPRequestMethodPOST,
+} CCHTTPRequestMethod;
 
-class CCHttpRequest : public CCObject
+class CCHTTPRequest : public CCObject
 {
-    static CCHttpRequest* createWithUrlLua(LUA_FUNCTION listener,
+    static CCHTTPRequest* createWithUrlLua(LUA_FUNCTION listener,
                                            const char* url,
-                                           CCHttpRequestMethod method = CCHttpRequestMethodGET);
+                                           CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
     void addRequestHeader(const char* key, const char* value);
     void addPostValue(const char* key, const char* value);
     void setPostData(const char* data);
@@ -22,8 +22,8 @@ class CCHttpRequest : public CCObject
     void cancel(void);
     void clearDelegatesAndCancel(void);
     int getResponseStatusCode(void);
-    const const char* getResponseString(void);
-    const void* getResponseData(int* dataLength);
+    const char* getResponseString(void);
+    LUA_STRING getResponseDataLua(void);
     int getResponseDataLength(void);
     int saveResponseData(const char* filename);
     int getErrorCode(void);
@@ -32,7 +32,7 @@ class CCHttpRequest : public CCObject
 
 class CCNetwork
 {
-    static CCHttpRequest* httpRequestLua(LUA_FUNCTION listener,
-                                         const char* url,
-                                         CCHttpRequestMethod method = CCHttpRequestMethodGET);
+    static CCHTTPRequest* createHTTPRequestLua(LUA_FUNCTION listener,
+                                               const char* url,
+                                               CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
 };

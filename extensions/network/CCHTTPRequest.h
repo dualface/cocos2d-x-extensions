@@ -4,7 +4,7 @@
 
 #include "cocos2dx_extensions.h"
 #include "cocos2d.h"
-#include "network/CCHttpRequestDelegate.h"
+#include "network/CCHTTPRequestDelegate.h"
 
 #if CC_LUA_ENGINE_ENABLED > 0
 #include "CCLuaEngine.h"
@@ -13,34 +13,34 @@
 NS_CC_EXT_BEGIN
 
 typedef enum {
-    CCHttpRequestMethodGET = 0,
-    CCHttpRequestMethodPOST,
-} CCHttpRequestMethod;
+    CCHTTPRequestMethodGET = 0,
+    CCHTTPRequestMethodPOST,
+} CCHTTPRequestMethod;
 
 typedef enum {
-    CCHttpRequestErrorNone = 0,
-    CCHttpRequestErrorConnectionFailure = 1,
-    CCHttpRequestErrorTimeout,
-    CCHttpRequestErrorAuthentication,
-    CCHttpRequestErrorCancelled,
-    CCHttpRequestErrorUnknown
-} CCHttpRequestError;
+    CCHTTPRequestErrorNone = 0,
+    CCHTTPRequestErrorConnectionFailure = 1,
+    CCHTTPRequestErrorTimeout,
+    CCHTTPRequestErrorAuthentication,
+    CCHTTPRequestErrorCancelled,
+    CCHTTPRequestErrorUnknown
+} CCHTTPRequestError;
 
-class CCHttpRequest : public cocos2d::CCObject
+class CCHTTPRequest : public cocos2d::CCObject
 {
 public:
-    static CCHttpRequest* createWithUrl(CCHttpRequestDelegate* delegate,
+    static CCHTTPRequest* createWithUrl(CCHTTPRequestDelegate* delegate,
                                         const char* url,
-                                        CCHttpRequestMethod method = CCHttpRequestMethodGET,
+                                        CCHTTPRequestMethod method = CCHTTPRequestMethodGET,
                                         bool isAutoReleaseOnFinish = true);
     
 #if CC_LUA_ENGINE_ENABLED > 0
-    static CCHttpRequest* createWithUrlLua(cocos2d::LUA_FUNCTION listener,
+    static CCHTTPRequest* createWithUrlLua(cocos2d::LUA_FUNCTION listener,
                                            const char* url,
-                                           CCHttpRequestMethod method = CCHttpRequestMethodGET);
+                                           CCHTTPRequestMethod method = CCHTTPRequestMethodGET);
 #endif
     
-    ~CCHttpRequest(void);
+    ~CCHTTPRequest(void);
     
     /** @brief Add a custom header to the request. */
     void addRequestHeader(const char* key, const char* value);
@@ -57,11 +57,11 @@ public:
     /** @brief True when the request hasn't finished yet. */
     bool getIsInProgress(void);
 
-    /** @brief Return CCHttpRequestDelegate delegate. */
-    CCHttpRequestDelegate* getDelegate(void) {
+    /** @brief Return CCHTTPRequestDelegate delegate. */
+    CCHTTPRequestDelegate* getDelegate(void) {
         return m_delegate;
     }
-
+    
     /** @brief Execute an asynchronous request
      
      If isCached set to false, it will force request not to be cached.        
@@ -78,12 +78,19 @@ public:
     /** @brief Return HTTP status code. */
     int getResponseStatusCode(void);
     
+    /** @brief Return HTTP response headers. */
+    const char* getResponseHeaders(void);
+    
     /** @brief Returns the contents of the result. */
     const char* getResponseString(void);
     
     /** @brief Get response data. */
-    const void* getResponseData(int* dataLength);
-
+    const void* getResponseData(void);
+    
+#if CC_LUA_ENGINE_ENABLED > 0
+    cocos2d::LUA_STRING getResponseDataLua(void);
+#endif
+    
     /** @brief Get response data length (bytes). */
     int getResponseDataLength(void);
     
@@ -91,7 +98,7 @@ public:
     int saveResponseData(const char* filename);
     
     /** @brief Get error code. */
-    CCHttpRequestError getErrorCode(void);
+    CCHTTPRequestError getErrorCode(void);
     
     /** @brief Get error message. */
     const char* getErrorMessage(void);
@@ -100,16 +107,16 @@ public:
     virtual void update(float dt);
 
 private:
-    CCHttpRequest(CCHttpRequestDelegate* delegate,
+    CCHTTPRequest(CCHTTPRequestDelegate* delegate,
                   const char* url,
-                  CCHttpRequestMethod method,
+                  CCHTTPRequestMethod method,
                   bool isAutoReleaseOnFinish)
     : m_delegate(delegate)
     , m_url(url ? url : "")
     , m_method(method)
     , m_request(NULL)
     , m_isAutoReleaseOnFinish(isAutoReleaseOnFinish)
-    , m_errorCode(CCHttpRequestErrorNone)
+    , m_errorCode(CCHTTPRequestErrorNone)
 #if CC_LUA_ENGINE_ENABLED > 0
     , m_luaListener(0)
 #endif
@@ -117,12 +124,12 @@ private:
     }
     bool initHttpRequest(void);
 
-    CCHttpRequestDelegate*  m_delegate;
+    CCHTTPRequestDelegate*  m_delegate;
     const std::string       m_url;
-    CCHttpRequestMethod     m_method;
+    CCHTTPRequestMethod     m_method;
     void*                   m_request;
     bool                    m_isAutoReleaseOnFinish;
-    CCHttpRequestError      m_errorCode;
+    CCHTTPRequestError      m_errorCode;
     std::string             m_errorMessage;
 
 #if CC_LUA_ENGINE_ENABLED > 0
