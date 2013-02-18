@@ -81,6 +81,10 @@ void CCHttpRequest::setTimeout(float timeout)
     ((CCHttpRequest_impl*)m_request)->setTimeout(timeout);
 }
 
+void CCHttpRequest::setExpectedContentType(const char *type) {
+    ((CCHttpRequest_impl*)m_request)->setExpectedContentType(type);
+}
+
 bool CCHttpRequest::getIsInProgress(void)
 {
     return ((CCHttpRequest_impl*)m_request)->getIsInProgress();
@@ -161,7 +165,15 @@ void CCHttpRequest::update(float dt)
     
     if (request->getIsCompleted())
     {
-        if (m_delegate) m_delegate->requestFinished(this);
+        bool contentTypeValid = request->getErrorCode() != CCHttpRequestErrorUnexpectedContentType;
+        if (m_delegate) {
+            if (contentTypeValid) {
+                m_delegate->requestFinished(this);
+            } else {
+                m_delegate->requestFailed(this);
+            }
+
+        }
         
 #if CC_LUA_ENGINE_ENABLED > 0
         
