@@ -23,6 +23,7 @@ typedef enum {
     CCHttpRequestErrorTimeout,
     CCHttpRequestErrorAuthentication,
     CCHttpRequestErrorCancelled,
+    CCHttpRequestErrorUnexpectedContentType,
     CCHttpRequestErrorUnknown
 } CCHttpRequestError;
 
@@ -53,6 +54,10 @@ public:
 
     /** @brief Number of seconds to wait before timing out - default is 10. */
     void setTimeout(float timeout);
+    
+    /** @brief Sets the expected content type to be returned. If the actual content type differs,
+                the CCHttpRequest will fail. */
+    void setExpectedContentType(const char* type);
     
     /** @brief True when the request hasn't finished yet. */
     bool getIsInProgress(void);
@@ -116,6 +121,7 @@ private:
     {
     }
     bool initHttpRequest(void);
+    bool isContentTypeValid(const std::string contentType);
 
     CCHttpRequestDelegate*  m_delegate;
     const std::string       m_url;
