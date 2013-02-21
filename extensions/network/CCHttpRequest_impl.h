@@ -12,7 +12,14 @@
 
 #include <vector>
 #include <map>
-#include "curl/curl.h"
+
+#ifdef PF_PLATFORM_ANDROID
+    #include <platform/third_party/android/prebuilt/libcurl/include/curl/curl.h>
+#endif
+
+#ifdef PF_PLATFORM_IOS
+    #include <platform/third_party//ios/curl/curl.h>
+#endif
 
 NS_CC_EXT_BEGIN
 
@@ -26,6 +33,7 @@ public:
     void addPostValue(const char* key, const char* value);
     void setPostData(const char* data);
     void setTimeout(float timeout);
+    void setExpectedContentType(const char* type);
     
     bool start(void);
     void cancel(void);
@@ -128,6 +136,7 @@ private:
     std::string         m_responseString;
     unsigned char*      m_responseData;
     int                 m_responseDataLength;
+    std::string         m_expectedContentType;
     
 #ifdef _WINDOWS_
     static DWORD WINAPI curlRequest(LPVOID lpParam);

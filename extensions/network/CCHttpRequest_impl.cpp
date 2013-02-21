@@ -58,6 +58,10 @@ void CCHttpRequest_impl::setTimeout(float timeout)
     curl_easy_setopt(m_curl, CURLOPT_TIMEOUT_MS, timeout * 1000);
 }
 
+void CCHttpRequest_impl::setExpectedContentType(const char *type) {
+    m_expectedContentType = std::string(type);
+}
+
 bool CCHttpRequest_impl::start(void)
 {
     if (m_state != STATE_IDLE) return false;
@@ -166,6 +170,11 @@ void CCHttpRequest_impl::onRequest(void)
     curl_easy_setopt(m_curl, CURLOPT_HTTPHEADER, chunk);
     CURLcode code = curl_easy_perform(m_curl);
     curl_easy_getinfo(m_curl, CURLINFO_RESPONSE_CODE, &m_responseCode);
+    
+    char *contentType;
+    curl_easy_getinfo(m_curl, CURLINFO_CONTENT_TYPE, &contentType);
+    std::string contentTypeString = std::string(contentType);
+    
     curl_easy_cleanup(m_curl);
     m_curl = NULL;
     curl_slist_free_all(chunk);
@@ -186,6 +195,12 @@ void CCHttpRequest_impl::onRequest(void)
     cleanupRawResponseBuff();
     
     m_responseString = std::string(reinterpret_cast<char*>(m_responseData));
+    
+    if (contentTypeString.find(m_expectedContentType) == std::string::npos) {
+        m_errorCode = CCHttpRequestErrorUnexpectedContentType;
+        m_errorMessage = CCString::createWithFormat("Http request succeeded, but the content type returned was not expected.\nExpected content type: %s response content type: %s", m_expectedContentType.c_str(), contentTypeString.c_str())->getCString();
+    }
+    
     m_state = STATE_COMPLETED;
 }
 
