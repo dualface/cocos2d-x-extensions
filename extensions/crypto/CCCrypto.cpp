@@ -1,4 +1,3 @@
-
 #include "crypto/CCCrypto.h"
 
 extern "C" {
@@ -16,7 +15,7 @@ extern "C" {
 #include "tolua_fix.h"
 }
 #endif
-
+//添加注释
 NS_CC_EXT_BEGIN
 
 int CCCrypto::encodeBase64(const void* input,
